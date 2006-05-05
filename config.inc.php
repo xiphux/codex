@@ -20,7 +20,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- *  $Id: config.inc.php 539 2006-05-05 04:51:58Z xiphux $
+ *  $Id: config.inc.php 540 2006-05-05 04:53:28Z xiphux $
  */
 
  /*
@@ -142,6 +142,7 @@
  $spellcheck["([Dd])ependant"] = "\\1ependent"; // Not technically wrong, but still pisses me off
  $spellcheck["([Dd])iscribe"] = "\\1escribe";
  $spellcheck["([Dd])issapoint"] = "\\1isappoint";
+ $spellcheck["([Dd])issapear"] = "\\1isappear";
  $spellcheck["Irregardless"] = "Regardless";
  $spellcheck["irregardless"] = "regardless";
  $spellcheck[",br>"] = "\n";
