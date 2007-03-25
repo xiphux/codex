@@ -550,7 +550,7 @@ function readfic($id)
 			/*
 			 * Spellcheck
 			 */
-			if ($codex_conf['spck'] == TRUE)
+			if ($codex_conf['spellcheck'] == TRUE)
 				foreach ($spellcheck as $broke => $fixed)
 					$fdat = ereg_replace($broke,$fixed,$fdat);
 

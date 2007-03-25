@@ -129,7 +129,7 @@
   * If enabled, spelling will be dynamically fixed.
   * See below for patterns.
   */
- $codex_conf['spck'] = TRUE;
+ $codex_conf['spellcheck'] = TRUE;
 
  /*
   * Spellcheck dictionary
