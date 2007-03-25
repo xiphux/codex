@@ -18,8 +18,6 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
- *
- *  $Id: header.tpl 368 2006-03-08 08:56:41Z xiphux $
  *}
 {* $contentType = strpos($_SERVER['HTTP_ACCEPT'], 'application/xhtml+xml') === false ? 'text/html' : 'application/xhtml+xml';
 header("Content-Type: $contentType; charset=utf-8"); *}
