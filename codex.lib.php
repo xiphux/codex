@@ -129,6 +129,18 @@ function fic_title($id)
 	return $db->CacheGetOne($codex_conf['secs2cache'],"SELECT fic_title FROM " . $tables['fics'] . " WHERE fic_id = $id");
 }
 
+function author_name($id)
+{
+	global $db,$tables,$codex_conf;
+	return $db->CacheGetOne($codex_conf['secs2cache'],"SELECT author_name FROM " . $tables['authors'] . " WHERE author_id = $id");
+}
+
+function genre_name($id)
+{
+	global $db,$tables,$codex_conf;
+	return $db->CacheGetOne($codex_conf['secs2cache'],"SELECT genre_name FROM " . $tables['genres'] . " WHERE genre_id = $id");
+}
+
 /*
  * matchup_data($id)
  * Given a matchup_id, get the character names,

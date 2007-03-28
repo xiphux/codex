@@ -47,6 +47,17 @@ $ttl = $codex_conf['title'];
  */
 if ($HTTP_GET_VARS['u'] == "read")
 	$ttl .= " :: " . fic_title($HTTP_GET_VARS['fic']);
+else if ($HTTP_GET_VARS['u'] == "matchup" && isset($HTTP_GET_VARS['mid'])) {
+	$match = matchup_data($HTTP_GET_VARS['mid']);
+	if ($match)
+		$ttl .= " :: " . $match["matchup_name"];
+} else if ($HTTP_GET_VARS['u'] == "series" && isset($HTTP_GET_VARS['sid']))
+	$ttl .= " :: " . series_title($HTTP_GET_VARS['sid']);
+else if ($HTTP_GET_VARS['u'] == "author" && isset($HTTP_GET_VARS['aid']))
+	$ttl .= " :: " . author_name($HTTP_GET_VARS['aid']);
+else if ($HTTP_GET_VARS['u'] == "genre" && isset($HTTP_GET_VARS['gid']))
+	$ttl .= " :: " . genre_name($HTTP_GET_VARS['gid']);
+	
 $tpl->clear_all_assign();
 $tpl->assign("title",$ttl);
 $tpl->assign("body_color",$codex_conf['body_color']);
