@@ -17,7 +17,7 @@
 	/*
 	 * Persistent database connection
 	 */
-	include_once('db.php');
+	include_once('include/db.php');
 
 	/*
 	 * Instantiate smarty
@@ -29,7 +29,7 @@
 	/*
 	 * Function library
 	 */
-	include_once('codex.lib.php');
+	include_once('include/codex.lib.php');
 
 
 $ttl = $codex_conf['title'];
