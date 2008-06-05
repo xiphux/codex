@@ -12,12 +12,8 @@
 function matchup_data($id)
 {
 	global $db,$tables,$codex_conf;
-	$tmp["match1"] = $db->CacheGetOne($codex_conf['secs2cache'],"SELECT t2.character_name FROM " . $tables['matchups'] . " AS t1, " . $tables['characters'] . " AS t2 WHERE t2.character_id = t1.match_1 AND t1.matchup_id = $id");
-	$tmp["match2"] = $db->CacheGetOne($codex_conf['secs2cache'],"SELECT t2.character_name FROM " . $tables['matchups'] . " AS t1, " . $tables['characters'] . " AS t2 WHERE t2.character_id = t1.match_2 AND t1.matchup_id = $id");
-	$tmp["id1"] = $db->CacheGetOne($codex_conf['secs2cache'],"SELECT t2.character_id FROM " . $tables['matchups'] . " AS t1, " . $tables['characters'] . " AS t2 WHERE t2.character_id = t1.match_1 AND t1.matchup_id = $id");
-	$tmp["id2"] = $db->CacheGetOne($codex_conf['secs2cache'],"SELECT t2.character_id FROM " . $tables['matchups'] . " AS t1, " . $tables['characters'] . " AS t2 WHERE t2.character_id = t1.match_2 AND t1.matchup_id = $id");
-	$tmp["matchup_name"] = $tmp['match1'] . " + " . $tmp['match2'];
-	return $tmp;
+	$tmp = $db->CacheGetArray($codex_conf['secs2cache'],"SELECT m1.matchup_id, char1.character_name AS match1, char1.character_id AS id1, char2.character_name AS match2, char2.character_id AS id2, CONCAT(char1.character_name,' + ',char2.character_name) AS matchup_name FROM " . $tables['matchups'] . " AS m1 LEFT JOIN " . $tables['characters'] . " AS char1 ON char1.character_id = m1.match_1 LEFT JOIN " . $tables['characters'] . " AS char2 ON char2.character_id = m1.match_2 WHERE m1.matchup_id = " . $id . " LIMIT 1");
+	return $tmp[0];
 }
 
 ?>
