@@ -31,11 +31,6 @@
 	$tpl =& new Smarty;
 	$tpl->load_filter('output','trimwhitespace');
 
-	/*
-	 * Function library
-	 */
-	include_once('include/codex.lib.php');
-
 
 $ttl = $codex_conf['title'];
 /*
