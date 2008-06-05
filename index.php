@@ -41,18 +41,24 @@ $ttl = $codex_conf['title'];
 /*
  * Give the fic title if reading
  */
-if ($_GET['u'] == "read")
+if ($_GET['u'] == "read") {
+	include_once('include/fic_title.php');
 	$ttl .= " :: " . fic_title($_GET['fic']);
-else if ($_GET['u'] == "matchup" && isset($_GET['mid'])) {
+} else if ($_GET['u'] == "matchup" && isset($_GET['mid'])) {
+	include_once('include/matchup_data.php');
 	$match = matchup_data($_GET['mid']);
 	if ($match)
 		$ttl .= " :: " . $match["matchup_name"];
-} else if ($_GET['u'] == "series" && isset($_GET['sid']))
+} else if ($_GET['u'] == "series" && isset($_GET['sid'])) {
+	include_once('include/series_title.php');
 	$ttl .= " :: " . series_title($_GET['sid']);
-else if ($_GET['u'] == "author" && isset($_GET['aid']))
+} else if ($_GET['u'] == "author" && isset($_GET['aid'])) {
+	include_once('include/author_name.php');
 	$ttl .= " :: " . author_name($_GET['aid']);
-else if ($_GET['u'] == "genre" && isset($_GET['gid']))
+} else if ($_GET['u'] == "genre" && isset($_GET['gid'])) {
+	include_once('include/genre_name.php');
 	$ttl .= " :: " . genre_name($_GET['gid']);
+}
 	
 $tpl->clear_all_assign();
 $tpl->assign("title",$ttl);
@@ -67,15 +73,20 @@ $tpl->display("header.tpl");
  * Determine action via GET variables
  */
 if (isset($_GET['u'])) {
-	if ($_GET['u'] == "read")
+	if ($_GET['u'] == "read") {
+		include_once('include/readfic.php');
 		readfic($_GET['fic']);
-	else if ($_GET['u'] == "stats")
+	} else if ($_GET['u'] == "stats") {
+		include_once('include/stats.php');
 		stats();
-	else if ($_GET['u'] == "dbperfmon")
+	} else if ($_GET['u'] == "dbperfmon") {
+		include_once('include/dbperfmon.php');
 		dbperfmon();
-	else if ($_GET['u'] == "search")
+	} else if ($_GET['u'] == "search") {
+		include_once('include/findfic.php');
 		findfic($_POST['search']);
-	else {
+	} else {
+		include_once('include/listfics.php');
 		$tid = null;
 		switch($_GET['u']) {
 			case "author":
