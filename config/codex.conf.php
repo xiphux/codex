@@ -89,7 +89,8 @@ $codex_conf['adodb_prefix'] = "adodb/";
  /*
   * This is the string that will be displayed at the top of the page
   * and in the page title.  The variable '$codex_appstring' will
-  * expand to the name (codex) and version.
+  * expand to the name (codex) and version. '$codex_version' will
+  * expand to the version only
   */
  $codex_conf['title'] = "centraldogma :: $codex_appstring";
 

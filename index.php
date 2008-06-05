@@ -1,7 +1,5 @@
 <?php
  ob_start();
- $version = "v03c";
- $codex_appstring = "codex $version";
 /*
  *  index.php
  *  Codex: A PHP/MySQL fanfiction database
@@ -9,6 +7,12 @@
  *
  *  Copyright (C) 2005 Christopher Han <xiphux@gmail.com>
  */
+
+ 	/*
+	 * Version
+	 */
+	include_once('include/version.php');
+
  	/*
 	 * Config
 	 */

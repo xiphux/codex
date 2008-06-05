@@ -668,9 +668,9 @@ function findfic($src = null)
  */
 function stats()
 {
-	global $codex_conf,$version,$db,$tpl,$tables;
+	global $codex_conf,$codex_version,$db,$tpl,$tables;
 	$tpl->clear_all_assign();
-	$tpl->assign("appstring","Codex $version");
+	$tpl->assign("appstring","Codex $codex_version");
 	$tpl->assign("cdate","2005");
 	$tpl->assign("cauthor_email","xiphux@gmail.com");
 	$tpl->assign("cauthor","Christopher Han");
