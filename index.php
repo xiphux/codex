@@ -41,18 +41,18 @@ $ttl = $codex_conf['title'];
 /*
  * Give the fic title if reading
  */
-if ($HTTP_GET_VARS['u'] == "read")
-	$ttl .= " :: " . fic_title($HTTP_GET_VARS['fic']);
-else if ($HTTP_GET_VARS['u'] == "matchup" && isset($HTTP_GET_VARS['mid'])) {
-	$match = matchup_data($HTTP_GET_VARS['mid']);
+if ($_GET['u'] == "read")
+	$ttl .= " :: " . fic_title($_GET['fic']);
+else if ($_GET['u'] == "matchup" && isset($_GET['mid'])) {
+	$match = matchup_data($_GET['mid']);
 	if ($match)
 		$ttl .= " :: " . $match["matchup_name"];
-} else if ($HTTP_GET_VARS['u'] == "series" && isset($HTTP_GET_VARS['sid']))
-	$ttl .= " :: " . series_title($HTTP_GET_VARS['sid']);
-else if ($HTTP_GET_VARS['u'] == "author" && isset($HTTP_GET_VARS['aid']))
-	$ttl .= " :: " . author_name($HTTP_GET_VARS['aid']);
-else if ($HTTP_GET_VARS['u'] == "genre" && isset($HTTP_GET_VARS['gid']))
-	$ttl .= " :: " . genre_name($HTTP_GET_VARS['gid']);
+} else if ($_GET['u'] == "series" && isset($_GET['sid']))
+	$ttl .= " :: " . series_title($_GET['sid']);
+else if ($_GET['u'] == "author" && isset($_GET['aid']))
+	$ttl .= " :: " . author_name($_GET['aid']);
+else if ($_GET['u'] == "genre" && isset($_GET['gid']))
+	$ttl .= " :: " . genre_name($_GET['gid']);
 	
 $tpl->clear_all_assign();
 $tpl->assign("title",$ttl);
@@ -66,32 +66,32 @@ $tpl->display("header.tpl");
 /*
  * Determine action via GET variables
  */
-if (isset($HTTP_GET_VARS['u'])) {
-	if ($HTTP_GET_VARS['u'] == "read")
-		readfic($HTTP_GET_VARS['fic']);
-	else if ($HTTP_GET_VARS['u'] == "stats")
+if (isset($_GET['u'])) {
+	if ($_GET['u'] == "read")
+		readfic($_GET['fic']);
+	else if ($_GET['u'] == "stats")
 		stats();
-	else if ($HTTP_GET_VARS['u'] == "dbperfmon")
+	else if ($_GET['u'] == "dbperfmon")
 		dbperfmon();
-	else if ($HTTP_GET_VARS['u'] == "search")
-		findfic($HTTP_POST_VARS['search']);
+	else if ($_GET['u'] == "search")
+		findfic($_POST['search']);
 	else {
 		$tid = null;
-		switch($HTTP_GET_VARS['u']) {
+		switch($_GET['u']) {
 			case "author":
-				$tid = $HTTP_GET_VARS['aid'];
+				$tid = $_GET['aid'];
 				break;
 			case "matchup":
-				$tid = $HTTP_GET_VARS['mid'];
+				$tid = $_GET['mid'];
 				break;
 			case "series":
-				$tid = $HTTP_GET_VARS['sid'];
+				$tid = $_GET['sid'];
 				break;
 			case "genre":
-				$tid = $HTTP_GET_VARS['gid'];
+				$tid = $_GET['gid'];
 				break;
 		}
-		listfics($HTTP_GET_VARS['u'],$tid);
+		listfics($_GET['u'],$tid);
 	}
 } else {
 	$tpl->clear_all_assign();
