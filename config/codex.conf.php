@@ -1,6 +1,6 @@
 <?php
 /*
- *  config.inc.php
+ *  codex.conf.php
  *  Codex: A PHP/MySQL fanfiction database
  *  Component: PHP viewer script configuration
  *
