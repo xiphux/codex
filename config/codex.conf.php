@@ -52,7 +52,8 @@
 
  /*
   * Base path containing fic text files
-  * Relative to the main script in the webroot
+  * Can be an absolute path or relative path
+  * Don't forget trailing slash
   */
  $codex_conf['basepath'] = "fics/";
 
@@ -82,7 +83,7 @@
  $codex_conf['dbperfmon'] = TRUE;
 
  /*
-  * If enabled, lemon fics will be shown.  Otherwise not
+  * If enabled, lemon fics will be shown.
   */
  $codex_conf['lemons'] = TRUE;
 
