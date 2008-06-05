@@ -22,7 +22,7 @@
 	/*
 	 * Instantiate smarty
 	 */
- 	include_once("smarty/Smarty.class.php");
+ 	include_once($codex_conf['smarty_prefix'] . "Smarty.class.php");
 	$tpl =& new Smarty;
 	$tpl->load_filter('output','trimwhitespace');
 

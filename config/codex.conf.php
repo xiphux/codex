@@ -7,6 +7,35 @@
  *  Copyright (C) 2005 Christopher Han <xiphux@gmail.com>
  */
 
+/*
+ * smarty_prefix
+ * This is the prefix where smarty is installed.
+ * (including trailing slash)
+ * If an absolute (starts with /) path is given,
+ * Smarty.class.php will be searched for in that directory.
+ * If a relative (doesn't start with /) path is given,
+ * that subdirectory inside the php include dirs will be
+ * searched.  So, for example, if you specify the path as
+ * "/usr/share/Smarty/" then the script will look for
+ * /usr/share/Smarty/Smarty.class.php.
+ * If you specify the path as "smarty/" then it will search
+ * the include directories in php.ini's include_path directive,
+ * so it would search in places like /usr/share/php and /usr/lib/php:
+ * /usr/share/php/smarty/Smarty.class.php,
+ * /usr/lib/php/smarty/Smarty.class.php, etc.
+ * Leave blank to just search in the root of the php include directories
+ * like /usr/share/php/Smarty.class.php, /usr/lib/php/Smarty.class.php, etc.
+ */
+$codex_conf['smarty_prefix'] = "smarty/";
+
+/*
+ * adodb_prefix
+ * This is the prefix where adodb is installed.
+ * Behaves the same way as smarty_prefix, but specifies
+ * location of adodb_inc.php.
+ */
+$codex_conf['adodb_prefix'] = "adodb/";
+
  /*
   * Database connection settings
   */

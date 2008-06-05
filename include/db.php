@@ -6,7 +6,8 @@
  *
  *  Copyright (C) 2005 Christopher Han <xiphux@gmail.com>
  */
- include_once("adodb/adodb.inc.php");
+
+ include_once($codex_conf['adodb_prefix'] . "adodb.inc.php");
 
 $tables = array();
 $tables['authors'] = $codex_conf['prefix'] . "authors";
