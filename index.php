@@ -1,5 +1,4 @@
 <?php
- ob_start();
 /*
  *  index.php
  *  Codex: A PHP/MySQL fanfiction database
@@ -7,6 +6,8 @@
  *
  *  Copyright (C) 2005 Christopher Han <xiphux@gmail.com>
  */
+
+ ob_start();
 
  	/*
 	 * Version
