@@ -10,8 +10,8 @@
 
 function fic_author($id)
 {
-	global $db,$tables,$codex_conf;
-	return $db->CacheGetArray($codex_conf['secs2cache'],"SELECT t2.* FROM " . $tables['fic_author'] . " AS t1, " . $tables['authors'] . " AS t2 WHERE t1.fic_id = $id AND t1.author_id = t2.author_id ORDER BY t2.author_name");
+	global $tables;
+	return DBGetArray("SELECT t2.* FROM " . $tables['fic_author'] . " AS t1, " . $tables['authors'] . " AS t2 WHERE t1.fic_id = $id AND t1.author_id = t2.author_id ORDER BY t2.author_name");
 }
 
 ?>

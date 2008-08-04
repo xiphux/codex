@@ -10,8 +10,8 @@
 
 function fic_genre($id)
 {
-	global $db,$tables,$codex_conf;
-	return $db->CacheGetArray($codex_conf['secs2cache'],"SELECT t2.* FROM " . $tables['fic_genre'] . " AS t1, " . $tables['genres'] . " AS t2 WHERE t1.fic_id = $id AND t1.genre_id = t2.genre_id ORDER BY t2.genre_name");
+	global $tables;
+	return DBGetArray("SELECT t2.* FROM " . $tables['fic_genre'] . " AS t1, " . $tables['genres'] . " AS t2 WHERE t1.fic_id = $id AND t1.genre_id = t2.genre_id ORDER BY t2.genre_name");
 }
 
 ?>

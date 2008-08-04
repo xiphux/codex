@@ -10,8 +10,8 @@
 
 function fic_title($id)
 {
-	global $db,$tables,$codex_conf;
-	return $db->CacheGetOne($codex_conf['secs2cache'],"SELECT fic_title FROM " . $tables['fics'] . " WHERE fic_id = $id");
+	global $tables;
+	return DBGetOne("SELECT fic_title FROM " . $tables['fics'] . " WHERE fic_id = $id");
 }
 
 ?>

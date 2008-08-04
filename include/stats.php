@@ -10,7 +10,7 @@
 
 function stats()
 {
-	global $codex_conf,$codex_version,$db,$tpl,$tables;
+	global $codex_conf,$codex_version,$tpl,$tables;
 	$tpl->clear_all_assign();
 	$tpl->assign("appstring","Codex $codex_version");
 	$tpl->assign("cdate","2005");
@@ -32,18 +32,18 @@ function stats()
 	$tpl->assign("uptime_days",$uptime);
 	$tpl->assign("uptime_percent",$percentage);
 	$tpl->assign("loadavg",$load);
-	$tpl->assign("fics",sizeof($db->CacheGetArray($codex_conf['secs2cache'],"SELECT fic_id FROM " . $tables['fics'])));
-	$tpl->assign("authors",sizeof($db->CacheGetArray($codex_conf['secs2cache'],"SELECT author_id FROM " . $tables['authors'])));
-	$tpl->assign("genres",sizeof($db->CacheGetArray($codex_conf['secs2cache'],"SELECT genre_id FROM " . $tables['genres'])));
-	$tpl->assign("series",sizeof($db->CacheGetArray($codex_conf['secs2cache'],"SELECT series_id FROM " . $tables['series'])));
-	$tpl->assign("characters",sizeof($db->CacheGetArray($codex_conf['secs2cache'],"SELECT character_id FROM " . $tables['characters'])));
-	$tpl->assign("matchups",sizeof($db->CacheGetArray($codex_conf['secs2cache'],"SELECT matchup_id FROM " . $tables['matchups'])));
+	$tpl->assign("fics",DBGetOne("SELECT COUNT(fic_id) FROM " . $tables['fics']));
+	$tpl->assign("authors",DBGetOne("SELECT COUNT(author_id) FROM " . $tables['authors']));
+	$tpl->assign("genres",DBGetOne("SELECT COUNT(genre_id) FROM " . $tables['genres']));
+	$tpl->assign("series",DBGetOne("SELECT COUNT(series_id) FROM " . $tables['series']));
+	$tpl->assign("characters",DBGetOne("SELECT COUNT(character_id) FROM " . $tables['characters']));
+	$tpl->assign("matchups",DBGetOne("SELECT COUNT(matchup_id) FROM " . $tables['matchups']));
 	$tpl->display("stats.tpl");
-	$dbstats = $db->CacheGetArray($codex_conf['secs2cache'],"SHOW TABLE STATUS");
+	$dbstats = DBGetArray("SHOW TABLE STATUS");
 	$total = 0;
 	foreach ($dbstats as $row) {
 		if ($codex_conf['optimize'])
-			$db->CacheExecute($codex_conf['secs2cache'],"OPTIMIZE TABLE " . $db->qstr($row['Name']));
+			DBExecute("OPTIMIZE TABLE " . DBqstr($row['Name']));
 		$tpl->clear_all_assign();
 		$tpl->assign("table",$row);
 		if (isset($row['Data_length']) && isset($row['Index_length'])) {

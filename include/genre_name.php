@@ -9,8 +9,8 @@
 
 function genre_name($id)
 {
-	global $db,$tables,$codex_conf;
-	return $db->CacheGetOne($codex_conf['secs2cache'],"SELECT genre_name FROM " . $tables['genres'] . " WHERE genre_id = $id");
+	global $tables;
+	return DBGetOne("SELECT genre_name FROM " . $tables['genres'] . " WHERE genre_id = $id");
 }
 
 ?>

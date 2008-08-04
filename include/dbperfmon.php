@@ -10,7 +10,7 @@
 
 function dbperfmon()
 {
-	global $codex_conf,$db;
+	global $db;
 	session_start();
 	$perf =& NewPerfMonitor($db);
 	$perf->UI($pollsecs=5);

@@ -10,8 +10,8 @@
 
 function series_title($id)
 {
-	global $db,$tables,$codex_conf;
-	return $db->CacheGetOne($codex_conf['secs2cache'],"SELECT series_title FROM " . $tables['series'] . " WHERE series_id = $id");
+	global $tables;
+	return DBGetOne("SELECT series_title FROM " . $tables['series'] . " WHERE series_id = $id");
 }
 
 ?>

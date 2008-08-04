@@ -15,7 +15,8 @@
 
 function readfic($id)
 {
-	global $codex_conf, $spellcheck, $db, $tpl;
+	global $codex_conf, $spellcheck, $tpl;
+	date_default_timezone_set("UTC");
 	$tpl->clear_all_assign();
 	if (isset($id)) {
 		$fic = fic_data($id);

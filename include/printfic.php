@@ -20,7 +20,7 @@
 
 function printfic($id, $author_info = TRUE, $highlight = 0, $search = null)
 {
-	global $tpl,$db,$codex_conf;
+	global $tpl,$codex_conf;
 
 	/*
 	 * Get the fic data

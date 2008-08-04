@@ -15,14 +15,14 @@
 
 function findfic($src = null)
 {
-	global $db,$codex_conf,$tables;
+	global $tables;
 	if (isset($src)) {
 	 	$found = FALSE;
 
 		/*
 		 * Substring search fic title
 		 */
-		$res = $db->CacheGetArray($codex_conf['secs2cache'],"SELECT fic_id FROM " . $tables['fics'] . " WHERE UPPER(fic_title) LIKE '%" . strtoupper($src) . "%' ORDER BY fic_title");
+		$res = DBGetArray("SELECT fic_id FROM " . $tables['fics'] . " WHERE UPPER(fic_title) LIKE '%" . strtoupper($src) . "%' ORDER BY fic_title");
 		foreach ($res as $row) {
 			$found = TRUE;
 			printfic($row['fic_id'],TRUE,CODEX_TITLE,$src);
@@ -31,7 +31,7 @@ function findfic($src = null)
 		/*
 		 * Substring search fic author
 		 */
-		$res = $db->CacheGetArray($codex_conf['secs2cache'],"SELECT author_id FROM " . $tables['authors'] . " WHERE UPPER(author_name) LIKE '%" . strtoupper($src) . "%' ORDER BY author_name");
+		$res = DBGetArray("SELECT author_id FROM " . $tables['authors'] . " WHERE UPPER(author_name) LIKE '%" . strtoupper($src) . "%' ORDER BY author_name");
 		foreach ($res as $row) {
 			$found = TRUE;
 			listfics("author",$row['author_id'],CODEX_AUTHOR,$src);
@@ -40,7 +40,7 @@ function findfic($src = null)
 		/*
 		 * Substring search fic series
 		 */
-		$res = $db->CacheGetArray($codex_conf['secs2cache'],"SELECT series_id FROM " . $tables['series'] . " WHERE UPPER(series_title) LIKE '%" . strtoupper($src) . "%' ORDER BY series_title");
+		$res = DBGetArray("SELECT series_id FROM " . $tables['series'] . " WHERE UPPER(series_title) LIKE '%" . strtoupper($src) . "%' ORDER BY series_title");
 		foreach ($res as $row) {
 			$found = TRUE;
 			listfics("series",$row['series_id'],CODEX_SERIES,$src);
@@ -49,7 +49,7 @@ function findfic($src = null)
 		/*
 		 * Substring search fic genre
 		 */
-		$res = $db->CacheGetArray($codex_conf['secs2cache'],"SELECT genre_id FROM " . $tables['genres'] . " WHERE UPPER(genre_name) LIKE '%" . strtoupper($src) . "%' ORDER BY genre_name");
+		$res = DBGetArray("SELECT genre_id FROM " . $tables['genres'] . " WHERE UPPER(genre_name) LIKE '%" . strtoupper($src) . "%' ORDER BY genre_name");
 		foreach ($res as $row) {
 			$found = TRUE;
 			listfics("genre",$row['genre_id'],CODEX_GENRE,$src);
@@ -58,7 +58,7 @@ function findfic($src = null)
 		/*
 		 * Substring search fic characters/matchups
 		 */
-		$res = $db->CacheGetArray($codex_conf['secs2cache'],"SELECT character_id FROM " . $tables['characters'] . " WHERE UPPER(character_name) LIKE '%" . strtoupper($src) . "%' ORDER BY character_name");
+		$res = DBGetArray("SELECT character_id FROM " . $tables['characters'] . " WHERE UPPER(character_name) LIKE '%" . strtoupper($src) . "%' ORDER BY character_name");
 		/*
 		 * Already listed matchups array
 		 */
@@ -67,7 +67,7 @@ function findfic($src = null)
 			/*
 			 * Get matchups for character 1
 			 */
-			$r = $db->CacheGetArray($codex_conf['secs2cache'],"SELECT matchup_id FROM " . $tables['matchups'] . " WHERE match_1 = " . $row['character_id']);
+			$r = DBGetArray("SELECT matchup_id FROM " . $tables['matchups'] . " WHERE match_1 = " . $row['character_id']);
 
 			/*
 			 * Sort alphabetically
@@ -87,7 +87,7 @@ function findfic($src = null)
 			/*
 			 * Get matchups for character 2
 			 */
-			$r = $db->CacheGetArray($codex_conf['secs2cache'],"SELECT matchup_id FROM " . $tables['matchups'] . " WHERE match_2 = {$row['character_id']}");
+			$r = DBGetArray("SELECT matchup_id FROM " . $tables['matchups'] . " WHERE match_2 = {$row['character_id']}");
 
 			/*
 			 * Sort alphabetically

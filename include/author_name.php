@@ -9,8 +9,8 @@
 
 function author_name($id)
 {
-	global $db,$tables,$codex_conf;
-	return $db->CacheGetOne($codex_conf['secs2cache'],"SELECT author_name FROM " . $tables['authors'] . " WHERE author_id = $id");
+	global $tables;
+	return DBGetOne("SELECT author_name FROM " . $tables['authors'] . " WHERE author_id = $id");
 }
 
 ?>

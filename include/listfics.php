@@ -22,7 +22,7 @@
 
 function listfics($sort = "title", $searchid = null, $highlight = 0, $searchstring = null)
 {
-	global $codex_conf,$db,$tpl,$tables;
+	global $codex_conf,$tpl,$tables;
 
 	/*
 	 * Sort by genre
@@ -37,7 +37,7 @@ function listfics($sort = "title", $searchid = null, $highlight = 0, $searchstri
 			$q .= " WHERE genre_id = $searchid";
 		else
 			$q .= " ORDER BY genre_name";
-		$gl = $db->CacheGetArray($codex_conf['secs2cache'],$q);
+		$gl = DBGetArray($q);
 
 		/*
 		 * Enumerate genre list
@@ -75,7 +75,7 @@ function listfics($sort = "title", $searchid = null, $highlight = 0, $searchstri
 			$q .= " WHERE series_id = $searchid";
 		else
 			$q .= " ORDER BY series_title";
-		$sl = $db->CacheGetArray($codex_conf['secs2cache'],$q);
+		$sl = DBGetArray($q);
 
 		/*
 		 * Enumerate series list
@@ -111,7 +111,7 @@ function listfics($sort = "title", $searchid = null, $highlight = 0, $searchstri
 			$q .= " WHERE matchup_id = $searchid";
 		else
 			$q .= " ORDER BY matchup_id";
-		$ml = $db->CacheGetArray($codex_conf['secs2cache'],$q);
+		$ml = DBGetArray($q);
 		usort($ml,"matchupcmp");
 
 		/*
@@ -158,7 +158,7 @@ function listfics($sort = "title", $searchid = null, $highlight = 0, $searchstri
 			$q .= " WHERE author_id = $searchid";
 		else
 			$q .= " ORDER BY author_name";
-		$al = $db->CacheGetArray($codex_conf['secs2cache'],$q);
+		$al = DBGetArray($q);
 
 		/*
 		 * Enumerate author list
@@ -187,7 +187,7 @@ function listfics($sort = "title", $searchid = null, $highlight = 0, $searchstri
 	 * Default case, sort alphabetically
 	 */
 	} else {
-		$fl = $db->CacheGetCol($codex_conf['secs2cache'],"SELECT fic_id FROM " . $tables['fics'] . " ORDER BY fic_title");
+		$fl = DBGetCol("SELECT fic_id FROM " . $tables['fics'] . " ORDER BY fic_title");
 		foreach ($fl as $row)
 			printfic($row,TRUE,$highlight,$searchstring);
 	}
