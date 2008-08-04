@@ -36,25 +36,41 @@
 
 $ttl = $codex_conf['title'];
 /*
- * Give the fic title if reading
+ * Append relevant info to title
  */
-if ($_GET['u'] == "read") {
-	include_once('include/fic_title.php');
-	$ttl .= " :: " . fic_title($_GET['fic']);
-} else if ($_GET['u'] == "matchup" && isset($_GET['mid'])) {
-	include_once('include/matchup_data.php');
-	$match = matchup_data($_GET['mid']);
-	if ($match)
-		$ttl .= " :: " . $match["matchup_name"];
-} else if ($_GET['u'] == "series" && isset($_GET['sid'])) {
-	include_once('include/series_title.php');
-	$ttl .= " :: " . series_title($_GET['sid']);
-} else if ($_GET['u'] == "author" && isset($_GET['aid'])) {
-	include_once('include/author_name.php');
-	$ttl .= " :: " . author_name($_GET['aid']);
-} else if ($_GET['u'] == "genre" && isset($_GET['gid'])) {
-	include_once('include/genre_name.php');
-	$ttl .= " :: " . genre_name($_GET['gid']);
+if (isset($_GET['u'])) {
+	switch ($_GET['u']) {
+		case "read":
+			include_once('include/fic_title.php');
+			$ttl .= " :: " . fic_title($_GET['fic']);
+			break;
+		case "matchup":
+			if (isset($_GET['mid'])) {
+				include_once('include/matchup_data.php');
+				$match = matchup_data($_GET['mid']);
+				if ($match)
+					$ttl .= " :: " . $match["matchup_name"];
+			}
+			break;
+		case "series":
+			if (isset($_GET['sid'])) {
+				include_once('include/series_title.php');
+				$ttl .= " :: " . series_title($_GET['sid']);
+			}
+			break;
+		case "author":
+			if (isset($_GET['aid'])) {
+				include_once('include/author_name.php');
+				$ttl .= " :: " . author_name($_GET['aid']);
+			}
+			break;
+		case "genre":
+			if (isset($_GET['gid'])) {
+				include_once('include/genre_name.php');
+				$ttl .= " :: " . genre_name($_GET['gid']);
+			}
+			break;
+	}
 }
 	
 $tpl->clear_all_assign();
@@ -87,16 +103,16 @@ if (isset($_GET['u'])) {
 		$tid = null;
 		switch($_GET['u']) {
 			case "author":
-				$tid = $_GET['aid'];
+				$tid = (isset($_GET['aid']) ? $_GET['aid'] : null);
 				break;
 			case "matchup":
-				$tid = $_GET['mid'];
+				$tid = (isset($_GET['mid']) ? $_GET['mid'] : null);
 				break;
 			case "series":
-				$tid = $_GET['sid'];
+				$tid = (isset($_GET['sid']) ? $_GET['sid'] : null);
 				break;
 			case "genre":
-				$tid = $_GET['gid'];
+				$tid = (isset($_GET['gid']) ? $_GET['gid'] : null);
 				break;
 		}
 		listfics($_GET['u'],$tid);
