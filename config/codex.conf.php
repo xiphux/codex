@@ -173,4 +173,10 @@ $codex_conf['adodb_prefix'] = "adodb/";
   * Active text box will have a border with this color
   */
  $codex_conf['focus_color'] = "red";
+
+ /*
+  * Debug
+  * Whether to display debugging information
+  */
+ $codex_conf['debug'] = TRUE;
 ?>

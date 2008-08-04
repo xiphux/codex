@@ -31,6 +31,8 @@
 	$tpl =& new Smarty;
 	$tpl->load_filter('output','trimwhitespace');
 
+ if ($codex_conf['debug'])
+ 	error_reporting(E_ALL | E_STRICT);
 
 $ttl = $codex_conf['title'];
 /*
