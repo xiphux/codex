@@ -53,7 +53,7 @@ $codex_conf['adodb_prefix'] = "adodb/";
   * on a heavily loaded server with lots of connections
   * left open.
   */
- $codex_conf['persist'] = TRUE;
+ $codex_conf['persist'] = FALSE;
 
  /*
   * Table prefix
