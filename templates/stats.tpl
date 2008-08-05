@@ -13,7 +13,6 @@
 <br /><strong>Server: </strong>{$server}
 <br /><strong>Uname: </strong>{$uname}
 <br /><strong>Uptime (days): </strong>{$uptime_days}
-<br /><strong>Uptime (%): </strong>{$uptime_percent}
 <br /><strong>Load average: </strong>{$loadavg}
 </p>
 <p><strong><span class="underline">Data statistics:</span></strong>
