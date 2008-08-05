@@ -154,4 +154,18 @@ $codex_conf['adodb_prefix'] = "adodb/";
   * Whether to display debugging information
   */
  $codex_conf['debug'] = TRUE;
+
+ /*
+  * session_key
+  * The key inside the session variable to use for session data
+  */
+ $codex_conf['session_key'] = "codex";
+
+/*
+ * theme
+ * This is the default theme to use
+ * Specified as the name of a css file in css/themes,
+ */
+$codex_conf['theme'] = "dark.css";
+
 ?>

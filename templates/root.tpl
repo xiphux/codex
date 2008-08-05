@@ -27,3 +27,12 @@
 <input type="submit" name="submit" value="Search" />
 </form>
 </p>
+<form action="{$SCRIPT_NAME}?u=changetheme" method="post">
+  <label for="theme">Set theme:</label>
+  <select name="theme">
+{foreach from=$themes item=theme}
+  <option value="{$theme}" {if $theme == $selectedtheme}selected{/if}>{$theme}</option>
+{/foreach}
+  </select>
+  <input type="submit" name="submit" value="Change" />
+</form>

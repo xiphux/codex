@@ -1,23 +1,23 @@
 body {
- 	color: white;
-	background-color: black;
+ 	color: black;
+	background-color: white;
 	position: relative;
-	font-family: "Verdana",sans-serif;
+	font-family: Georgia,"Times New Roman",Times,serif;
 	overflow: auto;
 }
 
 a:link {
-	color: lime;
+	color: blue;
 	text-decoration: none;
 }
 
 a:active {
-	color: lime;
+	color: blue;
 	text-decoration: none;
 }
 
 a:visited {
-	color: lime;
+	color: blue;
 	text-decoration: none;
 }
 
@@ -52,6 +52,6 @@ table {
 }
 
 form input.focus, form textarea.focus {
-	border-color: red;
-	color: #000;
+	border-color: blue;
+	color: #111;
 }

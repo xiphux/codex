@@ -12,8 +12,9 @@ header("Content-Type: $contentType; charset=utf-8"); *}
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <title>{$title}</title>
-<link rel="stylesheet" href="css/codex.css" type="text/css" />
 {literal}
+<link rel="stylesheet" href="css/codex.css" type="text/css" />
+<link rel="stylesheet" href="css/themes/{/literal}{$theme}{literal}" type="text/css" />
 <script type="text/javascript">
 //<!CDATA[
 function highlightFormElements() {
