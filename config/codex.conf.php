@@ -127,28 +127,6 @@ $codex_conf['adodb_prefix'] = "adodb/";
  $codex_conf['lemons'] = TRUE;
 
  /*
-  * Text color
-  */
- $codex_conf['body_color'] = "white";
-
- /*
-  * Background color
-  */
- $codex_conf['background_color'] = "black";
-
- /*
-  * Link color
-  */
- $codex_conf['link_color'] = "lime";
-
- /*
-  * Lemon color
-  * Color to use to mark the lemon category.  If you don't
-  * want any warning, just set the same as link color
-  */
- $codex_conf['lemon_color'] = "red";
-
- /*
   * Spellcheck
   * If enabled, spelling will be dynamically fixed.
   * See below for patterns.
@@ -170,18 +148,6 @@ $codex_conf['adodb_prefix'] = "adodb/";
  $spellcheck["Irregardless"] = "Regardless";
  $spellcheck["irregardless"] = "regardless";
  $spellcheck[",br>"] = "\n";
-
- /*
-  * Search highlight color
-  * When searching, the search string will be hilighted this color
-  */
- $codex_conf['searchtext_color'] = "yellow";
-
- /*
-  * Text focus color
-  * Active text box will have a border with this color
-  */
- $codex_conf['focus_color'] = "red";
 
  /*
   * Debug

@@ -75,12 +75,6 @@ if (isset($_GET['u'])) {
 	
 $tpl->clear_all_assign();
 $tpl->assign("title",$ttl);
-$tpl->assign("body_color",$codex_conf['body_color']);
-$tpl->assign("background_color",$codex_conf['background_color']);
-$tpl->assign("link_color",$codex_conf['link_color']);
-$tpl->assign("lemon_color",$codex_conf['lemon_color']);
-$tpl->assign("searchtext_color",$codex_conf['searchtext_color']);
-$tpl->assign("focus_color",$codex_conf['focus_color']);
 $tpl->display("header.tpl");
 /*
  * Determine action via GET variables

@@ -12,20 +12,7 @@ header("Content-Type: $contentType; charset=utf-8"); *}
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <title>{$title}</title>
-{literal}<style type="text/css">/*<![CDATA[[*/<!--
- body {color:{/literal}{$body_color}{literal}; background-color:{/literal}{$background_color}{literal}; position:relative; font-family:"Verdana",sans-serif;overflow:auto;}
- a:link {color:{/literal}{$link_color}{literal}; text-decoration:none;}
- a:active {color:{/literal}{$link_color}{literal}; text-decoration:none;}
- a:visited {color:{/literal}{$link_color}{literal}; text-decoration:none;}
- .italic {font-style:italic;}
- .bold {font-weight:bold;}
- .underline {text-decoration:underline;}
- .lemontext {color:{/literal}{$lemon_color}{literal};}
- .searchtext {color:{/literal}{$searchtext_color}{literal};font-weight:bold;}
- table {border:none; border-spacing:5px;}
- .main {width:100px;}
- form input.focus, form textarea.focus {border-color:{/literal}{$focus_color}{literal};color: #000;}
-/*]]>*/--></style>{/literal}
+<link rel="stylesheet" href="css/codex.css" type="text/css" />
 {literal}
 <script type="text/javascript">
 //<!CDATA[
