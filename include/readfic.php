@@ -19,7 +19,7 @@ function readfic($id)
 	date_default_timezone_set("UTC");
 	$tpl->clear_all_assign();
 	if (isset($id)) {
-		$fic = DBGetRow("SELECT fic_data, fic_file FROM " . $tables['fics'] . " WHERE fic_id = " . $id;
+		$fic = DBGetRow("SELECT fic_data, fic_file FROM " . $tables['fics'] . " WHERE fic_id = " . $id);
 		if ($fic) {
 			$fdat = $fic['fic_data'];
 			/*
