@@ -30,8 +30,8 @@
 	 * Instantiate smarty
 	 */
  	include_once($codex_conf['smarty_prefix'] . "Smarty.class.php");
-	$tpl =& new Smarty;
-	$tpl->load_filter('output','trimwhitespace');
+	$tpl = new Smarty;
+ 	$tpl->autoload_filters = array('output' => array('trimwhitespace'));
 
  if ($codex_conf['debug'])
  	error_reporting(E_ALL | E_STRICT);
