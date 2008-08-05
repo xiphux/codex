@@ -11,7 +11,7 @@
 function fic_data($id)
 {
 	global $tables;
-	return DBGetRow("SELECT * FROM " . $tables['fics'] . " WHERE fic_id = $id");
+	return DBGetRow("SELECT fic_id,fic_title,fic_comments FROM " . $tables['fics'] . " WHERE fic_id = $id");
 }
 
 ?>

@@ -15,11 +15,11 @@
 
 function readfic($id)
 {
-	global $codex_conf, $spellcheck, $tpl;
+	global $codex_conf, $spellcheck, $tables, $tpl;
 	date_default_timezone_set("UTC");
 	$tpl->clear_all_assign();
 	if (isset($id)) {
-		$fic = fic_data($id);
+		$fic = DBGetRow("SELECT fic_data, fic_file FROM " . $tables['fics'] . " WHERE fic_id = " . $id;
 		if ($fic) {
 			$fdat = $fic['fic_data'];
 			/*
