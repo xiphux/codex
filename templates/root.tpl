@@ -10,9 +10,6 @@
 {if $stats}
   <br />[<a href="{$SCRIPT_NAME}?u=stats">stats</a>]
 {/if}
-{if $dbperfmon}
-  <br />[<a href="{$SCRIPT_NAME}?u=dbperfmon">dbperfmon</a>]
-{/if}
 </p>
 <p>Sort by:<br />
 <a href="{$SCRIPT_NAME}?u=title">Title</a><br />

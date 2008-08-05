@@ -116,12 +116,6 @@ $codex_conf['adodb_prefix'] = "adodb/";
  $codex_conf['optimize'] = TRUE;
 
  /*
-  * If enabled, a database performance monitor link will appear
-  * on the main page
-  */
- $codex_conf['dbperfmon'] = TRUE;
-
- /*
   * If enabled, lemon fics will be shown.
   */
  $codex_conf['lemons'] = TRUE;

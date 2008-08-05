@@ -55,10 +55,6 @@ if (isset($_GET['u'])) {
 			include_once('include/stats.php');
 			stats();
 			break;
-		case "dbperfmon":
-			include_once('include/dbperfmon.php');
-			dbperfmon();
-			break;
 		case "search":
 			include_once('include/findfic.php');
 			findfic($_POST['search']);
