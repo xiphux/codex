@@ -26,6 +26,8 @@
 	 */
 	include_once('include/db.php');
 
+	date_default_timezone_set("UTC");
+
 	/*
 	 * Instantiate smarty
 	 */
