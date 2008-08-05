@@ -10,7 +10,10 @@
 
  include_once('defs.php');
  include_once('printfic.php');
- include_once('listfics.php');
+ include_once('listfics_author.php');
+ include_once('listfics_series.php');
+ include_once('listfics_genre.php');
+ include_once('listfics_matchup.php');
  include_once('matchupcmp.php');
 
 function findfic($src = null)
@@ -34,7 +37,7 @@ function findfic($src = null)
 		$res = DBGetArray("SELECT author_id FROM " . $tables['authors'] . " WHERE UPPER(author_name) LIKE '%" . strtoupper($src) . "%' ORDER BY author_name");
 		foreach ($res as $row) {
 			$found = TRUE;
-			listfics("author",$row['author_id'],CODEX_AUTHOR,$src);
+			listfics_author($row['author_id'],CODEX_AUTHOR,$src);
 		}
 
 		/*
@@ -43,7 +46,7 @@ function findfic($src = null)
 		$res = DBGetArray("SELECT series_id FROM " . $tables['series'] . " WHERE UPPER(series_title) LIKE '%" . strtoupper($src) . "%' ORDER BY series_title");
 		foreach ($res as $row) {
 			$found = TRUE;
-			listfics("series",$row['series_id'],CODEX_SERIES,$src);
+			listfics_series($row['series_id'],CODEX_SERIES,$src);
 		}
 
 		/*
@@ -52,7 +55,7 @@ function findfic($src = null)
 		$res = DBGetArray("SELECT genre_id FROM " . $tables['genres'] . " WHERE UPPER(genre_name) LIKE '%" . strtoupper($src) . "%' ORDER BY genre_name");
 		foreach ($res as $row) {
 			$found = TRUE;
-			listfics("genre",$row['genre_id'],CODEX_GENRE,$src);
+			listfics_genre($row['genre_id'],CODEX_GENRE,$src);
 		}
 
 		/*
@@ -80,7 +83,7 @@ function findfic($src = null)
 				if (!in_array($row2['matchup_id'],$ex)) {
 					$found = TRUE;
 					$ex[] = $row2['matchup_id'];
-					listfics("matchup",$row2['matchup_id'],CODEX_MATCHUP_1,$src);
+					listfics_matchup($row2['matchup_id'],CODEX_MATCHUP_1,$src);
 				}
 			}
 
@@ -101,7 +104,7 @@ function findfic($src = null)
 				if (!in_array($row2['matchup_id'],$ex)) {
 					$found = TRUE;
 					$ex[] = $row2['matchup_id'];
-					listfics("matchup",$row2['matchup_id'],CODEX_MATCHUP_2,$src);
+					listfics_matchup($row2['matchup_id'],CODEX_MATCHUP_2,$src);
 				}
 			}
 		}

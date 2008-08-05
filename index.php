@@ -98,24 +98,24 @@ if (isset($_GET['u'])) {
 			findfic($_POST['search']);
 			break;
 		case "title":
-			include_once('include/listfics.php');
-			listfics($_GET['u'], null);
+			include_once('include/listfics_title.php');
+			listfics_title();
 			break;
 		case "author":
-			include_once('include/listfics.php');
-			listfics($_GET['u'], (isset($_GET['aid']) ? $_GET['aid'] : null));
+			include_once('include/listfics_author.php');
+			listfics_author((isset($_GET['aid']) ? $_GET['aid'] : null));
 			break;
 		case "matchup":
-			include_once('include/listfics.php');
-			listfics($_GET['u'], (isset($_GET['mid']) ? $_GET['mid'] : null));
+			include_once('include/listfics_matchup.php');
+			listfics_matchup((isset($_GET['mid']) ? $_GET['mid'] : null));
 			break;
 		case "series":
-			include_once('include/listfics.php');
-			listfics($_GET['u'], (isset($_GET['sid']) ? $_GET['sid'] : null));
+			include_once('include/listfics_series.php');
+			listfics_series((isset($_GET['sid']) ? $_GET['sid'] : null));
 			break;
 		case "genre":
-			include_once('include/listfics.php');
-			listfics($_GET['u'], (isset($_GET['gid']) ? $_GET['gid'] : null));
+			include_once('include/listfics_genre.php');
+			listfics_genre((isset($_GET['gid']) ? $_GET['gid'] : null));
 			break;
 		default:
 			echo "Unknown action";
