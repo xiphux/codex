@@ -80,36 +80,46 @@ $tpl->display("header.tpl");
  * Determine action via GET variables
  */
 if (isset($_GET['u'])) {
-	if ($_GET['u'] == "read") {
-		include_once('include/readfic.php');
-		readfic($_GET['fic']);
-	} else if ($_GET['u'] == "stats") {
-		include_once('include/stats.php');
-		stats();
-	} else if ($_GET['u'] == "dbperfmon") {
-		include_once('include/dbperfmon.php');
-		dbperfmon();
-	} else if ($_GET['u'] == "search") {
-		include_once('include/findfic.php');
-		findfic($_POST['search']);
-	} else {
-		include_once('include/listfics.php');
-		$tid = null;
-		switch($_GET['u']) {
-			case "author":
-				$tid = (isset($_GET['aid']) ? $_GET['aid'] : null);
-				break;
-			case "matchup":
-				$tid = (isset($_GET['mid']) ? $_GET['mid'] : null);
-				break;
-			case "series":
-				$tid = (isset($_GET['sid']) ? $_GET['sid'] : null);
-				break;
-			case "genre":
-				$tid = (isset($_GET['gid']) ? $_GET['gid'] : null);
-				break;
-		}
-		listfics($_GET['u'],$tid);
+	switch ($_GET['u']) {
+		case "read":
+			include_once('include/readfic.php');
+			readfic($_GET['fic']);
+			break;
+		case "stats":
+			include_once('include/stats.php');
+			stats();
+			break;
+		case "dbperfmon":
+			include_once('include/dbperfmon.php');
+			dbperfmon();
+			break;
+		case "search":
+			include_once('include/findfic.php');
+			findfic($_POST['search']);
+			break;
+		case "title":
+			include_once('include/listfics.php');
+			listfics($_GET['u'], null);
+			break;
+		case "author":
+			include_once('include/listfics.php');
+			listfics($_GET['u'], (isset($_GET['aid']) ? $_GET['aid'] : null));
+			break;
+		case "matchup":
+			include_once('include/listfics.php');
+			listfics($_GET['u'], (isset($_GET['mid']) ? $_GET['mid'] : null));
+			break;
+		case "series":
+			include_once('include/listfics.php');
+			listfics($_GET['u'], (isset($_GET['sid']) ? $_GET['sid'] : null));
+			break;
+		case "genre":
+			include_once('include/listfics.php');
+			listfics($_GET['u'], (isset($_GET['gid']) ? $_GET['gid'] : null));
+			break;
+		default:
+			echo "Unknown action";
+			break;
 	}
 } else {
 	$tpl->clear_all_assign();
