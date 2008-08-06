@@ -20,6 +20,7 @@ function findfic($src = null)
 {
 	global $tables, $cache;
 	if (isset($src)) {
+		$src = addslashes($src);
 	 	$found = FALSE;
 		$key = md5(strtoupper($src));
 
