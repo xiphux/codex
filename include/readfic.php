@@ -56,7 +56,7 @@ function readfic($id, $ch = 1)
 			/*
 			 * Unwrap if specified
 			 */
-			if (isset($chapdata['wrapped']) && ($chapdata['wrapped'] === "1"))
+			if ($codex_conf['unwrap'] && isset($chapdata['wrapped']) && ($chapdata['wrapped'] === "1"))
 				$fdat = ereg_replace("([^\n])\r\n([^\r])","\\1\\2",$fdat);
 
 			/*

@@ -162,4 +162,10 @@ $codex_conf['adodb_prefix'] = "adodb/";
  */
 $codex_conf['theme'] = "dark.css";
 
+/*
+ * unwrap
+ * Attempt to unwrap fics marked as word-wrapped
+ */
+$codex_conf['unwrap'] = TRUE;
+
 ?>
