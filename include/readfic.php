@@ -22,10 +22,14 @@ function readfic($id, $ch = 1)
 		$fic = fic_data($id);
 		if ($fic) {
 			$tpl->assign("fic",$fic);
+			$tpl->assign("ficid",$id);
+			$tpl->assign("chapter",$ch);
+
 			$auth = fic_author($id);
 			$tpl->assign("author",$auth);
+
 			$chapters = DBGetArray("SELECT num,title FROM " . $tables['chapters'] . " WHERE fic = " . $id . " ORDER BY num");
-			$chapcount = DBGetOne("SELECT COUNT(id) FROM " . $tables['chapters'] . " WHERE fic = " . $id);
+			$chapcount = count($chapters);
 			$tpl->assign("chapters",$chapters);
 			if ($ch > 1)
 				$tpl->assign("prev",($ch - 1));
@@ -49,6 +53,9 @@ function readfic($id, $ch = 1)
 				foreach ($spellcheck as $broke => $fixed)
 					$fdat = ereg_replace($broke,$fixed,$fdat);
 		
+			/*
+			 * Unwrap if specified
+			 */
 			if (isset($chapdata['wrapped']) && ($chapdata['wrapped'] === "1"))
 				$fdat = ereg_replace("([^\n])\r\n([^\r])","\\1\\2",$fdat);
 
@@ -61,8 +68,6 @@ function readfic($id, $ch = 1)
 			$fdat = "Invalid fic";
 	} else
 		$fdat = "No fic specified";
-	$tpl->assign("ficid",$id);
-	$tpl->assign("chapter",$ch);
 	$tpl->assign("fdata",$fdat);
 	$tpl->display("read.tpl");
 }
