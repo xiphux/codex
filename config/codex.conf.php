@@ -145,9 +145,13 @@ $codex_conf['adodb_prefix'] = "adodb/";
 
  /*
   * Debug
-  * Whether to display debugging information
+  * Show debug messages
+  * Warning: debugging dumps a lot of information on the web page,
+  * some of it sensitive database information.  Do not enable this
+  * unless something is very wrong, and do not allow other users
+  * to access the site with debugging on.
   */
- $codex_conf['debug'] = TRUE;
+ $codex_conf['debug'] = FALSE;
 
  /*
   * session_key
