@@ -55,7 +55,11 @@ if (isset($_GET['u'])) {
 		case "read":
 			include_once('include/readfic.php');
 			include_once('include/fic_title.php');
+			include_once('include/chapter_title.php');
 			$ttl .= " :: " . fic_title($_GET['fic']);
+			$chttl = chapter_title($_GET['fic'], (isset($_GET['ch']) ? $_GET['ch'] : 1));
+			if ($chttl)
+				$ttl .= ", " . $chttl;
 			readfic($_GET['fic'], (isset($_GET['ch']) ? $_GET['ch'] : 1));
 			break;
 		case "stats":
