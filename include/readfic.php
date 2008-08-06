@@ -12,20 +12,35 @@
  */
 
  include_once('fic_data.php');
+ include_once('fic_author.php');
 
-function readfic($id)
+function readfic($id, $ch = 1)
 {
 	global $codex_conf, $spellcheck, $tables, $tpl;
 	$tpl->clear_all_assign();
 	if (isset($id)) {
-		$fic = DBGetRow("SELECT fic_data, fic_file FROM " . $tables['fics'] . " WHERE fic_id = " . $id);
+		$fic = fic_data($id);
 		if ($fic) {
-			$fdat = $fic['fic_data'];
+			$tpl->assign("fic",$fic);
+			$auth = fic_author($id);
+			$tpl->assign("author",$auth);
+			$chapters = DBGetArray("SELECT num,title FROM " . $tables['chapters'] . " WHERE fic = " . $id . " ORDER BY num");
+			$chapcount = DBGetOne("SELECT COUNT(id) FROM " . $tables['chapters'] . " WHERE fic = " . $id);
+			$tpl->assign("chapters",$chapters);
+			if ($ch > 1)
+				$tpl->assign("prev",($ch - 1));
+			if ($ch < $chapcount)
+				$tpl->assign("next",($ch + 1));
+
+			$chapdata = DBGetRow("SELECT file,data FROM " . $tables['chapters'] . " WHERE fic=" . $id . " AND num=" . $ch);
+
 			/*
 			 * Use the file version if it exists
 			 */
-			if (isset($fic['fic_file']) && file_exists($codex_conf['basepath'] . $fic['fic_file']))
-				$fdat = file_get_contents($codex_conf['basepath'] . $fic['fic_file']);
+			if (isset($chapdata['file']) && file_exists($codex_conf['basepath'] . $chapdata['file']))
+				$fdat = file_get_contents($codex_conf['basepath'] . $chapdata['file']);
+			else
+				$fdat = $chapdata['data'];
 				
 			/*
 			 * Spellcheck
@@ -43,6 +58,8 @@ function readfic($id)
 			$fdat = "Invalid fic";
 	} else
 		$fdat = "No fic specified";
+	$tpl->assign("ficid",$id);
+	$tpl->assign("chapter",$ch);
 	$tpl->assign("fdata",$fdat);
 	$tpl->display("read.tpl");
 }

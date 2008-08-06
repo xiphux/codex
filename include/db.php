@@ -11,6 +11,7 @@
 
 $tables = array();
 $tables['authors'] = $codex_conf['prefix'] . "authors";
+$tables['chapters'] = $codex_conf['prefix'] . "chapters";
 $tables['characters'] = $codex_conf['prefix'] . "characters";
 $tables['characters_series'] = $codex_conf['prefix'] . "characters_series";
 $tables['fic_author'] = $codex_conf['prefix'] . "fic_author";

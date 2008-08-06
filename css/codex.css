@@ -1,0 +1,20 @@
+.readnav {
+	width: 100%;
+	text-align: center;
+}
+
+.readnavleft {
+	text-align: left;
+	position: absolute;
+	left: 0;
+}
+
+.readnavcenter {
+	display: inline;
+}
+
+.readnavright {
+	text-align: right;
+	position: absolute;
+	right: 0;
+}
