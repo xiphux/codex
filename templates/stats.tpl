@@ -17,6 +17,7 @@
 </p>
 <p><strong><span class="underline">Data statistics:</span></strong>
 <br /><strong>Fics: </strong>{$fics}
+<br /><strong>Chapters: </strong>{$chapters}
 <br /><strong>Authors: </strong>{$authors}
 <br /><strong>Genres: </strong>{$genres}
 <br /><strong>Series: </strong>{$series}
