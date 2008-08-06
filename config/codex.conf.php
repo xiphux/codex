@@ -168,4 +168,56 @@ $codex_conf['theme'] = "dark.css";
  */
 $codex_conf['unwrap'] = TRUE;
 
+ /*
+  * cachetype
+  * Type of cache to use
+  * Valid values are:
+  *  "memcache" = connect to memcached, refer to
+  *               config options below beginning
+  *               with "memcached"
+  *  "eaccelerator" = use eaccelerator caching
+  *                   must have eaccelerator
+  *                   installed with shared memory
+  *                   enabled
+  *  "filecache" = use on-disk cache
+  *                refer to config options below
+  *                beginning with "filecache"
+  *  Any other unrecognized value (such as FALSE,
+  *  null, "off", "none", etc) will disable cache
+  */
+ $codex_conf['cachetype'] = "off";
+
+ /*
+  * filecache_dir
+  * Directory to store filecache data
+  * Make sure to include trailing slash!
+  * Paths that do not start with a slash will
+  * be relative to the index.php file
+  * This directory must exist and be writable
+  * by the webserver!
+  * Only used if cachetype is "filecache"
+  */
+ $codex_conf['filecache_dir'] = "cache/";
+
+ /*
+  * Memcached address
+  * Address of memcached server
+  * Only used if cachetype is "memcache"
+  */
+ $codex_conf['memcached_address'] = "127.0.0.1";
+
+ /*
+  * Memcached port
+  * Port of memcached server
+  * Only used if cachetype is "memcache"
+  */
+ $codex_conf['memcached_port'] = 11211;
+
+ /*
+  * Memcached persist
+  * Whether to use a persistent connection to Memcached
+  * Only used if cachetype is "memcache"
+  */
+ $codex_conf['memcached_persist'] = FALSE;
+
 ?>

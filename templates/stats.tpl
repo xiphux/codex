@@ -15,6 +15,13 @@
 <br /><strong>Uptime (days): </strong>{$uptime_days}
 <br /><strong>Load average: </strong>{$loadavg}
 </p>
+{if $cachestats}
+<p><strong><span class="underline">{$cachetype} statistics:</span></strong>
+{foreach from=$cachestats key=type item=value}
+<br /><strong>{$type}: </strong>{$value}
+{/foreach}
+</p>
+{/if}
 <p><strong><span class="underline">Data statistics:</span></strong>
 <br /><strong>Fics: </strong>{$fics}
 <br /><strong>Chapters: </strong>{$chapters}

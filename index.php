@@ -22,9 +22,14 @@ include_once('include/version.php');
 include_once('config/codex.conf.php');
 
 /*
- * Persistent database connection
+ * Database connection
  */
 include_once('include/db.php');
+
+/*
+ * Caching
+ */
+include_once('include/cache.php');
 
 date_default_timezone_set("UTC");
 

@@ -10,7 +10,7 @@
 
 function stats()
 {
-	global $codex_conf,$codex_version,$tpl,$tables;
+	global $codex_conf,$codex_version,$tpl,$tables,$cache;
 	$tpl->clear_all_assign();
 	$tpl->assign("appstring","Codex $codex_version");
 	$tpl->assign("cdate","2005");
@@ -26,6 +26,11 @@ function stats()
 		$load=$avgs[1].",".$avgs[2].",".$avgs[3]."";
 		$tpl->assign("uptime_days",$uptime);
 		$tpl->assign("loadavg",$load);
+	}
+	$cachetype = $cache->cachetype();
+	if ($cachetype !== "null") {
+		$tpl->assign("cachetype", $cachetype);
+		$tpl->assign("cachestats", $cache->stats());
 	}
 	$tpl->assign("fics",DBGetOne("SELECT COUNT(fic_id) FROM " . $tables['fics']));
 	$tpl->assign("chapters",DBGetOne("SELECT COUNT(id) FROM " . $tables['chapters']));
