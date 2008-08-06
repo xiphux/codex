@@ -10,8 +10,14 @@
 
 function fic_series($id)
 {
-	global $tables;
-	return DBGetArray("SELECT t2.* FROM " . $tables['fic_series'] . " AS t1, " . $tables['series'] . " AS t2 WHERE t1.fic_id = $id AND t1.series_id = t2.series_id ORDER BY t2.series_title");
+	global $tables, $cache;
+	
+	$tmp = $cache->get("fic_series_" . $id);
+	if (!$tmp) {
+		$tmp = DBGetArray("SELECT t2.* FROM " . $tables['fic_series'] . " AS t1, " . $tables['series'] . " AS t2 WHERE t1.fic_id = $id AND t1.series_id = t2.series_id ORDER BY t2.series_title");
+		$cache->set("fic_series_" . $id, $tmp);
+	}
+	return $tmp;
 }
 
 ?>

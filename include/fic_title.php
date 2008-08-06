@@ -10,8 +10,14 @@
 
 function fic_title($id)
 {
-	global $tables;
-	return DBGetOne("SELECT fic_title FROM " . $tables['fics'] . " WHERE fic_id = $id");
+	global $tables, $cache;
+
+	$tmp = $cache->get("fic_title_" . $id);
+	if (!$tmp) {
+		$tmp = DBGetOne("SELECT fic_title FROM " . $tables['fics'] . " WHERE fic_id = $id");
+		$cache->set("fic_title_" . $id, $tmp);
+	}
+	return $tmp;
 }
 
 ?>

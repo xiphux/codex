@@ -14,18 +14,23 @@ include_once('author_fic.php');
 
 function listfics_author($searchid = null, $highlight = 0, $searchstring = null)
 {
-	global $tables, $tpl;
+	global $tables, $tpl, $cache;
 
 	$q = "SELECT * FROM " . $tables['authors'];
-
+	$key = "listfics_author";
 	/*
 	 * User only wants one author
 	 */
-	if (isset($searchid))
+	if (isset($searchid)) {
 		$q .= " WHERE author_id = $searchid";
-	else
+		$key .= "_" . $searchid;
+	} else
 		$q .= " ORDER BY author_name";
-	$al = DBGetArray($q);
+	$al = $cache->get($key);
+	if (!$al) {
+		$al = DBGetArray($q);
+		$cache->set($key, $al);
+	}
 
 	/*
 	 * Enumerate author list

@@ -18,14 +18,19 @@
 
 function findfic($src = null)
 {
-	global $tables;
+	global $tables, $cache;
 	if (isset($src)) {
 	 	$found = FALSE;
+		$key = md5(strtoupper($src));
 
 		/*
 		 * Substring search fic title
 		 */
-		$res = DBGetArray("SELECT fic_id FROM " . $tables['fics'] . " WHERE UPPER(fic_title) LIKE '%" . strtoupper($src) . "%' ORDER BY fic_title");
+		$res = $cache->get("findfic_title_" . $key);
+		if (!$res) {
+			$res = DBGetArray("SELECT fic_id FROM " . $tables['fics'] . " WHERE UPPER(fic_title) LIKE '%" . strtoupper($src) . "%' ORDER BY fic_title");
+			$cache->set("findfic_title_" . $key, $res);
+		}
 		foreach ($res as $row) {
 			$found = TRUE;
 			printfic($row['fic_id'],TRUE,CODEX_TITLE,$src);
@@ -34,7 +39,11 @@ function findfic($src = null)
 		/*
 		 * Substring search fic author
 		 */
-		$res = DBGetArray("SELECT author_id FROM " . $tables['authors'] . " WHERE UPPER(author_name) LIKE '%" . strtoupper($src) . "%' ORDER BY author_name");
+		$res = $cache->get("findfic_author_" . $key);
+		if (!$res) {
+			$res = DBGetArray("SELECT author_id FROM " . $tables['authors'] . " WHERE UPPER(author_name) LIKE '%" . strtoupper($src) . "%' ORDER BY author_name");
+			$cache->set("findfic_author_" . $key, $res);
+		}
 		foreach ($res as $row) {
 			$found = TRUE;
 			listfics_author($row['author_id'],CODEX_AUTHOR,$src);
@@ -43,7 +52,11 @@ function findfic($src = null)
 		/*
 		 * Substring search fic series
 		 */
-		$res = DBGetArray("SELECT series_id FROM " . $tables['series'] . " WHERE UPPER(series_title) LIKE '%" . strtoupper($src) . "%' ORDER BY series_title");
+		$res = $cache->get("findfic_series_" . $key);
+		if (!$res) {
+			$res = DBGetArray("SELECT series_id FROM " . $tables['series'] . " WHERE UPPER(series_title) LIKE '%" . strtoupper($src) . "%' ORDER BY series_title");
+			$cache->set("findfic_series_" . $key, $res);
+		}
 		foreach ($res as $row) {
 			$found = TRUE;
 			listfics_series($row['series_id'],CODEX_SERIES,$src);
@@ -52,7 +65,11 @@ function findfic($src = null)
 		/*
 		 * Substring search fic genre
 		 */
-		$res = DBGetArray("SELECT genre_id FROM " . $tables['genres'] . " WHERE UPPER(genre_name) LIKE '%" . strtoupper($src) . "%' ORDER BY genre_name");
+		$res = $cache->get("findfic_genre_" . $key);
+		if (!$res) {
+			$res = DBGetArray("SELECT genre_id FROM " . $tables['genres'] . " WHERE UPPER(genre_name) LIKE '%" . strtoupper($src) . "%' ORDER BY genre_name");
+			$cache->set("findfic_genre_" . $key, $res);
+		}
 		foreach ($res as $row) {
 			$found = TRUE;
 			listfics_genre($row['genre_id'],CODEX_GENRE,$src);
@@ -61,7 +78,11 @@ function findfic($src = null)
 		/*
 		 * Substring search fic characters/matchups
 		 */
-		$res = DBGetArray("SELECT character_id FROM " . $tables['characters'] . " WHERE UPPER(character_name) LIKE '%" . strtoupper($src) . "%' ORDER BY character_name");
+		$res = $cache->get("findfic_character_" . $key);
+		if (!$res) {
+			$res = DBGetArray("SELECT character_id FROM " . $tables['characters'] . " WHERE UPPER(character_name) LIKE '%" . strtoupper($src) . "%' ORDER BY character_name");
+			$cache->set("findfic_character_" . $key, $res);
+		}
 		/*
 		 * Already listed matchups array
 		 */
@@ -70,7 +91,11 @@ function findfic($src = null)
 			/*
 			 * Get matchups for character 1
 			 */
-			$r = DBGetArray("SELECT matchup_id FROM " . $tables['matchups'] . " WHERE match_1 = " . $row['character_id']);
+			$r = $cache->get("match1_" . $row['character_id']);
+			if (!$r) {
+				$r = DBGetArray("SELECT matchup_id FROM " . $tables['matchups'] . " WHERE match_1 = " . $row['character_id']);
+				$cache->set("match1_" . $row['character_id'], $r);
+			}
 
 			/*
 			 * Sort alphabetically
@@ -90,7 +115,11 @@ function findfic($src = null)
 			/*
 			 * Get matchups for character 2
 			 */
-			$r = DBGetArray("SELECT matchup_id FROM " . $tables['matchups'] . " WHERE match_2 = {$row['character_id']}");
+			$r = $cache->get("match2_" . $row['character_id']);
+			if (!$r) {
+				$r = DBGetArray("SELECT matchup_id FROM " . $tables['matchups'] . " WHERE match_2 = {$row['character_id']}");
+				$cache->set("match2_" . $row['character_id'], $r);
+			}
 
 			/*
 			 * Sort alphabetically

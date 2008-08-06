@@ -16,7 +16,7 @@
 
 function readfic($id, $ch = 1)
 {
-	global $codex_conf, $spellcheck, $tables, $tpl;
+	global $codex_conf, $spellcheck, $tables, $tpl, $cache;
 	$tpl->clear_all_assign();
 	if (isset($id)) {
 		$fic = fic_data($id);
@@ -28,7 +28,11 @@ function readfic($id, $ch = 1)
 			$auth = fic_author($id);
 			$tpl->assign("author",$auth);
 
-			$chapters = DBGetArray("SELECT num,title FROM " . $tables['chapters'] . " WHERE fic = " . $id . " ORDER BY num");
+			$chapters = $cache->get("chapters_" . $id);
+			if (!$chapters) {
+				$chapters = DBGetArray("SELECT num,title FROM " . $tables['chapters'] . " WHERE fic = " . $id . " ORDER BY num");
+				$cache->set("chapters_" . $id, $chapters);
+			}
 			$chapcount = count($chapters);
 			$tpl->assign("chapters",$chapters);
 			if ($ch > 1)
@@ -36,7 +40,11 @@ function readfic($id, $ch = 1)
 			if ($ch < $chapcount)
 				$tpl->assign("next",($ch + 1));
 
-			$chapdata = DBGetRow("SELECT file,data,wrapped FROM " . $tables['chapters'] . " WHERE fic=" . $id . " AND num=" . $ch);
+			$chapdata = $cache->get("chapdata_" . $id . "_" . $ch);
+			if (!$chapdata) {
+				$chapdata = DBGetRow("SELECT file,data,wrapped FROM " . $tables['chapters'] . " WHERE fic=" . $id . " AND num=" . $ch);
+				$cache->set("chapdata_" . $id . "_" . $ch, $chapdata);
+			}
 
 			/*
 			 * Use the file version if it exists

@@ -15,18 +15,23 @@ include_once('printfic.php');
 
 function listfics_genre($searchid = null, $highlight = 0, $searchstring = null)
 {
-	global $codex_conf, $tables, $tpl;
+	global $codex_conf, $tables, $tpl, $cache;
 
 	$q = "SELECT * FROM " . $tables['genres'];
-
+	$key = "listfics_genre";
 	/*
 	 * User only wants one genre
 	 */
-	if (isset($searchid))
+	if (isset($searchid)) {
 		$q .= " WHERE genre_id = $searchid";
-	else
+		$key .= "_" . $searchid;
+	} else
 		$q .= " ORDER BY genre_name";
-	$gl = DBGetArray($q);
+	$gl = $cache->get($key);
+	if (!$gl) {
+		$gl = DBGetArray($q);
+		$cache->set($key, $gl);
+	}
 
 	/*
 	 * Enumerate genre list

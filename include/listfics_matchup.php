@@ -18,19 +18,24 @@ include_once('matchup_fic.php');
 
 function listfics_matchup($searchid = null, $highlight = 0, $searchstring = null)
 {
-	global $tables, $tpl;
+	global $tables, $tpl, $cache;
 
 	$q = "SELECT * FROM " . $tables['matchups'];
-
+	$key = "listfics_matchup";
 	/*
 	 * User only wants one matchup
 	 */
-	if (isset($searchid))
+	if (isset($searchid)) {
 		$q .= " WHERE matchup_id = $searchid";
-	else
+		$key .= "_" . $searchid;
+	} else
 		$q .= " ORDER BY matchup_id";
-	$ml = DBGetArray($q);
-	usort($ml,"matchupcmp");
+	$ml = $cache->get($key);
+	if (!$ml) {
+		$ml = DBGetArray($q);
+		usort($ml,"matchupcmp");
+		$cache->set($key, $ml);
+	}
 
 	/*
 	 * Enumerate matchup list

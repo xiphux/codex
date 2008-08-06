@@ -109,6 +109,15 @@ if (isset($_GET['u'])) {
 			$_SESSION[$codex_conf['session_key']]['theme'] = $_POST['theme'];
 			root();
 			break;
+		case "cacheflush":
+			include_once('include/root.php');
+			$cache->clear();
+			if ($cache->clear() === TRUE)
+				echo "Cache flushed<br /><br />";
+			else
+				echo "Could not flush cache<br /><br />";
+			root();
+			break;
 		default:
 			echo "Unknown action";
 			break;

@@ -13,9 +13,13 @@ include_once('printfic.php');
 
 function listfics_title($highlight = 0, $searchstring = null)
 {
-	global $tables;
+	global $tables, $cache;
 
-	$fl = DBGetCol("SELECT fic_id FROM " . $tables['fics'] . " ORDER BY fic_title");
+	$fl = $cache->get("listfics_title");
+	if (!$fl) {
+		$fl = DBGetCol("SELECT fic_id FROM " . $tables['fics'] . " ORDER BY fic_title");
+		$cache->set("listfics_title", $fl);
+	}
 	foreach ($fl as $row)
 		printfic($row,TRUE,$highlight,$searchstring);
 }

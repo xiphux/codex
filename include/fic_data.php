@@ -10,8 +10,14 @@
 
 function fic_data($id)
 {
-	global $tables;
-	return DBGetRow("SELECT fic_id,fic_title,fic_comments FROM " . $tables['fics'] . " WHERE fic_id = $id");
+	global $tables, $cache;
+	
+	$tmp = $cache->get("fic_data_" . $id);
+	if (!$tmp) {
+		$tmp = DBGetRow("SELECT fic_id,fic_title,fic_comments FROM " . $tables['fics'] . " WHERE fic_id = $id");
+		$cache->set("fic_data_" . $id, $tmp);
+	}
+	return $tmp;
 }
 
 ?>

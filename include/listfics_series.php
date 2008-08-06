@@ -14,18 +14,23 @@ include_once('series_fic.php');
 
 function listfics_series($searchid = null, $highlight = 0, $searchstring = null)
 {
-	global $tables, $tpl;
+	global $tables, $tpl, $cache;
 
 	$q = "SELECT * FROM " . $tables['series'];
-
+	$key = "listfics_series";
 	/*
 	 * User only wants one series
 	 */
-	if (isset($searchid))
+	if (isset($searchid)) {
 		$q .= " WHERE series_id = $searchid";
-	else
+		$key .= "_" . $searchid;
+	} else
 		$q .= " ORDER BY series_title";
-	$sl = DBGetArray($q);
+	$sl = $cache->get($key);
+	if (!$sl) {
+		$sl = DBGetArray($q);
+		$cache->set($key, $sl);
+	}
 
 	/*
 	 * Enumerate series list

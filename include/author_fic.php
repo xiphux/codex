@@ -11,8 +11,14 @@
 
 function author_fic($id)
 {
-	global $tables;
-	return DBGetArray("SELECT t2.* FROM " . $tables['fic_author'] . " AS t1, " . $tables['fics'] . " AS t2 WHERE t1.fic_id = t2.fic_id AND t1.author_id = $id ORDER BY t2.fic_title");
+	global $tables,$cache;
+
+	$tmp = $cache->get("author_fic_" . $id);
+	if (!$tmp) {
+		$tmp = DBGetArray("SELECT t2.* FROM " . $tables['fic_author'] . " AS t1, " . $tables['fics'] . " AS t2 WHERE t1.fic_id = t2.fic_id AND t1.author_id = $id ORDER BY t2.fic_title");
+		$cache->set("author_fic_" . $id, $tmp);
+	}
+	return $tmp;
 }
 
 ?>
