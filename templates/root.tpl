@@ -31,5 +31,7 @@
 {if $stats}
   <a href="{$SCRIPT_NAME}?u=stats">stats</a><br />
 {/if}
+{if $cache}
 <a href="{$SCRIPT_NAME}?u=cacheflush">cacheflush</a>
+{/if}
 </p>
