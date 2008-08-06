@@ -11,32 +11,32 @@
 
  ob_start();
 
- 	/*
-	 * Version
-	 */
-	include_once('include/version.php');
+/*
+ * Version
+ */
+include_once('include/version.php');
 
- 	/*
-	 * Config
-	 */
-	include_once('config/codex.conf.php');
+/*
+ * Config
+ */
+include_once('config/codex.conf.php');
 
-	/*
-	 * Persistent database connection
-	 */
-	include_once('include/db.php');
+/*
+ * Persistent database connection
+ */
+include_once('include/db.php');
 
-	date_default_timezone_set("UTC");
+date_default_timezone_set("UTC");
 
-	/*
-	 * Instantiate smarty
-	 */
- 	include_once($codex_conf['smarty_prefix'] . "Smarty.class.php");
-	$tpl = new Smarty;
- 	$tpl->autoload_filters = array('output' => array('trimwhitespace'));
+/*
+ * Instantiate smarty
+ */
+include_once($codex_conf['smarty_prefix'] . "Smarty.class.php");
+$tpl = new Smarty;
+$tpl->autoload_filters = array('output' => array('trimwhitespace'));
 
- if ($codex_conf['debug'])
- 	error_reporting(E_ALL | E_STRICT);
+if ($codex_conf['debug'])
+	error_reporting(E_ALL | E_STRICT);
 
 $ttl = $codex_conf['title'];
 
