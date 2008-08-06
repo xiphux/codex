@@ -32,7 +32,7 @@ function readfic($id, $ch = 1)
 			if ($ch < $chapcount)
 				$tpl->assign("next",($ch + 1));
 
-			$chapdata = DBGetRow("SELECT file,data FROM " . $tables['chapters'] . " WHERE fic=" . $id . " AND num=" . $ch);
+			$chapdata = DBGetRow("SELECT file,data,wrapped FROM " . $tables['chapters'] . " WHERE fic=" . $id . " AND num=" . $ch);
 
 			/*
 			 * Use the file version if it exists
@@ -48,6 +48,9 @@ function readfic($id, $ch = 1)
 			if ($codex_conf['spellcheck'] == TRUE)
 				foreach ($spellcheck as $broke => $fixed)
 					$fdat = ereg_replace($broke,$fixed,$fdat);
+		
+			if (isset($chapdata['wrapped']) && ($chapdata['wrapped'] === "1"))
+				$fdat = ereg_replace("([^\n])\r\n([^\r])","\\1\\2",$fdat);
 
 			/*
 			 * Fix for display on web browsers

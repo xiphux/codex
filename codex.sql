@@ -47,6 +47,7 @@ CREATE TABLE IF NOT EXISTS `chapters` (
   `title` varchar(255) default NULL,
   `file` varchar(100) default NULL,
   `data` longtext,
+  `wrapped` tinyint(1) NOT NULL default '0',
   PRIMARY KEY  (`id`),
   KEY `fic_id` (`fic`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
