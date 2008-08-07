@@ -20,124 +20,131 @@ function findfic($src = null)
 {
 	global $tables, $cache;
 	if (isset($src)) {
-		$src = addslashes($src);
-	 	$found = FALSE;
-		$key = md5(strtoupper($src));
+		$outkey = "output_findfic_" . md5($src);
+		$out = $cache->get($outkey);
+		if (!$out) {
+			$out = "";
+			$src = addslashes($src);
+			$found = FALSE;
+			$key = md5(strtoupper($src));
 
-		/*
-		 * Substring search fic title
-		 */
-		$res = $cache->get("findfic_title_" . $key);
-		if (!$res) {
-			$res = DBGetArray("SELECT fic_id FROM " . $tables['fics'] . " WHERE UPPER(fic_title) LIKE '%" . strtoupper($src) . "%' ORDER BY fic_title");
-			$cache->set("findfic_title_" . $key, $res);
-		}
-		foreach ($res as $row) {
-			$found = TRUE;
-			printfic($row['fic_id'],TRUE,CODEX_TITLE,$src);
-		}
-
-		/*
-		 * Substring search fic author
-		 */
-		$res = $cache->get("findfic_author_" . $key);
-		if (!$res) {
-			$res = DBGetArray("SELECT author_id FROM " . $tables['authors'] . " WHERE UPPER(author_name) LIKE '%" . strtoupper($src) . "%' ORDER BY author_name");
-			$cache->set("findfic_author_" . $key, $res);
-		}
-		foreach ($res as $row) {
-			$found = TRUE;
-			listfics_author($row['author_id'],CODEX_AUTHOR,$src);
-		}
-
-		/*
-		 * Substring search fic series
-		 */
-		$res = $cache->get("findfic_series_" . $key);
-		if (!$res) {
-			$res = DBGetArray("SELECT series_id FROM " . $tables['series'] . " WHERE UPPER(series_title) LIKE '%" . strtoupper($src) . "%' ORDER BY series_title");
-			$cache->set("findfic_series_" . $key, $res);
-		}
-		foreach ($res as $row) {
-			$found = TRUE;
-			listfics_series($row['series_id'],CODEX_SERIES,$src);
-		}
-
-		/*
-		 * Substring search fic genre
-		 */
-		$res = $cache->get("findfic_genre_" . $key);
-		if (!$res) {
-			$res = DBGetArray("SELECT genre_id FROM " . $tables['genres'] . " WHERE UPPER(genre_name) LIKE '%" . strtoupper($src) . "%' ORDER BY genre_name");
-			$cache->set("findfic_genre_" . $key, $res);
-		}
-		foreach ($res as $row) {
-			$found = TRUE;
-			listfics_genre($row['genre_id'],CODEX_GENRE,$src);
-		}
-
-		/*
-		 * Substring search fic characters/matchups
-		 */
-		$res = $cache->get("findfic_character_" . $key);
-		if (!$res) {
-			$res = DBGetArray("SELECT character_id FROM " . $tables['characters'] . " WHERE UPPER(character_name) LIKE '%" . strtoupper($src) . "%' ORDER BY character_name");
-			$cache->set("findfic_character_" . $key, $res);
-		}
-		/*
-		 * Already listed matchups array
-		 */
-		$ex = array();
-		foreach ($res as $row) {
 			/*
-			 * Get matchups for character 1
+			 * Substring search fic title
 			 */
-			$r = $cache->get("match1_" . $row['character_id']);
-			if (!$r) {
-				$r = DBGetArray("SELECT matchup_id FROM " . $tables['matchups'] . " WHERE match_1 = " . $row['character_id']);
-				$cache->set("match1_" . $row['character_id'], $r);
+			$res = $cache->get("findfic_title_" . $key);
+			if (!$res) {
+				$res = DBGetArray("SELECT fic_id FROM " . $tables['fics'] . " WHERE UPPER(fic_title) LIKE '%" . strtoupper($src) . "%' ORDER BY fic_title");
+				$cache->set("findfic_title_" . $key, $res);
+			}
+			foreach ($res as $row) {
+				$found = TRUE;
+				$out .= printfic($row['fic_id'],TRUE,CODEX_TITLE,$src);
 			}
 
 			/*
-			 * Sort alphabetically
+			 * Substring search fic author
 			 */
-			usort($r,"matchupcmp");
-			foreach ($r as $row2) {
+			$res = $cache->get("findfic_author_" . $key);
+			if (!$res) {
+				$res = DBGetArray("SELECT author_id FROM " . $tables['authors'] . " WHERE UPPER(author_name) LIKE '%" . strtoupper($src) . "%' ORDER BY author_name");
+				$cache->set("findfic_author_" . $key, $res);
+			}
+			foreach ($res as $row) {
+				$found = TRUE;
+				$out .= listfics_author($row['author_id'],CODEX_AUTHOR,$src);
+			}
+
+			/*
+			 * Substring search fic series
+			 */
+			$res = $cache->get("findfic_series_" . $key);
+			if (!$res) {
+				$res = DBGetArray("SELECT series_id FROM " . $tables['series'] . " WHERE UPPER(series_title) LIKE '%" . strtoupper($src) . "%' ORDER BY series_title");
+				$cache->set("findfic_series_" . $key, $res);
+			}
+			foreach ($res as $row) {
+				$found = TRUE;
+				$out .= listfics_series($row['series_id'],CODEX_SERIES,$src);
+			}
+
+			/*
+			 * Substring search fic genre
+			 */
+			$res = $cache->get("findfic_genre_" . $key);
+			if (!$res) {
+				$res = DBGetArray("SELECT genre_id FROM " . $tables['genres'] . " WHERE UPPER(genre_name) LIKE '%" . strtoupper($src) . "%' ORDER BY genre_name");
+				$cache->set("findfic_genre_" . $key, $res);
+			}
+			foreach ($res as $row) {
+				$found = TRUE;
+				$out .= listfics_genre($row['genre_id'],CODEX_GENRE,$src);
+			}
+
+			/*
+			 * Substring search fic characters/matchups
+			 */
+			$res = $cache->get("findfic_character_" . $key);
+			if (!$res) {
+				$res = DBGetArray("SELECT character_id FROM " . $tables['characters'] . " WHERE UPPER(character_name) LIKE '%" . strtoupper($src) . "%' ORDER BY character_name");
+				$cache->set("findfic_character_" . $key, $res);
+			}
+			/*
+			 * Already listed matchups array
+			 */
+			$ex = array();
+			foreach ($res as $row) {
 				/*
-				 * If not shown, list
+				 * Get matchups for character 1
 				 */
-				if (!in_array($row2['matchup_id'],$ex)) {
-					$found = TRUE;
-					$ex[] = $row2['matchup_id'];
-					listfics_matchup($row2['matchup_id'],CODEX_MATCHUP_1,$src);
+				$r = $cache->get("match1_" . $row['character_id']);
+				if (!$r) {
+					$r = DBGetArray("SELECT matchup_id FROM " . $tables['matchups'] . " WHERE match_1 = " . $row['character_id']);
+					$cache->set("match1_" . $row['character_id'], $r);
+				}
+
+				/*
+				 * Sort alphabetically
+				 */
+				usort($r,"matchupcmp");
+				foreach ($r as $row2) {
+					/*
+					 * If not shown, list
+					 */
+					if (!in_array($row2['matchup_id'],$ex)) {
+						$found = TRUE;
+						$ex[] = $row2['matchup_id'];
+						$out .= listfics_matchup($row2['matchup_id'],CODEX_MATCHUP_1,$src);
+					}
+				}
+
+				/*
+				 * Get matchups for character 2
+				 */
+				$r = $cache->get("match2_" . $row['character_id']);
+				if (!$r) {
+					$r = DBGetArray("SELECT matchup_id FROM " . $tables['matchups'] . " WHERE match_2 = {$row['character_id']}");
+					$cache->set("match2_" . $row['character_id'], $r);
+				}
+
+				/*
+				 * Sort alphabetically
+				 */
+				usort($r,"matchupcmp");
+
+				foreach ($r as $row2) {
+					/*
+					 * If not shown, list
+					 */
+					if (!in_array($row2['matchup_id'],$ex)) {
+						$found = TRUE;
+						$ex[] = $row2['matchup_id'];
+						$out .= listfics_matchup($row2['matchup_id'],CODEX_MATCHUP_2,$src);
+					}
 				}
 			}
-
-			/*
-			 * Get matchups for character 2
-			 */
-			$r = $cache->get("match2_" . $row['character_id']);
-			if (!$r) {
-				$r = DBGetArray("SELECT matchup_id FROM " . $tables['matchups'] . " WHERE match_2 = {$row['character_id']}");
-				$cache->set("match2_" . $row['character_id'], $r);
-			}
-
-			/*
-			 * Sort alphabetically
-			 */
-			usort($r,"matchupcmp");
-
-			foreach ($r as $row2) {
-				/*
-				 * If not shown, list
-				 */
-				if (!in_array($row2['matchup_id'],$ex)) {
-					$found = TRUE;
-					$ex[] = $row2['matchup_id'];
-					listfics_matchup($row2['matchup_id'],CODEX_MATCHUP_2,$src);
-				}
-			}
+			$cache->set($outkey, $out);
 		}
+		return $out;
 	}
 }
 

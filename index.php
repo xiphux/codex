@@ -68,11 +68,11 @@ if (isset($_GET['u'])) {
 			break;
 		case "search":
 			include_once('include/findfic.php');
-			findfic($_POST['search']);
+			echo findfic($_POST['search']);
 			break;
 		case "title":
 			include_once('include/listfics_title.php');
-			listfics_title();
+			echo listfics_title();
 			break;
 		case "author":
 			include_once('include/listfics_author.php');
@@ -80,7 +80,7 @@ if (isset($_GET['u'])) {
 				include_once('include/author_name.php');
 				$ttl .= " :: " . author_name($_GET['aid']);
 			}
-			listfics_author((isset($_GET['aid']) ? $_GET['aid'] : null));
+			echo listfics_author((isset($_GET['aid']) ? $_GET['aid'] : null));
 			break;
 		case "matchup":
 			include_once('include/listfics_matchup.php');
@@ -90,7 +90,7 @@ if (isset($_GET['u'])) {
 				if ($match)
 					$ttl .= " :: " . $match["matchup_name"];
 			}
-			listfics_matchup((isset($_GET['mid']) ? $_GET['mid'] : null));
+			echo listfics_matchup((isset($_GET['mid']) ? $_GET['mid'] : null));
 			break;
 		case "series":
 			include_once('include/listfics_series.php');
@@ -98,7 +98,7 @@ if (isset($_GET['u'])) {
 				include_once('include/series_title.php');
 				$ttl .= " :: " . series_title($_GET['sid']);
 			}
-			listfics_series((isset($_GET['sid']) ? $_GET['sid'] : null));
+			echo listfics_series((isset($_GET['sid']) ? $_GET['sid'] : null));
 			break;
 		case "genre":
 			include_once('include/listfics_genre.php');
@@ -106,7 +106,7 @@ if (isset($_GET['u'])) {
 				include_once('include/genre_name.php');
 				$ttl .= " :: " . genre_name($_GET['gid']);
 			}
-			listfics_genre((isset($_GET['gid']) ? $_GET['gid'] : null));
+			echo listfics_genre((isset($_GET['gid']) ? $_GET['gid'] : null));
 			break;
 		case "changetheme":
 			include_once('include/root.php');
@@ -134,15 +134,27 @@ if (isset($_GET['u'])) {
 $main = ob_get_contents();
 ob_end_clean();
 
-$tpl->clear_all_assign();
-$tpl->assign("title",$ttl);
-$tpl->assign("theme", (isset($_SESSION[$codex_conf['session_key']]['theme']) ? $_SESSION[$codex_conf['session_key']]['theme'] : $codex_conf['theme']));
-$tpl->display("header.tpl");
+$theme = (isset($_SESSION[$codex_conf['session_key']]['theme']) ? $_SESSION[$codex_conf['session_key']]['theme'] : $codex_conf['theme']);
+$headerkey = "output_header_" . md5($theme) . "_" . md5($ttl);
+$headerout = $cache->get($headerkey);
+if (!$headerout) {
+	$tpl->clear_all_assign();
+	$tpl->assign("title",$ttl);
+	$tpl->assign("theme", $theme);
+	$headerout = $tpl->fetch("header.tpl");
+	$cache->set($headerkey, $headerout);
+}
+echo $headerout;
 
 echo $main;
 
-$tpl->clear_all_assign();
-$tpl->display("footer.tpl");
+$footerout = $cache->get("output_footer");
+if (!$footerout) {
+	$tpl->clear_all_assign();
+	$footerout = $tpl->fetch("footer.tpl");
+	$cache->set("output_footer", $footerout);
+}
+echo $footerout;
 
 ob_end_flush();
 ?>

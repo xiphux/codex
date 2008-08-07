@@ -15,13 +15,21 @@ function listfics_title($highlight = 0, $searchstring = null)
 {
 	global $tables, $cache;
 
-	$fl = $cache->get("listfics_title");
-	if (!$fl) {
-		$fl = DBGetCol("SELECT fic_id FROM " . $tables['fics'] . " ORDER BY fic_title");
-		$cache->set("listfics_title", $fl);
+	$outkey = "output_listfics_title_" . $highlight . "_" . md5($searchstring);
+
+	$out = $cache->get($outkey);
+	if (!$out) {
+		$out = "";
+		$fl = $cache->get("listfics_title");
+		if (!$fl) {
+			$fl = DBGetCol("SELECT fic_id FROM " . $tables['fics'] . " ORDER BY fic_title");
+			$cache->set("listfics_title", $fl);
+		}
+		foreach ($fl as $row)
+			$out .= printfic($row,TRUE,$highlight,$searchstring);
+		$cache->set($outkey, $out);
 	}
-	foreach ($fl as $row)
-		printfic($row,TRUE,$highlight,$searchstring);
+	return $out;
 }
 
 ?>

@@ -16,44 +16,53 @@ function listfics_author($searchid = null, $highlight = 0, $searchstring = null)
 {
 	global $tables, $tpl, $cache;
 
-	$q = "SELECT * FROM " . $tables['authors'];
-	$key = "listfics_author";
-	/*
-	 * User only wants one author
-	 */
-	if (isset($searchid)) {
-		$q .= " WHERE author_id = $searchid";
-		$key .= "_" . $searchid;
-	} else
-		$q .= " ORDER BY author_name";
-	$al = $cache->get($key);
-	if (!$al) {
-		$al = DBGetArray($q);
-		$cache->set($key, $al);
-	}
+	$outkey = "output_listfics_author_" . $searchid . "_" . $highlight . "_" . md5($searchstring);
 
-	/*
-	 * Enumerate author list
-	 */
-	foreach ($al as $row) {
-		$tpl->clear_all_assign();
-		$tpl->assign("catsort", "author");
-		$tpl->assign("catidtype","aid");
-		$tpl->assign("catid",$row['author_id']);
-		if ($highlight == CODEX_AUTHOR && $searchstring)
-			highlight($row['author_name'],$searchstring);
-		$tpl->assign("catname",$row['author_name']);
-		$tpl->assign("email",$row['author_email']);
-		$tpl->assign("website",$row['author_website']);
-		$tpl->display("category.tpl");
-		$fl = author_fic($row['author_id']);
+	$out = $cache->get($outkey);
+	if (!$out) {
+		$out = "";
+		$q = "SELECT * FROM " . $tables['authors'];
+		$key = "listfics_author";
+		/*
+		 * User only wants one author
+		 */
+		if (isset($searchid)) {
+			$q .= " WHERE author_id = $searchid";
+			$key .= "_" . $searchid;
+		} else
+			$q .= " ORDER BY author_name";
+		$al = $cache->get($key);
+		if (!$al) {
+			$al = DBGetArray($q);
+			$cache->set($key, $al);
+		}
 
 		/*
-		 * Enumerate fics per author
+		 * Enumerate author list
 		 */
-		foreach ($fl as $row2)
-			printfic($row2['fic_id'],FALSE,$highlight,$searchstring);
+		foreach ($al as $row) {
+			$tpl->clear_all_assign();
+			$tpl->assign("catsort", "author");
+			$tpl->assign("catidtype","aid");
+			$tpl->assign("catid",$row['author_id']);
+			if ($highlight == CODEX_AUTHOR && $searchstring)
+				highlight($row['author_name'],$searchstring);
+			$tpl->assign("catname",$row['author_name']);
+			$tpl->assign("email",$row['author_email']);
+			$tpl->assign("website",$row['author_website']);
+			$out .= $tpl->fetch("category.tpl");
+			$fl = author_fic($row['author_id']);
+
+			/*
+			 * Enumerate fics per author
+			 */
+			foreach ($fl as $row2)
+				$out .= printfic($row2['fic_id'],FALSE,$highlight,$searchstring);
+		}
+
+		$cache->set($outkey, $out);
 	}
+	return $out;
 }
 
 ?>
