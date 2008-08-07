@@ -39,24 +39,24 @@ function stats()
 	$tpl->assign("series",DBGetOne("SELECT COUNT(series_id) FROM " . $tables['series']));
 	$tpl->assign("characters",DBGetOne("SELECT COUNT(character_id) FROM " . $tables['characters']));
 	$tpl->assign("matchups",DBGetOne("SELECT COUNT(matchup_id) FROM " . $tables['matchups']));
-	$tpl->display("stats.tpl");
 	$dbstats = DBGetArray("SHOW TABLE STATUS");
 	$total = 0;
+	$tablelist = array();
 	foreach ($dbstats as $row) {
-		if ($codex_conf['optimize'])
-			DBExecute("OPTIMIZE TABLE " . $row['Name']);
-		$tpl->clear_all_assign();
-		$tpl->assign("table",$row);
-		if (isset($row['Data_length']) && isset($row['Index_length'])) {
-			$t = $row['Data_length'] + $row['Index_length'];
-			$tpl->assign("total_size",$t);
-			$total += $t;
-			$tpl->display("stats_table.tpl");
+		if (in_array($row['Name'],$tables)) {
+			if ($codex_conf['optimize'])
+				DBExecute("OPTIMIZE TABLE " . $row['Name']);
+			if (isset($row['Data_length']) && isset($row['Index_length'])) {
+				$t = $row['Data_length'] + $row['Index_length'];
+				$row['total_size'] = $t;
+				$total += $t;
+			}
+			$tablelist[] = $row;
 		}
 	}
-	$tpl->clear_all_assign();
+	$tpl->assign("tablelist",$tablelist);
 	$tpl->assign("dbsize",$total);
-	$tpl->display("stats_sum.tpl");
+	$tpl->display("stats.tpl");
 }
 
 ?>
