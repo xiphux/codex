@@ -36,7 +36,7 @@ function nav2()
 <form name="readnav1form" class="readnavcenter">
 <select name="readnav1select" class="readnavcenter" name="chapter" onchange="nav1()">
 {foreach from=$chapters item=chap}
-  <option value="{$chap.num}" {if $chap.num == $chapter}selected{/if}>Chapter {$chap.num}{if $chap.title}: {$chap.title}{/if}</option>
+  <option value="{$chap.num}" {if $chap.num == $chapter}selected{/if}>{if $chap.title}{$chap.title}{else}Chapter {$chap.num}{/if}</option>
 {/foreach}
 </select>
 </form>
@@ -62,7 +62,7 @@ function nav2()
 <form name="readnav2form" class="readnavcenter">
 <select name="readnav2select" class="readnavcenter" name="chapter" onchange="nav2()">
 {foreach from=$chapters item=chap}
-  <option value="{$chap.num}" {if $chap.num == $chapter}selected{/if}>Chapter {$chap.num}{if $chap.title}: {$chap.title}{/if}</option>
+  <option value="{$chap.num}" {if $chap.num == $chapter}selected{/if}>{if $chap.title}{$chap.title}{else}Chapter {$chap.num}{/if}</option>
 {/foreach}
 </select>
 </form>
