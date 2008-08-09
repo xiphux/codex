@@ -32,6 +32,7 @@ function readfic($id, $ch = 1)
 					$tpl->assign("fic",$fic);
 					$tpl->assign("ficid",$id);
 					$tpl->assign("chapter",$ch);
+					$tpl->assign("chaptitle",$ctest);
 
 					$auth = fic_author($id);
 					$tpl->assign("author",$auth);
@@ -42,11 +43,8 @@ function readfic($id, $ch = 1)
 						$cache->set("chapters_" . $id, $chapters);
 					}
 					$chapcount = count($chapters);
+					$tpl->assign("chapcount",$chapcount);
 					$tpl->assign("chapters",$chapters);
-					if ($ch > 1)
-						$tpl->assign("prev",($ch - 1));
-					if ($ch < $chapcount)
-						$tpl->assign("next",($ch + 1));
 
 					$chapdata = $cache->get("chapdata_" . $id . "_" . $ch);
 					if (!$chapdata) {
