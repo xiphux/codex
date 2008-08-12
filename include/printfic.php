@@ -17,6 +17,7 @@
  include_once('fic_matchup.php');
  include_once('character_series.php');
  include_once('series_title.php');
+ include_once('chapter_count.php');
 
 function printfic($id, $author_info = TRUE, $highlight = 0, $search = null)
 {
@@ -82,6 +83,16 @@ function printfic($id, $author_info = TRUE, $highlight = 0, $search = null)
 		 * Export author(s)
 		 */
 		$tpl->assign("fic_author",$adata);
+
+		/*
+		 * Get count of chapters in fic
+		 */
+		$chapcount = chapter_count($id);
+
+		/*
+		 * Export chapter count
+		 */
+		$tpl->assign("chaptercount", $chapcount);
 
 		/*
 		 * Get series data
