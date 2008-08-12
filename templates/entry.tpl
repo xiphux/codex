@@ -41,7 +41,7 @@
   </tr>
   {if $fic_matchup}
     <tr>
-      <td><strong>Match: </strong></td>
+      <td><strong>Matchup: </strong></td>
       <td>{foreach item=matchup name=matchupfe from=$fic_matchup}{if !$smarty.foreach.matchupfe.first}, {/if}<a href="{$SCRIPT_NAME}?u=matchup&mid={$matchup.matchup_id}">{$matchup.match1} + {$matchup.match2}</a>{/foreach}</td>
     </tr>
   {/if}
