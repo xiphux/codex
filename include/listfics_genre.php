@@ -12,6 +12,7 @@ include_once('defs.php');
 include_once('highlight.php');
 include_once('genre_fic.php');
 include_once('printfic.php');
+include_once('printcategory.php');
 
 function listfics_genre($searchid = null, $highlight = 0, $searchstring = null)
 {
@@ -46,15 +47,10 @@ function listfics_genre($searchid = null, $highlight = 0, $searchstring = null)
 		 */
 		foreach ($gl as $row) {
 			if (!stristr($row['genre_name'],"Lemon") || $codex_conf['lemons']) {
-				$tpl->clear_all_assign();
-				$tpl->assign("catsort", "genre");
-				$tpl->assign("catidtype","gid");
-				$tpl->assign("catid",$row['genre_id']);
-				highlight($row['genre_name'],"Lemon","lemontext");
 				if ($highlight == CODEX_GENRE && $searchstring)
 					highlight($row['genre_name'],$searchstring);
-				$tpl->assign("catname",$row['genre_name']);
-				$out .= $tpl->fetch("category.tpl");
+				highlight($row['genre_name'],"Lemon","lemontext");
+				$out .= printcategory("genre", "gid", $row['genre_id'], $row['genre_name'], null, null);
 				$fl = genre_fic($row['genre_id']);
 				/*
 				 * Enumerate fics per genre

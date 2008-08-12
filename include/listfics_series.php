@@ -10,6 +10,7 @@
 include_once('defs.php');
 include_once('highlight.php');
 include_once('printfic.php');
+include_once('printcategory.php');
 include_once('series_fic.php');
 
 function listfics_series($searchid = null, $highlight = 0, $searchstring = null)
@@ -42,14 +43,9 @@ function listfics_series($searchid = null, $highlight = 0, $searchstring = null)
 		 * Enumerate series list
 		 */
 		foreach ($sl as $row) {
-			$tpl->clear_all_assign();
-			$tpl->assign("catsort", "series");
-			$tpl->assign("catidtype","sid");
-			$tpl->assign("catid",$row['series_id']);
 			if ($highlight == CODEX_SERIES && $searchstring)
 				highlight($row['series_title'],$searchstring);
-			$tpl->assign("catname",$row['series_title']);
-			$out .= $tpl->fetch("category.tpl");
+			$out .= printcategory("series", "sid", $row['series_id'], $row['series_title'], null, null);
 			$fl = series_fic($row['series_id']);
 
 			/*

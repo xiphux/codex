@@ -10,6 +10,7 @@
 include_once('defs.php');
 include_once('highlight.php');
 include_once('printfic.php');
+include_once('printcategory.php');
 include_once('matchupcmp.php');
 include_once('matchup_data.php');
 include_once('character_series.php');
@@ -47,15 +48,11 @@ function listfics_matchup($searchid = null, $highlight = 0, $searchstring = null
 		 * Enumerate matchup list
 		 */
 		foreach ($ml as $row) {
-			$tpl->clear_all_assign();
-			$tpl->assign("catsort", "matchup");
-			$tpl->assign("catidtype","mid");
-			$tpl->assign("catid",$row['matchup_id']);
-			$tmp = matchup_data($row['matchup_id']);
 			if ($highlight == CODEX_MATCHUP_1 && $searchstring)
 				highlight($tmp['match1'],$searchstring);
 			if ($highlight == CODEX_MATCHUP_2 && $searchstring)
 				highlight($tmp['match2'],$searchstring);
+			$tmp = matchup_data($row['matchup_id']);
 			$s1 = character_series($tmp['id1']);
 			$s2 = character_series($tmp['id2']);
 			if ($s1 != $s2) {
@@ -63,8 +60,7 @@ function listfics_matchup($searchid = null, $highlight = 0, $searchstring = null
 				$tmp['match2'] .= " (" . series_title($s2) . ")";
 			}
 			$tmp["matchup_name"] = $tmp['match1'] . " + " . $tmp['match2'];
-			$tpl->assign("catname",$tmp['matchup_name']);
-			$out .= $tpl->fetch("category.tpl");
+			$out .= printcategory("matchup", "mid", $row['matchup_id'], $tmp['matchup_name'], null, null);
 			$fl = matchup_fic($row['matchup_id']);
 
 			/*
