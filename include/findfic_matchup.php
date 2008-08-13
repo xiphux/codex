@@ -18,15 +18,15 @@ function findfic_matchup($src)
 {
 	global $cache, $tables, $tpl;
 
-	$key = md5(strtoupper($src));
+	$key = "findfic_matchup_" . md5(strtoupper($src));
 
-	$out = $cache->get("output_findfic_character_" . $key);
+	$out = $cache->get("output_" . $key);
 	if (!$out) {
 		$out = "";
-		$res = $cache->get("findfic_character_" . $key);
+		$res = $cache->get($key);
 		if (!$res) {
 			$res = DBGetArray("SELECT character_id FROM " . $tables['characters'] . " WHERE UPPER(character_name) LIKE '%" . strtoupper($src) . "%' ORDER BY character_name");
-			$cache->set("findfic_character_" . $key, $res);
+			$cache->set($key, $res);
 		}
 
 		$ex = array();
@@ -77,7 +77,7 @@ function findfic_matchup($src)
 			$tmp["matchup_name"] = $tmp['match1'] . " + " . $tmp['match2'];
 			$out .= printcategory("matchup", "mid", $mat, $tmp['matchup_name'], null, null);
 		}
-		$cache->set("output_findfic_character_" . $key, $out);
+		$cache->set("output_" . $key, $out);
 	}
 	return $out;
 }

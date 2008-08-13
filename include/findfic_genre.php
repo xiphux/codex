@@ -15,21 +15,19 @@ function findfic_genre($src)
 {
 	global $cache, $tables, $tpl, $codex_conf;
 
-	$key = md5(strtoupper($src));
-
-	$genrekey = "findfic_genre_" . $key;
+	$key = "findfic_genre_" . md5(strtoupper($src));
 	if ($codex_conf['lemons'])
-		$genrekey .= "_lemon";
-	$out = $cache->get("output_" . $genrekey);
+		$key .= "_lemon";
+	$out = $cache->get("output_" . $key);
 	if (!$out) {
 		$out = "";
-		$res = $cache->get($genrekey);
+		$res = $cache->get($key);
 		if (!$res) {
 			$lim = "";
 			if (!$codex_conf['lemons'])
 				$lim = " AND UPPER(genre_name) NOT LIKE 'LEMON%' ";
 			$res = DBGetArray("SELECT genre_id,genre_name FROM " . $tables['genres'] . " WHERE UPPER(genre_name) LIKE '%" . strtoupper($src) . "%' " . $lim . " ORDER BY genre_name");
-			$cache->set($genrekey, $res);
+			$cache->set($key, $res);
 		}
 		if ($res) {
 			$tpl->clear_all_assign();
@@ -42,7 +40,7 @@ function findfic_genre($src)
 			highlight($row['genre_name'],$src);
 			$out .= printcategory("genre", "gid", $row['genre_id'], $row['genre_name'], null, null);
 		}
-		$cache->set("output_" . $genrekey, $out);
+		$cache->set("output_" . $key, $out);
 	}
 	return $out;
 }

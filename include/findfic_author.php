@@ -15,15 +15,15 @@ function findfic_author($src)
 {
 	global $cache, $tables, $tpl;
 
-	$key = md5(strtoupper($src));
+	$key = "findfic_author_" . md5(strtoupper($src));
 
-	$out = $cache->get("output_findfic_author_" . $key);
+	$out = $cache->get("output_" . $key);
 	if (!$out) {
 		$out = "";
-		$res = $cache->get("findfic_author_" . $key);
+		$res = $cache->get($key);
 		if (!$res) {
 			$res = DBGetArray("SELECT author_id,author_name,author_email,author_website FROM " . $tables['authors'] . " WHERE UPPER(author_name) LIKE '%" . strtoupper($src) . "%' ORDER BY author_name");
-			$cache->set("findfic_author_" . $key, $res);
+			$cache->set($key, $res);
 		}
 		if ($res) {
 			$tpl->clear_all_assign();
@@ -34,7 +34,7 @@ function findfic_author($src)
 			highlight($row['author_name'],$src);
 			$out .= printcategory("author", "aid", $row['author_id'], $row['author_name'], $row['author_email'], $row['author_website']);
 		}
-		$cache->set("output_findfic_author_" . $key, $out);
+		$cache->set("output_" . $key, $out);
 	}
 	return $out;
 }
