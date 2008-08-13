@@ -37,9 +37,9 @@ function findfic_genre($src)
 			$out .= $tpl->fetch("note.tpl");
 		}
 		foreach ($res as $row) {
-			highlight($row['genre_name'],$src);
 			if ($codex_conf['lemons']);
 				highlight($row['genre_name'],"Lemon","lemontext");
+			highlight($row['genre_name'],$src);
 			$out .= printcategory("genre", "gid", $row['genre_id'], $row['genre_name'], null, null);
 		}
 		$cache->set("output_" . $genrekey, $out);
