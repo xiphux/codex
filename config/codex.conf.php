@@ -225,4 +225,15 @@ $codex_conf['unwrap'] = TRUE;
   */
  $codex_conf['memcached_persist'] = FALSE;
 
+ /*
+  * Fuzzy search threshold
+  * If search produces no exact results, it will attempt
+  * a fuzzy search with this threshold of acceptable
+  * character differences between searched and matched
+  * word.
+  * Please note that fuzzy search can be computationally
+  * expensive.  Set this to 0 to disable fuzzy search.
+  */
+ $codex_conf['fuzzysearchthreshold'] = 2;
+
 ?>
