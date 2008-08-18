@@ -3,7 +3,6 @@
  *  readfic.php
  *  Codex: A PHP/MySQL fanfiction database
  *  Component: readfic
- *  Search for a string
  *  Display a particular fic for reading
  *  Will use the (ideally most updated) text file if present
  *  Otherwise will use inline database version
@@ -11,11 +10,12 @@
  *  Copyright (C) 2005 Christopher Han <xiphux@gmail.com>
  */
 
- include_once('fic_data.php');
- include_once('fic_author.php');
- include_once('chapter_title.php');
+include_once('fic_data.php');
+include_once('chapter_count.php');
+include_once('readchapter.php');
+include_once('toc.php');
 
-function readfic($id, $ch = 1)
+function readfic($id, $ch = 0)
 {
 	global $codex_conf, $spellcheck, $tables, $tpl, $cache;
 
@@ -23,72 +23,23 @@ function readfic($id, $ch = 1)
 
 	$out = $cache->get($outkey);
 	if (!$out) {
-		$tpl->clear_all_assign();
 		if (isset($id)) {
-			$fic = fic_data($id);
-			if ($fic) {
-				$ctest = chapter_title($id, $ch);
-				if ($ctest) {
-					$tpl->assign("fic",$fic);
-					$tpl->assign("ficid",$id);
-					$tpl->assign("chapter",$ch);
-					$tpl->assign("chaptitle",$ctest);
-
-					$auth = fic_author($id);
-					$tpl->assign("author",$auth);
-
-					$chapters = $cache->get("chapters_" . $id);
-					if (!$chapters) {
-						$chapters = DBGetArray("SELECT num,title FROM " . $tables['chapters'] . " WHERE fic = " . $id . " ORDER BY num");
-						$cache->set("chapters_" . $id, $chapters);
-					}
-					$chapcount = count($chapters);
-					$tpl->assign("chapcount",$chapcount);
-					$tpl->assign("chapters",$chapters);
-
-					$chapdata = $cache->get("chapdata_" . $id . "_" . $ch);
-					if (!$chapdata) {
-						$chapdata = DBGetRow("SELECT file,data,wrapped FROM " . $tables['chapters'] . " WHERE fic=" . $id . " AND num=" . $ch);
-						$cache->set("chapdata_" . $id . "_" . $ch, $chapdata);
-					}
-
-					/*
-					 * Use the file version if it exists
-					 */
-					if (isset($chapdata['file']) && file_exists($codex_conf['basepath'] . $chapdata['file']))
-						$fdat = file_get_contents($codex_conf['basepath'] . $chapdata['file']);
+			if (fic_data($id)) {
+				if ($ch == 0) {
+					if (chapter_count($id) < 2)
+						$out = readchapter($id, 1);
 					else
-						$fdat = $chapdata['data'];
-						
-					/*
-					 * Spellcheck
-					 */
-					if ($codex_conf['spellcheck'] == TRUE)
-						foreach ($spellcheck as $broke => $fixed)
-							$fdat = ereg_replace($broke,$fixed,$fdat);
-				
-					/*
-					 * Unwrap if specified
-					 */
-					if ($codex_conf['unwrap'] && isset($chapdata['wrapped']) && ($chapdata['wrapped'] === "1"))
-						$fdat = ereg_replace("([^\n])\r\n([^\r])","\\1 \\2",$fdat);
-
-					/*
-					 * Fix for display on web browsers
-					 */
-					$fdat = htmlentities($fdat,ENT_COMPAT,'UTF-8');
-					$fdat = nl2br($fdat);
+						$out = toc($id);
 				} else
-					$fdat = "Invalid chapter";
+					$out = readchapter($id, $ch);
 			} else
-				$fdat = "Invalid fic";
+				$out = "Invalid fic";
 		} else
-			$fdat = "No fic specified";
-		$tpl->assign("fdata",$fdat);
-		$out = $tpl->fetch("read.tpl");
+			$out = "No fic specified";
+
 		$cache->set($outkey, $out);
 	}
-	echo $out;
+	return $out;
 }
 
 ?>
