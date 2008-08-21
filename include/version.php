@@ -7,7 +7,7 @@
  *  Copyright (C) 2008 Christopher Han <xiphux@gmail.com>
  */
 
- $codex_version = "0.3.4";
+ $codex_version = "0.4.0";
  $codex_appstring = "codex $codex_version";
 
  ?>
