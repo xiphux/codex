@@ -9,6 +9,7 @@
  */
 
 include_once('fic_chapters.php');
+include_once('printfic.php');
 
 function toc($id)
 {
@@ -18,11 +19,12 @@ function toc($id)
 
 	$out = $cache->get($outkey);
 	if (!$out) {
+		$out = printfic($id);
+
 		$chapters = fic_chapters($id);
-		$tpl->assign("fic", fic_data($id));
+		$tpl->assign("ficid", $id);
 		$tpl->assign("chapters", $chapters);
-		$tpl->assign("author", fic_author($id));
-		$out = $tpl->fetch("toc.tpl");
+		$out .= $tpl->fetch("toc.tpl");
 		
 		$cache->set($outkey, $out);
 	}
