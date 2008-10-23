@@ -12,10 +12,10 @@ function matchup_fic($id)
 {
 	global $tables, $cache;
 
-	$tmp = $cache->get("matchup_fic_" . $id);
+	$tmp = $cache->Get("matchup_fic_" . $id);
 	if (!$tmp) {
 		$tmp = DBGetArray("SELECT t2.* FROM " . $tables['fic_matchup'] . " AS t1, " . $tables['fics'] . " AS t2 WHERE t1.fic_id = t2.fic_id AND t1.matchup_id = $id ORDER BY t2.fic_title");
-		$cache->set("matchup_fic_" . $id, $tmp);
+		$cache->Set("matchup_fic_" . $id, $tmp);
 	}
 	return $tmp;
 }

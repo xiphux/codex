@@ -14,7 +14,7 @@ function printcategory($catsort, $catidtype, $catid, $catname, $email = null, $w
 
 	$key = "output_printcategory_" . $catsort . "_" . $catidtype . "_" . $catid . "_" . $catname . "_" . $email . "_" . $website;
 
-	$out = $cache->get($key);
+	$out = $cache->Get($key);
 	if (!$out) {
 		$tpl->clear_all_assign();
 		$tpl->assign("catsort", $catsort);
@@ -26,7 +26,7 @@ function printcategory($catsort, $catidtype, $catid, $catname, $email = null, $w
 		if ($website)
 			$tpl->assign("website", $website);
 		$out = $tpl->fetch("category.tpl");
-		$cache->set($key, $out);
+		$cache->Set($key, $out);
 	}
 	return $out;
 }

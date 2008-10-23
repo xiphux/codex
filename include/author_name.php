@@ -11,10 +11,10 @@ function author_name($id)
 {
 	global $tables, $cache;
 
-	$tmp = $cache->get("author_name_" . $id);
+	$tmp = $cache->Get("author_name_" . $id);
 	if (!$tmp) {
 		$tmp = DBGetOne("SELECT author_name FROM " . $tables['authors'] . " WHERE author_id = $id");
-		$cache->set("author_name_" . $id, $tmp);
+		$cache->Set("author_name_" . $id, $tmp);
 	}
 	return $tmp;
 }

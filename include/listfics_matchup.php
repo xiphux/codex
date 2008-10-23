@@ -23,7 +23,7 @@ function listfics_matchup($searchid = null, $highlight = 0, $searchstring = null
 
 	$outkey = "output_listfics_matchup_" . $searchid . "_" . $highlight . "_" . md5($searchstring);
 	
-	$out = $cache->get($outkey);
+	$out = $cache->Get($outkey);
 	if (!$out) {
 		$out = "";
 
@@ -37,11 +37,11 @@ function listfics_matchup($searchid = null, $highlight = 0, $searchstring = null
 			$key .= "_" . $searchid;
 		} else
 			$q .= " ORDER BY matchup_id";
-		$ml = $cache->get($key);
+		$ml = $cache->Get($key);
 		if (!$ml) {
 			$ml = DBGetArray($q);
 			usort($ml,"matchupcmp");
-			$cache->set($key, $ml);
+			$cache->Set($key, $ml);
 		}
 
 		/*
@@ -70,7 +70,7 @@ function listfics_matchup($searchid = null, $highlight = 0, $searchstring = null
 				$out .= printfic($row2['fic_id'],TRUE,$highlight,$searchstring);
 		}
 
-		$cache->set($outkey, $out);
+		$cache->Set($outkey, $out);
 	}
 	return $out;
 }

@@ -17,13 +17,13 @@ function findfic_author_fuzzy($src)
 
 	$key = "findfic_author_fuzzy_" . md5(strtoupper($src));
 
-	$out = $cache->get("output_" . $key);
+	$out = $cache->Get("output_" . $key);
 	if (!$out) {
 		$out = "";
-		$res = $cache->get($key);
+		$res = $cache->Get($key);
 		if (!$res) {
 			$res = DBGetArray("SELECT author_id,author_name,author_email,author_website FROM " . $tables['authors'] . " ORDER BY author_name");
-			$cache->set($key, $res);
+			$cache->Set($key, $res);
 		}
 		foreach ($res as $row) {
 			if (fuzzysearch($row['author_name'],$src))
@@ -34,7 +34,7 @@ function findfic_author_fuzzy($src)
 			$tpl->assign("note", "Matching authors:");
 			$out = $tpl->fetch("note.tpl") . $out;
 		}
-		$cache->set("output_" . $key, $out);
+		$cache->Set("output_" . $key, $out);
 	}
 	return $out;
 }

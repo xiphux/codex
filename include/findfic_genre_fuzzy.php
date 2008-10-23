@@ -19,16 +19,16 @@ function findfic_genre_fuzzy($src)
 	$key = "findfic_genre_fuzzy_" . md5(strtoupper($src));
 	if ($codex_conf['lemons'])
 		$key .= "_lemon";
-	$out = $cache->get("output_" . $key);
+	$out = $cache->Get("output_" . $key);
 	if (!$out) {
 		$out = "";
-		$res = $cache->get($key);
+		$res = $cache->Get($key);
 		if (!$res) {
 			$lim = "";
 			if (!$codex_conf['lemons'])
 				$lim = " WHERE UPPER(genre_name) NOT LIKE 'LEMON%' ";
 			$res = DBGetArray("SELECT genre_id,genre_name FROM " . $tables['genres'] . $lim . " ORDER BY genre_name");
-			$cache->set($key, $res);
+			$cache->Set($key, $res);
 		}
 		foreach ($res as $row) {
 			if (fuzzysearch($row['genre_name'],$src)) {
@@ -42,7 +42,7 @@ function findfic_genre_fuzzy($src)
 			$tpl->assign("note", "Matching genres:");
 			$out = $tpl->fetch("note.tpl") . $out;
 		}
-		$cache->set("output_" . $key, $out);
+		$cache->Set("output_" . $key, $out);
 	}
 	return $out;
 }

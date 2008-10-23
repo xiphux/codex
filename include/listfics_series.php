@@ -19,7 +19,7 @@ function listfics_series($searchid = null, $highlight = 0, $searchstring = null)
 
 	$outkey = "output_listfics_series_" . $searchid . "_" . $highlight . "_" . md5($searchstring);
 
-	$out = $cache->get($outkey);
+	$out = $cache->Get($outkey);
 	if (!$out) {
 		$out = "";
 
@@ -33,10 +33,10 @@ function listfics_series($searchid = null, $highlight = 0, $searchstring = null)
 			$key .= "_" . $searchid;
 		} else
 			$q .= " ORDER BY series_title";
-		$sl = $cache->get($key);
+		$sl = $cache->Get($key);
 		if (!$sl) {
 			$sl = DBGetArray($q);
-			$cache->set($key, $sl);
+			$cache->Set($key, $sl);
 		}
 
 		/*
@@ -55,7 +55,7 @@ function listfics_series($searchid = null, $highlight = 0, $searchstring = null)
 				$out .= printfic($row2['fic_id'],TRUE,$highlight,$searchstring);
 		}
 
-		$cache->set($outkey, $out);
+		$cache->Set($outkey, $out);
 	}
 	return $out;
 }

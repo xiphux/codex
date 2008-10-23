@@ -20,13 +20,13 @@ function findfic_matchup($src)
 
 	$key = "findfic_matchup_" . md5(strtoupper($src));
 
-	$out = $cache->get("output_" . $key);
+	$out = $cache->Get("output_" . $key);
 	if (!$out) {
 		$out = "";
-		$res = $cache->get($key);
+		$res = $cache->Get($key);
 		if (!$res) {
 			$res = DBGetArray("SELECT character_id FROM " . $tables['characters'] . " WHERE UPPER(character_name) LIKE '%" . strtoupper($src) . "%' ORDER BY character_name");
-			$cache->set($key, $res);
+			$cache->Set($key, $res);
 		}
 
 		$ex = array();
@@ -34,10 +34,10 @@ function findfic_matchup($src)
 			/*
 			 * Get matchups for character 1
 			 */
-			$r = $cache->get("match1_" . $row['character_id']);
+			$r = $cache->Get("match1_" . $row['character_id']);
 			if (!$r) {
 				$r = DBGetArray("SELECT matchup_id FROM " . $tables['matchups'] . " WHERE match_1 = " . $row['character_id']);
-				$cache->set("match1_" . $row['character_id'], $r);
+				$cache->Set("match1_" . $row['character_id'], $r);
 			}
 
 			foreach ($r as $row2) {
@@ -48,10 +48,10 @@ function findfic_matchup($src)
 			/*
 			 * Get matchups for character 2
 			 */
-			$r = $cache->get("match2_" . $row['character_id']);
+			$r = $cache->Get("match2_" . $row['character_id']);
 			if (!$r) {
 				$r = DBGetArray("SELECT matchup_id FROM " . $tables['matchups'] . " WHERE match_2 = {$row['character_id']}");
-				$cache->set("match2_" . $row['character_id'], $r);
+				$cache->Set("match2_" . $row['character_id'], $r);
 			}
 
 			foreach ($r as $row2) {
@@ -77,7 +77,7 @@ function findfic_matchup($src)
 			$tmp["matchup_name"] = $tmp['match1'] . " + " . $tmp['match2'];
 			$out .= printcategory("matchup", "mid", $mat, $tmp['matchup_name'], null, null);
 		}
-		$cache->set("output_" . $key, $out);
+		$cache->Set("output_" . $key, $out);
 	}
 	return $out;
 }

@@ -19,7 +19,7 @@ function listfics_author($searchid = null, $highlight = 0, $searchstring = null)
 
 	$outkey = "output_listfics_author_" . $searchid . "_" . $highlight . "_" . md5($searchstring);
 
-	$out = $cache->get($outkey);
+	$out = $cache->Get($outkey);
 	if (!$out) {
 		$out = "";
 		$q = "SELECT * FROM " . $tables['authors'];
@@ -32,10 +32,10 @@ function listfics_author($searchid = null, $highlight = 0, $searchstring = null)
 			$key .= "_" . $searchid;
 		} else
 			$q .= " ORDER BY author_name";
-		$al = $cache->get($key);
+		$al = $cache->Get($key);
 		if (!$al) {
 			$al = DBGetArray($q);
-			$cache->set($key, $al);
+			$cache->Set($key, $al);
 		}
 
 		/*
@@ -54,7 +54,7 @@ function listfics_author($searchid = null, $highlight = 0, $searchstring = null)
 				$out .= printfic($row2['fic_id'],FALSE,$highlight,$searchstring);
 		}
 
-		$cache->set($outkey, $out);
+		$cache->Set($outkey, $out);
 	}
 	return $out;
 }

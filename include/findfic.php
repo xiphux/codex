@@ -24,7 +24,7 @@ function findfic($src = null)
 	global $cache, $tpl, $codex_conf;
 	if (isset($src)) {
 		$outkey = "output_findfic_" . md5(strtoupper($src));
-		$out = $cache->get($outkey);
+		$out = $cache->Get($outkey);
 		if (!$out) {
 			$out = "";
 			$src = addslashes($src);
@@ -63,7 +63,7 @@ function findfic($src = null)
 
 			$out = $outhead . $out;
 
-			$cache->set($outkey, $out);
+			$cache->Set($outkey, $out);
 		}
 		return $out;
 	} else

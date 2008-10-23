@@ -12,7 +12,7 @@ function chapter_title($fic, $ch)
 {
 	global $tables, $cache;
 	
-	$tmp = $cache->get("chapter_title_" . $fic . "_" . $ch);
+	$tmp = $cache->Get("chapter_title_" . $fic . "_" . $ch);
 	if (!$tmp) {
 		$tmp = null;
 		$chap = DBGetRow("SELECT id,title FROM " . $tables['chapters'] . " WHERE fic=" . $fic . " AND num=" . $ch);
@@ -23,7 +23,7 @@ function chapter_title($fic, $ch)
 				$tmp = "Chapter " . $ch;
 		}
 		if ($tmp)
-			$cache->set("chapter_title_" . $fic . "_" . $ch, $tmp);
+			$cache->Set("chapter_title_" . $fic . "_" . $ch, $tmp);
 	}
 	return $tmp;
 }

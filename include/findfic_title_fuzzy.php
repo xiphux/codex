@@ -18,13 +18,13 @@ function findfic_title_fuzzy($src)
 
 	$key = "findfic_title_fuzzy_" . md5(strtoupper($src));
 
-	$out = $cache->get("output_" . $key);
+	$out = $cache->Get("output_" . $key);
 	if (!$out) {
 		$out = "";
-		$res = $cache->get($key);
+		$res = $cache->Get($key);
 		if (!$res) {
 			$res = DBGetArray("SELECT fic_id,fic_title FROM " . $tables['fics'] . " ORDER BY fic_title");
-			$cache->set($key, $res);
+			$cache->Set($key, $res);
 		}
 		foreach ($res as $row) {
 			if (fuzzysearch($row['fic_title'],$src))
@@ -35,7 +35,7 @@ function findfic_title_fuzzy($src)
 			$tpl->assign("note", "Matching titles:");
 			$out = $tpl->fetch("note.tpl") . $out;
 		}
-		$cache->set("output_" . $key, $out);
+		$cache->Set("output_" . $key, $out);
 	}
 	return $out;
 }

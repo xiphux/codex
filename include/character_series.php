@@ -12,10 +12,10 @@
 function character_series($id)
 {
 	global $tables, $cache;
-	$tmp = $cache->get("character_series_" . $id);
+	$tmp = $cache->Get("character_series_" . $id);
 	if (!$tmp) {
 		$tmp = DBGetOne("SELECT series_id FROM " . $tables['characters_series'] . " WHERE character_id = $id");
-		$cache->set("character_series_" . $id, $tmp);
+		$cache->Set("character_series_" . $id, $tmp);
 	}
 	return $tmp;
 }

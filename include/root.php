@@ -18,7 +18,7 @@ function root()
 	$key = "output_root_" . md5($codex_conf['title']) . "_" . md5($theme) . "_" . md5(serialize($themelist));
 	if ($codex_conf['stats'])
 		$key .= "_stats";
-	$rootout = $cache->get($key);
+	$rootout = $cache->Get($key);
 	if (!$rootout) {
 		$tpl->clear_all_assign();
 		$tpl->assign("title",$codex_conf['title']);
@@ -26,10 +26,10 @@ function root()
 			$tpl->assign("stats",TRUE);
 		$tpl->assign("selectedtheme", $theme);
 		$tpl->assign("themes", $themelist);
-		if ($cache->cachetype() !== "null")
+		if ($cache->GetCacheType() !== XXCACHE_NULL)
 			$tpl->assign("cache", TRUE);
 		$rootout = $tpl->fetch("root.tpl");
-		$cache->set($key, $rootout);
+		$cache->Set($key, $rootout);
 	}
 	echo $rootout;
 }

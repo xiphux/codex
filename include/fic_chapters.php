@@ -14,10 +14,10 @@ function fic_chapters($id)
 
 	$outkey = "fic_chapters_" . $id;
 
-	$out = $cache->get($outkey);
+	$out = $cache->Get($outkey);
 	if (!$out) {
 		$out = DBGetArray("SELECT num,title FROM " . $tables['chapters'] . " WHERE fic = " . $id . " ORDER BY num");
-		$cache->set($outkey, $out);
+		$cache->Set($outkey, $out);
 	}
 	return $out;
 }

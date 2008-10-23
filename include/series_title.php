@@ -12,10 +12,10 @@ function series_title($id)
 {
 	global $tables, $cache;
 
-	$tmp = $cache->get("series_title_" . $id);
+	$tmp = $cache->Get("series_title_" . $id);
 	if (!$tmp) {
 		$tmp = DBGetOne("SELECT series_title FROM " . $tables['series'] . " WHERE series_id = $id");
-		$cache->set("series_title_" . $id, $tmp);
+		$cache->Set("series_title_" . $id, $tmp);
 	}
 	return $tmp;
 }

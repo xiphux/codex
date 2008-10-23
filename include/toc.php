@@ -17,7 +17,7 @@ function toc($id)
 
 	$outkey = "output_toc_" . $id;
 
-	$out = $cache->get($outkey);
+	$out = $cache->Get($outkey);
 	if (!$out) {
 		$out = printfic($id);
 
@@ -26,7 +26,7 @@ function toc($id)
 		$tpl->assign("chapters", $chapters);
 		$out .= $tpl->fetch("toc.tpl");
 		
-		$cache->set($outkey, $out);
+		$cache->Set($outkey, $out);
 	}
 	return $out;
 }

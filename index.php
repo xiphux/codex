@@ -29,7 +29,19 @@ include_once('include/db.php');
 /*
  * Caching
  */
-include_once('include/cache.php');
+include_once('include/xxcache/xxcache.php');
+$cache = GetXXCache($codex_conf['cachetype']);
+if ($cache->GetCacheType() === XXCACHE_MEMCACHE) {
+	$cache->SetAddress($codex_conf['memcached_address']);
+	$cache->SetPort($codex_conf['memcached_port']);
+	$cache->SetPersist($codex_conf['memcached_persist']);
+	$cache->SetNamespace("codex_");
+} else if ($cache->GetCacheType() === XXCACHE_EACCELERATOR) {
+	$cache->SetNamespace("codex_");
+} else if ($cache->GetCacheType() === XXCACHE_FILECACHE) {
+	$cache->SetCacheDir($codex_conf['filecache_dir']);
+}
+$cache->Open();
 
 date_default_timezone_set("UTC");
 
@@ -115,8 +127,8 @@ if (isset($_GET['u'])) {
 			break;
 		case "cacheflush":
 			include_once('include/root.php');
-			$cache->clear();
-			if ($cache->clear() === TRUE)
+			$cache->Clear();
+			if ($cache->Clear() === TRUE)
 				echo "Cache flushed<br /><br />";
 			else
 				echo "Could not flush cache<br /><br />";
@@ -136,25 +148,28 @@ ob_end_clean();
 
 $theme = (isset($_SESSION[$codex_conf['session_key']]['theme']) ? $_SESSION[$codex_conf['session_key']]['theme'] : $codex_conf['theme']);
 $headerkey = "output_header_" . md5($theme) . "_" . md5($ttl);
-$headerout = $cache->get($headerkey);
+$headerout = $cache->Get($headerkey);
 if (!$headerout) {
 	$tpl->clear_all_assign();
 	$tpl->assign("title",$ttl);
 	$tpl->assign("theme", $theme);
 	$headerout = $tpl->fetch("header.tpl");
-	$cache->set($headerkey, $headerout);
+	$cache->Set($headerkey, $headerout);
 }
 echo $headerout;
 
 echo $main;
 
-$footerout = $cache->get("output_footer");
+$footerout = $cache->Get("output_footer");
 if (!$footerout) {
 	$tpl->clear_all_assign();
 	$footerout = $tpl->fetch("footer.tpl");
-	$cache->set("output_footer", $footerout);
+	$cache->Set("output_footer", $footerout);
 }
 echo $footerout;
 
+$cache->Close();
+
 ob_end_flush();
+
 ?>

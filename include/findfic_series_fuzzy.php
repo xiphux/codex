@@ -17,13 +17,13 @@ function findfic_series_fuzzy($src)
 
 	$key = "findfic_series_fuzzy_" . md5(strtoupper($src));
 
-	$out = $cache->get("output_" . $key);
+	$out = $cache->Get("output_" . $key);
 	if (!$out) {
 		$out = "";
-		$res = $cache->get($key);
+		$res = $cache->Get($key);
 		if (!$res) {
 			$res = DBGetArray("SELECT series_id,series_title FROM " . $tables['series'] . " ORDER BY series_title");
-			$cache->set($key, $res);
+			$cache->Set($key, $res);
 		}
 		foreach ($res as $row) {
 			if (fuzzysearch($row['series_title'],$src))
@@ -34,7 +34,7 @@ function findfic_series_fuzzy($src)
 			$tpl->assign("note", "Matching series:");
 			$out = $tpl->fetch("note.tpl") . $out;
 		}
-		$cache->set("output_" . $key, $out);
+		$cache->Set("output_" . $key, $out);
 	}
 	return $out;
 }

@@ -12,10 +12,10 @@ function chapter_count($id)
 {
 	global $tables, $cache;
 	
-	$tmp = $cache->get("chapter_count_" . $id);
+	$tmp = $cache->Get("chapter_count_" . $id);
 	if (!$tmp) {
 		$tmp = DBGetOne("SELECT COUNT(id) FROM " . $tables['chapters'] . " WHERE fic=" . $id);
-		$cache->set("chapter_count_" . $id, $tmp);
+		$cache->Set("chapter_count_" . $id, $tmp);
 	}
 	return $tmp;
 }

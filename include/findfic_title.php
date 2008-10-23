@@ -17,13 +17,13 @@ function findfic_title($src)
 
 	$key = "findfic_title_" . md5(strtoupper($src));
 
-	$out = $cache->get("output_" . $key);
+	$out = $cache->Get("output_" . $key);
 	if (!$out) {
 		$out = "";
-		$res = $cache->get($key);
+		$res = $cache->Get($key);
 		if (!$res) {
 			$res = DBGetArray("SELECT fic_id FROM " . $tables['fics'] . " WHERE UPPER(fic_title) LIKE '%" . strtoupper($src) . "%' ORDER BY fic_title");
-			$cache->set($key, $res);
+			$cache->Set($key, $res);
 		}
 		if ($res) {
 			$tpl->clear_all_assign();
@@ -33,7 +33,7 @@ function findfic_title($src)
 		foreach ($res as $row) {
 			$out .= printfic($row['fic_id'],TRUE,CODEX_TITLE,$src);
 		}
-		$cache->set("output_" . $key, $out);
+		$cache->Set("output_" . $key, $out);
 	}
 	return $out;
 }

@@ -27,7 +27,7 @@ function printfic($id, $author_info = TRUE, $highlight = 0, $search = null)
 	if ($author_info)
 		$key .= "_ainfo";
 
-	$out = $cache->get($key);
+	$out = $cache->Get($key);
 	if (!$out) {
 
 		/*
@@ -186,7 +186,7 @@ function printfic($id, $author_info = TRUE, $highlight = 0, $search = null)
 			$tpl->assign("fic_comments",$fdata["fic_comments"]);
 
 		$out = $tpl->fetch("entry.tpl");
-		$cache->set($key, $out);
+		$cache->Set($key, $out);
 	}
 
 	return $out;

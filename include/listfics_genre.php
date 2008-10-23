@@ -22,7 +22,7 @@ function listfics_genre($searchid = null, $highlight = 0, $searchstring = null)
 	if ($codex_conf['lemons'])
 		$outkey .= "_lemons";
 
-	$out = $cache->get($outkey);
+	$out = $cache->Get($outkey);
 	if (!$out) {
 		$out = "";
 
@@ -36,10 +36,10 @@ function listfics_genre($searchid = null, $highlight = 0, $searchstring = null)
 			$key .= "_" . $searchid;
 		} else
 			$q .= " ORDER BY genre_name";
-		$gl = $cache->get($key);
+		$gl = $cache->Get($key);
 		if (!$gl) {
 			$gl = DBGetArray($q);
-			$cache->set($key, $gl);
+			$cache->Set($key, $gl);
 		}
 
 		/*
@@ -60,7 +60,7 @@ function listfics_genre($searchid = null, $highlight = 0, $searchstring = null)
 			}
 		}
 		
-		$cache->set($outkey, $out);
+		$cache->Set($outkey, $out);
 	}
 	return $out;
 }

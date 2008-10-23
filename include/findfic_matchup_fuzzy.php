@@ -20,13 +20,13 @@ function findfic_matchup_fuzzy($src)
 
 	$key = "findfic_matchup_fuzzy_" . md5(strtoupper($src));
 
-	$out = $cache->get("output_" . $key);
+	$out = $cache->Get("output_" . $key);
 	if (!$out) {
 		$out = "";
-		$res = $cache->get($key);
+		$res = $cache->Get($key);
 		if (!$res) {
 			$res = DBGetCol("SELECT matchup_id FROM " . $tables['matchups']);
-			$cache->set($key, $res);
+			$cache->Set($key, $res);
 		}
 		foreach ($res as $mat) {
 			$tmp = matchup_data($mat);
@@ -46,7 +46,7 @@ function findfic_matchup_fuzzy($src)
 			$tpl->assign("note", "Matching matchups:");
 			$out = $tpl->fetch("note.tpl") . $out;
 		}
-		$cache->set("output_" . $key, $out);
+		$cache->Set("output_" . $key, $out);
 	}
 	return $out;
 }

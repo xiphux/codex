@@ -21,7 +21,7 @@ function readfic($id, $ch = 0)
 
 	$outkey = "readfic_" . $id . "_" . $ch;
 
-	$out = $cache->get($outkey);
+	$out = $cache->Get($outkey);
 	if (!$out) {
 		if (isset($id)) {
 			if (fic_data($id)) {
@@ -37,7 +37,7 @@ function readfic($id, $ch = 0)
 		} else
 			$out = "No fic specified";
 
-		$cache->set($outkey, $out);
+		$cache->Set($outkey, $out);
 	}
 	return $out;
 }

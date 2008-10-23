@@ -19,7 +19,7 @@ function readchapter($id, $ch = 1)
 
 	$outkey = "readchapter_" . $id . "_" . $ch;
 
-	$out = $cache->get($outkey);
+	$out = $cache->Get($outkey);
 	if (!$out) {
 		$ctest = chapter_title($id, $ch);
 		if ($ctest) {
@@ -36,10 +36,10 @@ function readchapter($id, $ch = 1)
 			$tpl->assign("chapcount",$chapcount);
 			$tpl->assign("chapters",$chapters);
 
-			$chapdata = $cache->get("chapdata_" . $id . "_" . $ch);
+			$chapdata = $cache->Get("chapdata_" . $id . "_" . $ch);
 			if (!$chapdata) {
 				$chapdata = DBGetRow("SELECT file,data,wrapped FROM " . $tables['chapters'] . " WHERE fic=" . $id . " AND num=" . $ch);
-				$cache->set("chapdata_" . $id . "_" . $ch, $chapdata);
+				$cache->Set("chapdata_" . $id . "_" . $ch, $chapdata);
 			}
 
 			/*
@@ -74,7 +74,7 @@ function readchapter($id, $ch = 1)
 		} else
 			$out = "Invalid chapter";
 
-		$cache->set($outkey, $out);
+		$cache->Set($outkey, $out);
 	}
 	return $out;
 }
