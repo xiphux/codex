@@ -69,9 +69,11 @@ if (isset($_GET['u'])) {
 			include_once('include/fic_title.php');
 			include_once('include/chapter_title.php');
 			$ttl .= " :: " . fic_title($_GET['fic']);
-			$chttl = chapter_title($_GET['fic'], (isset($_GET['ch']) ? $_GET['ch'] : 1));
-			if ($chttl)
-				$ttl .= " :: " . $chttl;
+			if (isset($_GET['ch'])) {
+				$chttl = chapter_title($_GET['fic'], $_GET['ch']);
+				if ($chttl)
+					$ttl .= " :: " . $chttl;
+			}
 			echo readfic($_GET['fic'], (isset($_GET['ch']) ? $_GET['ch'] : 0));
 			break;
 		case "stats":
