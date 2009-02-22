@@ -68,11 +68,18 @@ if (isset($_GET['u'])) {
 			include_once('include/readfic.php');
 			include_once('include/fic_title.php');
 			include_once('include/chapter_title.php');
+			include_once('include/chapter_exists.php');
+			include_once('include/chapter_count.php');
 			$ttl .= " :: " . fic_title($_GET['fic']);
 			if (isset($_GET['ch'])) {
-				$chttl = chapter_title($_GET['fic'], $_GET['ch']);
-				if ($chttl)
-					$ttl .= " :: " . $chttl;
+				$chttl = chapter_exists($_GET['fic'], $_GET['ch']);
+				if ($chttl) {
+					$chttl = chapter_title($_GET['fic'], $_GET['ch']);
+					if ($chttl)
+						$ttl .= " :: " . $chttl;
+					else if (chapter_count($_GET['fic']) > 1)
+						$ttl .= " :: " . "Chapter " . $_GET['ch'];
+				}
 			}
 			echo readfic($_GET['fic'], (isset($_GET['ch']) ? $_GET['ch'] : 0));
 			break;

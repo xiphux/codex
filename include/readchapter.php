@@ -11,6 +11,7 @@
 include_once('fic_data.php');
 include_once('fic_author.php');
 include_once('fic_chapters.php');
+include_once('chapter_exists.php');
 include_once('chapter_title.php');
 
 function readchapter($id, $ch = 1)
@@ -21,12 +22,12 @@ function readchapter($id, $ch = 1)
 
 	$out = $cache->Get($outkey);
 	if (!$out) {
-		$ctest = chapter_title($id, $ch);
+		$ctest = chapter_exists($id, $ch);
 		if ($ctest) {
 			$tpl->clear_all_assign();
 			$tpl->assign("fic", fic_data($id));
 			$tpl->assign("chapter",$ch);
-			$tpl->assign("chaptitle",$ctest);
+			$tpl->assign("chaptitle",chapter_title($id,$ch));
 
 			$auth = fic_author($id);
 			$tpl->assign("author",$auth);

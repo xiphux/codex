@@ -16,12 +16,8 @@ function chapter_title($fic, $ch)
 	if (!$tmp) {
 		$tmp = null;
 		$chap = DBGetRow("SELECT id,title FROM " . $tables['chapters'] . " WHERE fic=" . $fic . " AND num=" . $ch);
-		if ($chap) {
-			if ($chap['title'])
-				$tmp = $chap['title'];
-			else
-				$tmp = "Chapter " . $ch;
-		}
+		if ($chap)
+			$tmp = $chap['title'];
 		if ($tmp)
 			$cache->Set("chapter_title_" . $fic . "_" . $ch, $tmp);
 	}
