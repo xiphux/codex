@@ -71,7 +71,7 @@ if (isset($_GET['u'])) {
 			$ttl .= " :: " . fic_title($_GET['fic']);
 			$chttl = chapter_title($_GET['fic'], (isset($_GET['ch']) ? $_GET['ch'] : 1));
 			if ($chttl)
-				$ttl .= ", " . $chttl;
+				$ttl .= " :: " . $chttl;
 			echo readfic($_GET['fic'], (isset($_GET['ch']) ? $_GET['ch'] : 0));
 			break;
 		case "stats":
