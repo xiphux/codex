@@ -43,6 +43,8 @@ function nav2()
 {/foreach}
 </select>
 </form>
+{elseif $chaptitle}
+<span class="readnavcenter">{$chaptitle}</span>
 {/if}
 {if $chapter < $chapcount}
 <span class="readnavright">
