@@ -12,7 +12,7 @@ function printcategory($catsort, $catidtype, $catid, $catname, $email = null, $w
 {
 	global $cache, $tpl;
 
-	$key = "output_printcategory_" . $catsort . "_" . $catidtype . "_" . $catid . "_" . $catname . "_" . $email . "_" . $website;
+	$key = "output_printcategory_" . $catsort . "_" . $catidtype . "_" . $catid . "_" . md5($catname) . "_" . md5($email) . "_" . md5($website);
 
 	$out = $cache->Get($key);
 	if (!$out) {
