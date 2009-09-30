@@ -32,7 +32,7 @@ function nav2()
 <div class="readnav">
 {if $chapter > 1}
 <span class="readnavleft">
-<a href="{$SCRIPT_NAME}?u=read&fic={$fic.fic_id}&ch={$chapter-1}">prev</a>
+<a href="{$SCRIPT_NAME}?u=read&fic={$fic.fic_id}&ch={$chapter-1}" accesskey="p">prev</a>
 </span>
 {/if}
 {if $chapcount > 1}
@@ -48,7 +48,7 @@ function nav2()
 {/if}
 {if $chapter < $chapcount}
 <span class="readnavright">
-<a href="{$SCRIPT_NAME}?u=read&fic={$fic.fic_id}&ch={$chapter+1}">next</a>
+<a href="{$SCRIPT_NAME}?u=read&fic={$fic.fic_id}&ch={$chapter+1}" accesskey="n">next</a>
 </span>
 {/if}
 </div>
