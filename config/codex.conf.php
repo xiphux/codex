@@ -236,4 +236,14 @@ $codex_conf['unwrap'] = TRUE;
   */
  $codex_conf['fuzzysearchthreshold'] = 2;
 
+ /**
+  * Stylize
+  *
+  * Attempt to translate common text emphasis into HTML
+  * styles.  For example, surrounding underscores:
+  *  _good_
+  * would be italicized.
+  */
+ $codex_conf['stylize'] = TRUE;
+
 ?>

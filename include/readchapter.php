@@ -70,6 +70,13 @@ function readchapter($id, $ch = 1)
 			$fdat = htmlentities($fdat,ENT_COMPAT,'UTF-8');
 			$fdat = nl2br($fdat);
 
+			/*
+			 * Stylize
+			 */
+			if ($codex_conf['stylize'] == TRUE) {
+				$fdat = preg_replace("/(\W)_([^_]{1,40})_(\W)/", "$1<span class=\"emphasis\">$2</span>$3", $fdat);
+			}
+
 			$tpl->assign("fdata", $fdat);
 			$out = $tpl->fetch("read.tpl");
 		} else
