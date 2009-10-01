@@ -129,20 +129,20 @@ $codex_conf['adodb_prefix'] = "adodb/";
 
  /*
   * Spellcheck dictionary
-  * List of spelling errors to fix, in extended regexp form.
+  * List of spelling errors to fix, in perl regexp form.
   * The pattern is the array key, and the replacement is the
-  * value.  So $spellcheck["foo"] = "bar" will replace all
+  * value.  So $spellcheck["/foo/"] = "bar" will replace all
   * occurrences of "foo" with "bar".
   */
- $spellcheck["([Dd])efinate"] = "\\1efinite";
- $spellcheck["([Dd])ependant"] = "\\1ependent"; // Not technically wrong, but still pisses me off
- $spellcheck["([Dd])iscribe"] = "\\1escribe";
- $spellcheck["([Dd])issapoint"] = "\\1isappoint";
- $spellcheck["([Dd])issapear"] = "\\1isappear";
- $spellcheck["Irregardless"] = "Regardless";
- $spellcheck["irregardless"] = "regardless";
- $spellcheck[",br>"] = "\n";
- $spellcheck["([Tt])hw "] = "\\1he ";
+ $spellcheck["/([Dd])efinate/"] = "$1efinite";
+ $spellcheck["/([Dd])ependant/"] = "$1ependent"; // Not technically wrong, but still pisses me off
+ $spellcheck["/([Dd])iscribe/"] = "$1escribe";
+ $spellcheck["/([Dd])issapoint/"] = "$1isappoint";
+ $spellcheck["/([Dd])issapear/"] = "$1isappear";
+ $spellcheck["/Irregardless/"] = "Regardless";
+ $spellcheck["/irregardless/"] = "regardless";
+ $spellcheck["/,br>/"] = "\n";
+ $spellcheck["/([Tt])hw /"] = "$1he ";
 
  /*
   * Debug

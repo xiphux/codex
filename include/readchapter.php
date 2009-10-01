@@ -56,13 +56,13 @@ function readchapter($id, $ch = 1)
 			 */
 			if ($codex_conf['spellcheck'] == TRUE)
 				foreach ($spellcheck as $broke => $fixed)
-					$fdat = ereg_replace($broke,$fixed,$fdat);
+					$fdat = preg_replace($broke,$fixed,$fdat);
 		
 			/*
 			 * Unwrap if specified
 			 */
 			if ($codex_conf['unwrap'] && isset($chapdata['wrapped']) && ($chapdata['wrapped'] === "1"))
-				$fdat = ereg_replace("([^\n])\r\n([^\r])","\\1 \\2",$fdat);
+				$fdat = preg_replace("/([^\n])\r\n([^\r])/","$1 $2",$fdat);
 
 			/*
 			 * Fix for display on web browsers

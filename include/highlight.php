@@ -11,8 +11,8 @@
 function highlight(&$string, $substr, $type = "searchtext")
 {
 	$string = "<span>" . $string . "</span>";
-	$string = eregi_replace("(>[^<]*)(" . quotemeta($substr) . ")","\\1<span class=\"" . $type . "\">\\2</span>",$string);
-	$string = eregi_replace("<span>","",$string);
+	$string = preg_replace("/(>[^<]*)(" . quotemeta($substr) . ")/i","$1<span class=\"" . $type . "\">$2</span>",$string);
+	$string = preg_replace("/<span>/","",$string);
 	$string = substr($string,0,-7);
 }
 
