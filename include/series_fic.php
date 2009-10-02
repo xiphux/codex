@@ -15,7 +15,7 @@ function series_fic($id)
 
 	$tmp = $cache->Get("series_fic_" . $id);
 	if (!$tmp) {
-		$tmp = DBGetArray("SELECT t2.* FROM " . $tables['fic_series'] . " AS t1, " . $tables['fics'] . " AS t2 WHERE t1.fic_id = t2.fic_id AND t1.series_id = $id ORDER BY t2.fic_title");
+		$tmp = DBGetArray("SELECT t2.* FROM " . $tables['fic_series'] . " AS t1, " . $tables['fics'] . " AS t2 WHERE t1.fic_id = t2.id AND t1.series_id = $id ORDER BY t2.title");
 		$cache->Set("series_fic_" . $id, $tmp);
 	}
 	return $tmp;

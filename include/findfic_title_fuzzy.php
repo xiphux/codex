@@ -23,12 +23,12 @@ function findfic_title_fuzzy($src)
 		$out = "";
 		$res = $cache->Get($key);
 		if (!$res) {
-			$res = DBGetArray("SELECT fic_id,fic_title FROM " . $tables['fics'] . " ORDER BY fic_title");
+			$res = DBGetArray("SELECT id,title FROM " . $tables['fics'] . " ORDER BY title");
 			$cache->Set($key, $res);
 		}
 		foreach ($res as $row) {
-			if (fuzzysearch($row['fic_title'],$src))
-				$out .= printfic($row['fic_id'],TRUE,CODEX_TITLE,$src);
+			if (fuzzysearch($row['title'],$src))
+				$out .= printfic($row['id'],TRUE,CODEX_TITLE,$src);
 		}
 		if (strlen($out) > 0) {
 			$tpl->clear_all_assign();

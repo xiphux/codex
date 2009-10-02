@@ -14,25 +14,25 @@ function nav1()
 {
 	var w = document.readnav1form.readnav1select.selectedIndex;
 	var ch = document.readnav1form.readnav1select.options[w].value;
-	window.location.href = {/literal}"{$SCRIPT_NAME}?u=read&fic={$fic.fic_id}&ch=" + ch;{literal}
+	window.location.href = {/literal}"{$SCRIPT_NAME}?u=read&fic={$fic.id}&ch=" + ch;{literal}
 }
 function nav2()
 {
 	var w = document.readnav2form.readnav2select.selectedIndex;
 	var ch = document.readnav2form.readnav2select.options[w].value;
-	window.location.href = {/literal}"{$SCRIPT_NAME}?u=read&fic={$fic.fic_id}&ch=" + ch;{literal}
+	window.location.href = {/literal}"{$SCRIPT_NAME}?u=read&fic={$fic.id}&ch=" + ch;{literal}
 }
 //]]>
 </script>
 {/literal}
 {/if}
 <div class="readnav">
-{$fic.fic_title} by {foreach item=author name=authorfe from=$author}{if !$smarty.foreach.authorfe.first}, {/if}{$author.author_name}{foreachelse}Unknown{/foreach}
+{$fic.title} by {foreach item=author name=authorfe from=$author}{if !$smarty.foreach.authorfe.first}, {/if}{$author.author_name}{foreachelse}Unknown{/foreach}
 </div>
 <div class="readnav">
 {if $chapter > 1}
 <span class="readnavleft">
-<a href="{$SCRIPT_NAME}?u=read&fic={$fic.fic_id}&ch={$chapter-1}" accesskey="p">prev</a>
+<a href="{$SCRIPT_NAME}?u=read&fic={$fic.id}&ch={$chapter-1}" accesskey="p">prev</a>
 </span>
 {/if}
 {if $chapcount > 1}
@@ -48,7 +48,7 @@ function nav2()
 {/if}
 {if $chapter < $chapcount}
 <span class="readnavright">
-<a href="{$SCRIPT_NAME}?u=read&fic={$fic.fic_id}&ch={$chapter+1}" accesskey="n">next</a>
+<a href="{$SCRIPT_NAME}?u=read&fic={$fic.id}&ch={$chapter+1}" accesskey="n">next</a>
 </span>
 {/if}
 </div>
@@ -62,7 +62,7 @@ function nav2()
 <div class="readnav">
 {if $chapter > 1}
 <span class="readnavleft">
-<a href="{$SCRIPT_NAME}?u=read&fic={$fic.fic_id}&ch={$chapter-1}">prev</a>
+<a href="{$SCRIPT_NAME}?u=read&fic={$fic.id}&ch={$chapter-1}">prev</a>
 </span>
 {/if}
 {if $chapcount > 1}
@@ -78,7 +78,7 @@ function nav2()
 {/if}
 {if $chapter < $chapcount}
 <span class="readnavright">
-<a href="{$SCRIPT_NAME}?u=read&fic={$fic.fic_id}&ch={$chapter+1}">next</a>
+<a href="{$SCRIPT_NAME}?u=read&fic={$fic.id}&ch={$chapter+1}">next</a>
 </span>
 {/if}
 </div>

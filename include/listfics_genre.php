@@ -56,7 +56,7 @@ function listfics_genre($searchid = null, $highlight = 0, $searchstring = null)
 				 * Enumerate fics per genre
 				 */
 				foreach ($fl as $row2)
-					$out .= printfic($row2['fic_id'],TRUE,$highlight,$searchstring);
+					$out .= printfic($row2['id'],TRUE,$highlight,$searchstring);
 			}
 		}
 		

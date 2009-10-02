@@ -22,7 +22,7 @@ function listfics_title($highlight = 0, $searchstring = null)
 		$out = "";
 		$fl = $cache->Get("listfics_title");
 		if (!$fl) {
-			$fl = DBGetCol("SELECT fic_id FROM " . $tables['fics'] . " ORDER BY fic_title");
+			$fl = DBGetCol("SELECT id FROM " . $tables['fics'] . " ORDER BY title");
 			$cache->Set("listfics_title", $fl);
 		}
 		foreach ($fl as $row)

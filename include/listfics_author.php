@@ -51,7 +51,7 @@ function listfics_author($searchid = null, $highlight = 0, $searchstring = null)
 			 * Enumerate fics per author
 			 */
 			foreach ($fl as $row2)
-				$out .= printfic($row2['fic_id'],FALSE,$highlight,$searchstring);
+				$out .= printfic($row2['id'],FALSE,$highlight,$searchstring);
 		}
 
 		$cache->Set($outkey, $out);

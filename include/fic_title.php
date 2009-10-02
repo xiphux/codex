@@ -14,7 +14,7 @@ function fic_title($id)
 
 	$tmp = $cache->Get("fic_title_" . $id);
 	if (!$tmp) {
-		$tmp = DBGetOne("SELECT fic_title FROM " . $tables['fics'] . " WHERE fic_id = $id");
+		$tmp = DBGetOne("SELECT title FROM " . $tables['fics'] . " WHERE id = $id");
 		$cache->Set("fic_title_" . $id, $tmp);
 	}
 	return $tmp;

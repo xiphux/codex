@@ -14,7 +14,7 @@ function fic_data($id)
 	
 	$tmp = $cache->Get("fic_data_" . $id);
 	if (!$tmp) {
-		$tmp = DBGetRow("SELECT fic_id,fic_title,fic_comments FROM " . $tables['fics'] . " WHERE fic_id = $id");
+		$tmp = DBGetRow("SELECT id,title,comments FROM " . $tables['fics'] . " WHERE id = $id");
 		$cache->Set("fic_data_" . $id, $tmp);
 	}
 	return $tmp;

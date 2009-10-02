@@ -49,12 +49,12 @@ function printfic($id, $author_info = TRUE, $highlight = 0, $search = null)
 		 * Highlight search string in title if specified
 		 */
 		if ($highlight == CODEX_TITLE && $search)
-			highlight($fdata["fic_title"],$search);
+			highlight($fdata["title"],$search);
 
 		/*
 		 * Export fic title
 		 */
-		$tpl->assign("fic_title",$fdata["fic_title"]);
+		$tpl->assign("fic_title",$fdata["title"]);
 
 		/*
 		 * Get author data
@@ -182,8 +182,8 @@ function printfic($id, $author_info = TRUE, $highlight = 0, $search = null)
 		/*
 		 * Export comments if any
 		 */
-		if ($fdata["fic_comments"])
-			$tpl->assign("fic_comments",$fdata["fic_comments"]);
+		if ($fdata["comments"])
+			$tpl->assign("fic_comments",$fdata["comments"]);
 
 		$out = $tpl->fetch("entry.tpl");
 		$cache->Set($key, $out);

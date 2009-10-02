@@ -14,7 +14,7 @@ function genre_fic($id)
 
 	$tmp = $cache->Get("genre_fic_" . $id);
 	if (!$tmp) {
-		$tmp = DBGetArray("SELECT t2.* FROM " . $tables['fic_genre'] . " AS t1, " . $tables['fics'] . " AS t2 WHERE t1.fic_id = t2.fic_id AND t1.genre_id = $id ORDER BY t2.fic_title");
+		$tmp = DBGetArray("SELECT t2.* FROM " . $tables['fic_genre'] . " AS t1, " . $tables['fics'] . " AS t2 WHERE t1.fic_id = t2.id AND t1.genre_id = $id ORDER BY t2.title");
 		$cache->Set("genre_fic_" . $id, $tmp);
 	}
 	return $tmp;

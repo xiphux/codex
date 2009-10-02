@@ -15,7 +15,7 @@ function author_fic($id)
 
 	$tmp = $cache->Get("author_fic_" . $id);
 	if (!$tmp) {
-		$tmp = DBGetArray("SELECT t2.* FROM " . $tables['fic_author'] . " AS t1, " . $tables['fics'] . " AS t2 WHERE t1.fic_id = t2.fic_id AND t1.author_id = $id ORDER BY t2.fic_title");
+		$tmp = DBGetArray("SELECT t2.* FROM " . $tables['fic_author'] . " AS t1, " . $tables['fics'] . " AS t2 WHERE t1.fic_id = t2.id AND t1.author_id = $id ORDER BY t2.title");
 		$cache->Set("author_fic_" . $id, $tmp);
 	}
 	return $tmp;

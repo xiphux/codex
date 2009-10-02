@@ -52,7 +52,7 @@ function listfics_series($searchid = null, $highlight = 0, $searchstring = null)
 			 * Enumerate fics per series
 			 */
 			foreach ($fl as $row2)
-				$out .= printfic($row2['fic_id'],TRUE,$highlight,$searchstring);
+				$out .= printfic($row2['id'],TRUE,$highlight,$searchstring);
 		}
 
 		$cache->Set($outkey, $out);
