@@ -50,25 +50,25 @@
 {if $fic.sequel_to_title}
   <tr>
     <td><strong>Prequel: </strong></td>
-    <td><a href="{$SCRIPT_NAME}?u=read&fic={$fic.sequel_to}">{$fic.sequel_to_title}</a></td>
+    <td><a href="{$SCRIPT_NAME}?u=show&fic={$fic.sequel_to}">{$fic.sequel_to_title}</a></td>
   </tr>
 {/if}
 {if $fic.sequels}
   <tr>
     <td><strong>{if count($fic.sequels) > 1}Sequels{else}Sequel{/if}:</strong></td>
-    <td>{foreach item=sequel name=sequelfe from=$fic.sequels}{if !$smarty.foreach.sequelfe.first}<br />{/if}<a href="{$SCRIPT_NAME}?u=read&fic={$sequel.id}">{$sequel.title}</a>{/foreach}</td>
+    <td>{foreach item=sequel name=sequelfe from=$fic.sequels}{if !$smarty.foreach.sequelfe.first}<br />{/if}<a href="{$SCRIPT_NAME}?u=show&fic={$sequel.id}">{$sequel.title}</a>{/foreach}</td>
   </tr>
 {/if}
 {if $fic.sidestory_to_title}
   <tr>
     <td><strong>Sidestory to: </strong></td>
-    <td><a href="{$SCRIPT_NAME}?u=read&fic={$fic.sidestory_to}">{$fic.sidestory_to_title}</a></td>
+    <td><a href="{$SCRIPT_NAME}?u=show&fic={$fic.sidestory_to}">{$fic.sidestory_to_title}</a></td>
   </tr>
 {/if}
 {if $fic.sidestories}
   <tr>
     <td><strong>{if count($fic.sidestories) > 1}Sidestories{else}Sidestory{/if}:</strong></td>
-    <td>{foreach item=sidestory name=sidestoryfe from=$fic.sidestories}{if !$smarty.foreach.sidestoryfe.first}<br />{/if}<a href="{$SCRIPT_NAME}?u=read&fic={$sidestory.id}">{$sidestory.title}</a>{/foreach}</td>
+    <td>{foreach item=sidestory name=sidestoryfe from=$fic.sidestories}{if !$smarty.foreach.sidestoryfe.first}<br />{/if}<a href="{$SCRIPT_NAME}?u=show&fic={$sidestory.id}">{$sidestory.title}</a>{/foreach}</td>
   </tr>
 {/if}
 {if $fic.comments}

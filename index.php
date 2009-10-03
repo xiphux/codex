@@ -64,6 +64,10 @@ ob_start();
  */
 if (isset($_GET['u'])) {
 	switch ($_GET['u']) {
+		case "show":
+			include_once('include/printfic.php');
+			echo printfic($_GET['fic']);
+			break;
 		case "read":
 			include_once('include/readfic.php');
 			include_once('include/fic_title.php');
