@@ -41,20 +41,15 @@ function printfic($id, $author_info = TRUE, $highlight = 0, $search = null)
 		$tpl->clear_all_assign();
 
 		/*
-		 * Export the fic_id for the href
-		 */
-		$tpl->assign("fic_id",$id);
-
-		/*
 		 * Highlight search string in title if specified
 		 */
 		if ($highlight == CODEX_TITLE && $search)
 			highlight($fdata["title"],$search);
 
 		/*
-		 * Export fic title
+		 * Export fic data
 		 */
-		$tpl->assign("fic_title",$fdata["title"]);
+		$tpl->assign("fic",$fdata);
 
 		/*
 		 * Get author data
@@ -178,12 +173,6 @@ function printfic($id, $author_info = TRUE, $highlight = 0, $search = null)
 		 * Export matchup data
 		 */
 		$tpl->assign("fic_matchup",$mdata);
-
-		/*
-		 * Export comments if any
-		 */
-		if ($fdata["comments"])
-			$tpl->assign("fic_comments",$fdata["comments"]);
 
 		$out = $tpl->fetch("entry.tpl");
 		$cache->Set($key, $out);
