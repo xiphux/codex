@@ -74,7 +74,7 @@ function readchapter($id, $ch = 1)
 			 * Stylize
 			 */
 			if ($codex_conf['stylize'] == TRUE) {
-				$fdat = preg_replace("/(\W)_(\w{1,40})_(\W)/e", "'$1<span class=\"emphasis\">'.str_replace('_',' ','$2').'</span>$3'", $fdat);
+				$fdat = preg_replace("/(\W)_([^\t\n\r\f\a\e]{1,40})_(\W)/e", "'$1<span class=\"emphasis\">'.str_replace('_',' ','$2').'</span>$3'", $fdat);
 			}
 
 			$tpl->assign("fdata", $fdat);
