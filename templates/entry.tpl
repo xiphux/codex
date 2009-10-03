@@ -9,7 +9,7 @@
 <table>
   <tr>
     <td class="main"><strong>Title: </strong></td>
-    <td><a href="{$SCRIPT_NAME}?u=read&fic={$fic.id}">{$fic.title}</a></td>
+    <td>{if $chaptercount > 0}<a href="{$SCRIPT_NAME}?u=read&fic={$fic.id}">{$fic.title}</a>{else}{$fic.title}{/if}</td>
   </tr>
   <tr>
     <td><strong>{if count($fic_author) > 1}Authors{else}Author{/if}: </strong></td>
