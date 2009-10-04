@@ -266,4 +266,12 @@ $codex_conf['unwrap'] = TRUE;
   */
  $codex_conf['showwebsite'] = TRUE;
 
+ /**
+  * Pad lines
+  *
+  * If set to true, will attempt to pad lines of densely
+  * packed text with extra line breaks to aid readability
+  */
+ $codex_conf['padlines'] = TRUE;
+
 ?>

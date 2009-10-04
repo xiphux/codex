@@ -65,6 +65,12 @@ function readchapter($id, $ch = 1)
 				$fdat = preg_replace("/([^\n])\r\n([^\r\s])/","$1 $2",$fdat);
 
 			/*
+			 * Pad lines if specified
+			 */
+			if ($codex_conf['padlines'])
+				$fdat = preg_replace("/([^\n])\r\n([^\r\n])/","$1\r\n\r\n$2",$fdat);
+
+			/*
 			 * Fix for display on web browsers
 			 */
 			$fdat = htmlentities($fdat,ENT_COMPAT,'UTF-8');
