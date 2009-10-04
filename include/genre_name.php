@@ -13,7 +13,7 @@ function genre_name($id)
 
 	$tmp = $cache->Get("genre_name_" . $id);
 	if (!$tmp) {
-		$tmp = DBGetOne("SELECT genre_name FROM " . $tables['genres'] . " WHERE genre_id = $id");
+		$tmp = DBGetOne("SELECT name FROM " . $tables['genres'] . " WHERE id = $id");
 		$cache->Set("genre_name_" . $id, $tmp);
 	}
 	return $tmp;

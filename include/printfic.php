@@ -122,18 +122,18 @@ function printfic($id, $author_info = TRUE, $highlight = 0, $search = null)
 			/*
 			 * Mark if genre is lemon
 			 */
-			highlight($gdata[$i]["genre_name"],"Lemon","lemontext");
+			highlight($gdata[$i]["name"],"Lemon","lemontext");
 
 			/*
 			 * Highlight search string in genre if specified
 			 */
 			if ($highlight == CODEX_GENRE && $search)
-				highlight($gdata[$i]["genre_name"],$search);
+				highlight($gdata[$i]["name"],$search);
 
 			/*
 			 * If lemons are disabled, don't finish displaying
 			 */
-			if (!$codex_conf['lemons'] && stristr($gdata[$i]["genre_name"],"Lemon"))
+			if (!$codex_conf['lemons'] && stristr($gdata[$i]["name"],"Lemon"))
 				return;
 		}
 

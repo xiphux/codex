@@ -32,10 +32,10 @@ function listfics_genre($searchid = null, $highlight = 0, $searchstring = null)
 		 * User only wants one genre
 		 */
 		if (isset($searchid)) {
-			$q .= " WHERE genre_id = $searchid";
+			$q .= " WHERE id = $searchid";
 			$key .= "_" . $searchid;
 		} else
-			$q .= " ORDER BY genre_name";
+			$q .= " ORDER BY name";
 		$gl = $cache->Get($key);
 		if (!$gl) {
 			$gl = DBGetArray($q);
@@ -46,12 +46,12 @@ function listfics_genre($searchid = null, $highlight = 0, $searchstring = null)
 		 * Enumerate genre list
 		 */
 		foreach ($gl as $row) {
-			if (!stristr($row['genre_name'],"Lemon") || $codex_conf['lemons']) {
+			if (!stristr($row['name'],"Lemon") || $codex_conf['lemons']) {
 				if ($highlight == CODEX_GENRE && $searchstring)
-					highlight($row['genre_name'],$searchstring);
-				highlight($row['genre_name'],"Lemon","lemontext");
-				$out .= printcategory("genre", "gid", $row['genre_id'], $row['genre_name'], null, null);
-				$fl = genre_fic($row['genre_id']);
+					highlight($row['name'],$searchstring);
+				highlight($row['name'],"Lemon","lemontext");
+				$out .= printcategory("genre", "gid", $row['id'], $row['name'], null, null);
+				$fl = genre_fic($row['id']);
 				/*
 				 * Enumerate fics per genre
 				 */

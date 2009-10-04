@@ -26,15 +26,15 @@ function findfic_genre_fuzzy($src)
 		if (!$res) {
 			$lim = "";
 			if (!$codex_conf['lemons'])
-				$lim = " WHERE UPPER(genre_name) NOT LIKE 'LEMON%' ";
-			$res = DBGetArray("SELECT genre_id,genre_name FROM " . $tables['genres'] . $lim . " ORDER BY genre_name");
+				$lim = " WHERE UPPER(name) NOT LIKE 'LEMON%' ";
+			$res = DBGetArray("SELECT id,name FROM " . $tables['genres'] . $lim . " ORDER BY name");
 			$cache->Set($key, $res);
 		}
 		foreach ($res as $row) {
-			if (fuzzysearch($row['genre_name'],$src)) {
+			if (fuzzysearch($row['name'],$src)) {
 				if ($codex_conf['lemons']);
-					highlight($row['genre_name'],"Lemon","lemontext");
-				$out .= printcategory("genre", "gid", $row['genre_id'], $row['genre_name'], null, null);
+					highlight($row['name'],"Lemon","lemontext");
+				$out .= printcategory("genre", "gid", $row['id'], $row['name'], null, null);
 			}
 		}
 		if (strlen($out) > 0) {

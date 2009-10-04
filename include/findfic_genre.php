@@ -25,8 +25,8 @@ function findfic_genre($src)
 		if (!$res) {
 			$lim = "";
 			if (!$codex_conf['lemons'])
-				$lim = " AND UPPER(genre_name) NOT LIKE 'LEMON%' ";
-			$res = DBGetArray("SELECT genre_id,genre_name FROM " . $tables['genres'] . " WHERE UPPER(genre_name) LIKE '%" . strtoupper($src) . "%' " . $lim . " ORDER BY genre_name");
+				$lim = " AND UPPER(name) NOT LIKE 'LEMON%' ";
+			$res = DBGetArray("SELECT id,name FROM " . $tables['genres'] . " WHERE UPPER(name) LIKE '%" . strtoupper($src) . "%' " . $lim . " ORDER BY name");
 			$cache->Set($key, $res);
 		}
 		if ($res) {
@@ -36,9 +36,9 @@ function findfic_genre($src)
 		}
 		foreach ($res as $row) {
 			if ($codex_conf['lemons']);
-				highlight($row['genre_name'],"Lemon","lemontext");
-			highlight($row['genre_name'],$src);
-			$out .= printcategory("genre", "gid", $row['genre_id'], $row['genre_name'], null, null);
+				highlight($row['name'],"Lemon","lemontext");
+			highlight($row['name'],$src);
+			$out .= printcategory("genre", "gid", $row['id'], $row['name'], null, null);
 		}
 		$cache->Set("output_" . $key, $out);
 	}

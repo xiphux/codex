@@ -43,7 +43,7 @@
   </tr>
   <tr>
     <td><strong>{if count($fic_genre) > 1}Genres{else}Genre{/if}: </strong></td>
-    <td>{foreach item=genre name=genrefe from=$fic_genre}{if !$smarty.foreach.genrefe.first}, {/if}<a href="{$SCRIPT_NAME}?u=genre&gid={$genre.genre_id}">{$genre.genre_name}</a>{/foreach}</td>
+    <td>{foreach item=genre name=genrefe from=$fic_genre}{if !$smarty.foreach.genrefe.first}, {/if}<a href="{$SCRIPT_NAME}?u=genre&gid={$genre.id}">{$genre.name}</a>{/foreach}</td>
   </tr>
   {if $fic_matchup}
     <tr>

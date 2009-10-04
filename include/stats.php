@@ -34,7 +34,7 @@ function stats()
 	$tpl->assign("fics",DBGetOne("SELECT COUNT(id) FROM " . $tables['fics']));
 	$tpl->assign("chapters",DBGetOne("SELECT COUNT(id) FROM " . $tables['chapters']));
 	$tpl->assign("authors",DBGetOne("SELECT COUNT(author_id) FROM " . $tables['authors']));
-	$tpl->assign("genres",DBGetOne("SELECT COUNT(genre_id) FROM " . $tables['genres']));
+	$tpl->assign("genres",DBGetOne("SELECT COUNT(id) FROM " . $tables['genres']));
 	$tpl->assign("series",DBGetOne("SELECT COUNT(series_id) FROM " . $tables['series']));
 	$tpl->assign("characters",DBGetOne("SELECT COUNT(character_id) FROM " . $tables['characters']));
 	$tpl->assign("matchups",DBGetOne("SELECT COUNT(matchup_id) FROM " . $tables['matchups']));
