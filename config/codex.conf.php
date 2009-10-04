@@ -274,4 +274,13 @@ $codex_conf['unwrap'] = TRUE;
   */
  $codex_conf['padlines'] = TRUE;
 
+ /*
+  * Compact lines
+  *
+  * If set to true, will attempt to compact repeated
+  * blank lines into a single blank line to avoid
+  * unnecessary scrolling
+  */
+ $codex_conf['compactlines'] = TRUE;
+
 ?>

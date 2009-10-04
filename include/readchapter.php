@@ -71,6 +71,12 @@ function readchapter($id, $ch = 1)
 				$fdat = preg_replace("/([^\n])\r\n([^\r\n])/","$1\r\n\r\n$2",$fdat);
 
 			/*
+			 * Compact lines if specified
+			 */
+			if ($codex_conf['compactlines'])
+				$fdat = preg_replace("/([^\n])(\r\n\s*){3,}([^\r\n])/","$1\r\n\r\n$3",$fdat);
+
+			/*
 			 * Fix for display on web browsers
 			 */
 			$fdat = htmlentities($fdat,ENT_COMPAT,'UTF-8');
