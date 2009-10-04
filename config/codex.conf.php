@@ -238,7 +238,7 @@ $codex_conf['unwrap'] = TRUE;
   */
  $codex_conf['fuzzysearchthreshold'] = 2;
 
- /**
+ /*
   * Stylize
   *
   * Attempt to translate common text emphasis into HTML
@@ -248,7 +248,7 @@ $codex_conf['unwrap'] = TRUE;
   */
  $codex_conf['stylize'] = TRUE;
 
- /**
+ /*
   * Show email
   *
   * Whether to show the email of the author.  If false,
@@ -257,7 +257,7 @@ $codex_conf['unwrap'] = TRUE;
   */
  $codex_conf['showemail'] = TRUE;
 
- /**
+ /*
   * Show website
   *
   * Whether to show the website address of the author.
@@ -266,7 +266,7 @@ $codex_conf['unwrap'] = TRUE;
   */
  $codex_conf['showwebsite'] = TRUE;
 
- /**
+ /*
   * Pad lines
   *
   * If set to true, will attempt to pad lines of densely
