@@ -248,4 +248,22 @@ $codex_conf['unwrap'] = TRUE;
   */
  $codex_conf['stylize'] = TRUE;
 
+ /**
+  * Show email
+  *
+  * Whether to show the email of the author.  If false,
+  * will just show an 'email' link rather than displaying
+  * the full email address
+  */
+ $codex_conf['showemail'] = TRUE;
+
+ /**
+  * Show website
+  *
+  * Whether to show the website address of the author.
+  * If false, will just show a 'web' link rather than
+  * displaying the full web address
+  */
+ $codex_conf['showwebsite'] = TRUE;
+
 ?>

@@ -41,6 +41,12 @@ function printfic($id, $author_info = TRUE, $highlight = 0, $search = null)
 		$tpl->clear_all_assign();
 
 		/*
+		 * Whether to show full or compact links
+		 */
+		$tpl->assign("showemail", $codex_conf['showemail']);
+		$tpl->assign("showwebsite", $codex_conf['showwebsite']);
+
+		/*
 		 * Highlight search string in title if specified
 		 */
 		if ($highlight == CODEX_TITLE && $search)
