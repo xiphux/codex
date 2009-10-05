@@ -144,6 +144,8 @@ $codex_conf['adodb_prefix'] = "adodb/";
  $spellcheck["/([Tt])hw /"] = "$1he ";
  $spellcheck["/([Dd])angurus/"] = "$1angerous";
  $spellcheck["/([Cc])lumsyly/"] = "$1lumsily";
+ $spellcheck["/([Ss])parr([^\w])/"] = "$1par$2";
+ $spellcheck["/([Uu])nsion/"] = "$1nison";
 
  /* HTML typos */
  $spellcheck["/,br>/"] = "\n";
