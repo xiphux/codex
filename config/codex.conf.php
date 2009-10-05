@@ -142,7 +142,7 @@ $codex_conf['adodb_prefix'] = "adodb/";
  $spellcheck["/Irregardless/"] = "Regardless";
  $spellcheck["/irregardless/"] = "regardless";
  $spellcheck["/([Tt])hw /"] = "$1he ";
- $spellcheck["/(Dd)angurus/"] = "$1angerous";
+ $spellcheck["/([Dd])angurus/"] = "$1angerous";
 
  /* HTML typos */
  $spellcheck["/,br>/"] = "\n";
