@@ -146,6 +146,7 @@ $codex_conf['adodb_prefix'] = "adodb/";
  $spellcheck["/([Cc])lumsyly/"] = "$1lumsily";
  $spellcheck["/([Ss])parr([^\w])/"] = "$1par$2";
  $spellcheck["/([Uu])nsion/"] = "$1nison";
+ $spellcheck["/([Bb])uisness/"] = "$1usiness";
 
  /* HTML typos */
  $spellcheck["/,br>/"] = "\n";
