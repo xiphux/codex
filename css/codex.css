@@ -22,3 +22,7 @@
 	position: absolute;
 	right: 0;
 }
+
+.readtext {
+	white-space: pre-wrap;
+}

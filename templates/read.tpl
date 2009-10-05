@@ -55,7 +55,9 @@ function nav2()
 <hr />
 {/if}
 
+<div class="readtext">
 {$fdata}
+</div>
 
 {if ($chapter > 1) || ($chapter < $chapcount)}
 <hr />
