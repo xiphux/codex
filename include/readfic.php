@@ -17,7 +17,7 @@ include_once('toc.php');
 
 function readfic($id, $ch = 0)
 {
-	global $codex_conf, $spellcheck, $tables, $tpl, $cache;
+	global $cache;
 
 	$outkey = "readfic_" . $id . "_" . $ch;
 
