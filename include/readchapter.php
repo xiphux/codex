@@ -75,7 +75,7 @@ function readchapter($id, $ch = 1)
 			 * Compact lines if specified
 			 */
 			if ($codex_conf['compactlines'])
-				$fdat = preg_replace("/([^\n])(\r\n\s*){3,}([^\r\n])/","$1\r\n\r\n$3",$fdat);
+				$fdat = preg_replace("/([^\n])(\r\n\s*){2,}\r\n(\s*[^\r\n])/","$1\r\n\r\n$3",$fdat);
 
 			/*
 			 * Fix for display on web browsers
@@ -89,7 +89,7 @@ function readchapter($id, $ch = 1)
 			 */
 			if ($codex_conf['stylize'] == TRUE) {
 				$fdat = preg_replace("/(\W)_([^\t\n\r\f\a\e]{1,40})_(\W)/e", "'$1<span class=\"emphasis\">'.str_replace('_',' ','$2').'</span>$3'", $fdat);
-				$fdat = preg_replace("/([^\*])\*([^\*]{1,40})\*([^\*])/","$1*<span class=\"emphasis\">$2</span>*$3", $fdat);
+				$fdat = preg_replace("/([^\*])\*([^\*>\n]*)\*([^\*])/","$1*<span class=\"emphasis\">$2</span>*$3", $fdat);
 			}
 
 			$tpl->assign("fdata", $fdat);
