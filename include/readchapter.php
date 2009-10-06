@@ -8,6 +8,7 @@
  *  Copyright (C) 2005 Christopher Han <xiphux@gmail.com>
  */
 
+include_once('config/spellcheck.conf.php');
 include_once('fic_data.php');
 include_once('fic_author.php');
 include_once('fic_chapters.php');
