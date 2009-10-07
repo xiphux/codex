@@ -11,6 +11,7 @@
 	text-align: left;
 	position: absolute;
 	left: 0;
+	top: 0;
 }
 
 .readnavcenter {
@@ -21,6 +22,7 @@
 	text-align: right;
 	position: absolute;
 	right: 0;
+	top: 0;
 }
 
 .readtext {
@@ -32,11 +34,28 @@
 }
 
 .bottomreadnav {
+	width: 100%;
+	text-align: center;
 	position: fixed;
 	left: 0px;
 	bottom: 0px;
 	z-index: 5;
 }
+
+.bottomreadnavleft {
+	text-align: left;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+}
+
+.bottomreadnavright {
+	text-align: right;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}
+
 
 hr {
 	margin: 0 0 0 0;
