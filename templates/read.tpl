@@ -26,8 +26,11 @@ function nav2()
 </script>
 {/literal}
 {/if}
-<div class="readnav">
+{capture name=ficstr}
 {$fic.title} by {foreach item=author name=authorfe from=$author}{if !$smarty.foreach.authorfe.first}, {/if}{$author.author_name}{foreachelse}Unknown{/foreach}
+{/capture}
+<div class="readnav">
+{$smarty.capture.ficstr}
 </div>
 <div class="readnav">
 {if $chapter > 1}
@@ -58,17 +61,19 @@ function nav2()
 <div class="readtext">
 {$fdata}
 </div>
+<div class="bottompadding">
+</div>
 
 {if ($chapter > 1) || ($chapter < $chapcount)}
+<div class="readnav bottomreadnav">
 <hr />
-<div class="readnav">
 {if $chapter > 1}
 <span class="readnavleft">
 <a href="{$SCRIPT_NAME}?u=read&fic={$fic.id}&ch={$chapter-1}">prev</a>
 </span>
 {/if}
 {if $chapcount > 1}
-<form name="readnav2form" class="readnavcenter">
+<form name="readnav2form" class="readnavcenter">{$smarty.capture.ficstr} | 
 <select name="readnav2select" class="readnavcenter" name="chapter" onchange="nav2()">
 {foreach from=$chapters item=chap}
   <option value="{$chap.num}" {if $chap.num == $chapter}selected{/if}>{if $chap.title}{$chap.title}{else}Chapter {$chap.num}{/if}</option>
@@ -76,7 +81,9 @@ function nav2()
 </select>
 </form>
 {else}
-<span class="readnavcenter">{if $chaptitle}{$chaptitle}{else}Chapter {$chapter}{/if}</span>
+<span class="readnavcenter">
+{$smarty.capture.ficstr} | 
+{if $chaptitle}{$chaptitle}{else}Chapter {$chapter}{/if}</span>
 {/if}
 {if $chapter < $chapcount}
 <span class="readnavright">

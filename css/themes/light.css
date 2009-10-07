@@ -55,3 +55,7 @@ form input.focus, form textarea.focus {
 	border-color: blue;
 	color: #111;
 }
+
+.bottomreadnav {
+	background-color: white;
+}

@@ -26,3 +26,18 @@
 .readtext {
 	white-space: pre-wrap;
 }
+
+.bottompadding {
+	height: 40px;
+}
+
+.bottomreadnav {
+	position: fixed;
+	left: 0px;
+	bottom: 0px;
+	z-index: 5;
+}
+
+hr {
+	margin: 0 0 0 0;
+}
