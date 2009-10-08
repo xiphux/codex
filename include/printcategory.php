@@ -20,8 +20,8 @@ function printcategory($catsort, $catidtype, $catid, $catname, $email = null, $w
 		$tpl->assign("catsort", $catsort);
 		$tpl->assign("catidtype", $catidtype);
 		$tpl->assign("catid", $catid);
-		$tpl->assign("catname", $catname);
-		if ($email)
+		$tpl->assign("catname", (isset($catname) ? $catname : $email));
+		if ($email && isset($catname))
 			$tpl->assign("email", $email);
 		if ($website)
 			$tpl->assign("website", $website);

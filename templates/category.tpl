@@ -9,7 +9,7 @@
  <strong>
   <a href="{$SCRIPT_FILE}?u={$catsort}&{$catidtype}={$catid}">{$catname}</a></strong>
   {if $email}
-    [<a href="mailto:{$email}">{$email}</a>]
+    [<a href="mailto:{$email|strip_tags|strip:''}">{$email}</a>]
   {/if}
   {if $website}
     [<a href="{$website}">{$website}</a>]

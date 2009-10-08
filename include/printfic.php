@@ -66,18 +66,17 @@ function printfic($id, $author_info = TRUE, $highlight = 0, $search = null)
 		 * Omit the author's contact info (for author-based listings)
 		 */
 		if (!$author_info) {
-			foreach ($adata as $i => $aid) {
-				unset($adata[$i]['author_email']);
-				unset($adata[$i]['author_website']);
-			}
+			$tpl->assign("omitcontact", true);
 		}
 
 		/*
 		 * Highlight a search string in author name if specified
 		 */
 		if ($highlight == CODEX_AUTHOR && $search) {
-			foreach ($adata as $i => $aid)
+			foreach ($adata as $i => $aid) {
 				highlight($adata[$i]["author_name"],$search);
+				highlight($adata[$i]["author_email"],$search);
+			}
 		}
 
 		/*

@@ -22,7 +22,7 @@ function findfic_author($src)
 		$out = "";
 		$res = $cache->Get($key);
 		if (!$res) {
-			$res = DBGetArray("SELECT author_id,author_name,author_email,author_website FROM " . $tables['authors'] . " WHERE UPPER(author_name) LIKE '%" . strtoupper($src) . "%' ORDER BY author_name");
+			$res = DBGetArray("SELECT author_id,author_name,author_email,author_website FROM " . $tables['authors'] . " WHERE (UPPER(author_name) LIKE '%" . strtoupper($src) . "%') OR (UPPER(author_email) LIKE '%" . strtoupper($src) . "%') ORDER BY author_name");
 			$cache->Set($key, $res);
 		}
 		if ($res) {
@@ -32,6 +32,7 @@ function findfic_author($src)
 		}
 		foreach ($res as $row) {
 			highlight($row['author_name'],$src);
+			highlight($row['author_email'],$src);
 			$out .= printcategory("author", "aid", $row['author_id'], $row['author_name'], $row['author_email'], $row['author_website']);
 		}
 		$cache->Set("output_" . $key, $out);

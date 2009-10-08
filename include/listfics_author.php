@@ -28,10 +28,10 @@ function listfics_author($searchid = null, $highlight = 0, $searchstring = null)
 		 * User only wants one author
 		 */
 		if (isset($searchid)) {
-			$q .= " WHERE author_id = $searchid";
+			$q .= " WHERE author_id = $searchid AND ((" . $tables['authors'] . ".author_name IS NOT NULL) OR (" . $tables['authors'] . ".author_email IS NOT NULL))";
 			$key .= "_" . $searchid;
 		} else
-			$q .= " ORDER BY author_name";
+			$q .= " WHERE (" . $tables['authors'] . ".author_name IS NOT NULL) OR (" . $tables['authors'] . ".author_email IS NOT NULL) ORDER BY author_name";
 		$al = $cache->Get($key);
 		if (!$al) {
 			$al = DBGetArray($q);
@@ -42,8 +42,10 @@ function listfics_author($searchid = null, $highlight = 0, $searchstring = null)
 		 * Enumerate author list
 		 */
 		foreach ($al as $row) {
-			if ($highlight == CODEX_AUTHOR && $searchstring)
+			if ($highlight == CODEX_AUTHOR && $searchstring) {
 				highlight($row['author_name'],$searchstring);
+				highlight($row['author_email'],$searchstring);
+			}
 			$out .= printcategory("author", "aid", $row['author_id'], $row['author_name'], $row['author_email'], $row['author_website']);
 			$fl = author_fic($row['author_id']);
 
