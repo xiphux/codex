@@ -33,7 +33,7 @@ function findfic_author($src)
 		foreach ($res as $row) {
 			highlight($row['author_name'],$src);
 			highlight($row['author_email'],$src);
-			$out .= printcategory("author", "aid", $row['author_id'], $row['author_name'], $row['author_email'], $row['author_website']);
+			$out .= printcategory("author", "aid", $row['author_id'], (isset($row['author_name']) ? $row['author_name'] : $row['author_email']), (isset($row['author_name']) ? $row['author_email'] : null), $row['author_website']);
 		}
 		$cache->Set("output_" . $key, $out);
 	}
