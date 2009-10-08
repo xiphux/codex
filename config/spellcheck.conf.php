@@ -14,6 +14,12 @@
  * The pattern is the array key, and the replacement is the
  * value.  So $spellcheck["/foo/"] = "bar" will replace all
  * occurrences of "foo" with "bar".
+ *
+ * For the more technical:
+ * These are just parameters into PHP's preg_replace, with
+ * the array key as the pattern and the array value as the
+ * replacement, so you can actually do any transformations
+ * that you want with this, not just spelling corrections.
  */
 $spellcheck["/([Dd])efinate/"] = "$1efinite";
 $spellcheck["/([Dd])ependant/"] = "$1ependent"; // Not technically wrong, but still pisses me off
@@ -36,6 +42,33 @@ $spellcheck["/([Dd])iscribing/"] = "$1escribing";
 $spellcheck["/([Ee])xcersize/"] = "$1xercise";
 $spellcheck["/([Pp])revert/"] = "$1ervert";
 $spellcheck["/([Aa])ntoher/"] = "$1nother";
+$spellcheck["/([Ss])torey/"] = "$1tory";
+$spellcheck["/Irratic/"] = "Erratic";
+$spellcheck["/irratic/"] = "erratic";
+$spellcheck["/([Pp])rocent/"] = "$1ercent";
+$spellcheck["/([Rr])ediculous/"] = "$1idiculous";
+$spellcheck["/([Ll])enght/"] = "$1ength";
+$spellcheck["/([Tt])estemony/"] = "$1estimony";
+$spellcheck["/Incountered/"] = "Encountered";
+$spellcheck["/incountered/"] = "encountered";
+$spellcheck["/([Uu])ncomiting/"] = "$1ncomitting";
+$spellcheck["/([Ii])ngrediences/"] = "$1ngredients";
+$spellcheck["/([Cc])urcuit/"] = "$1ircuit";
+$spellcheck["/([Pp])roffread/"] = "$1roofread";
+$spellcheck["/([Rr])emainded/"] = "$1emained";
+$spellcheck["/ ti /"] = " it ";
+$spellcheck["/ Ti /"] = " It ";
+$spellcheck["/([Bb])reakfest/"] = "$1reakfast";
+$spellcheck["/([Gg])aurded/"] = "$1uarded";
+$spellcheck["/([Mm])artail/"] = "$1artial";
+$spellcheck["/([Aa])amazinfg/"] = "$1mazing";
+$spellcheck["/([Dd])ecion/"] = "$1ecision";
+
+/* Some series-specific stuff */
+$spellcheck["/NAbiki/"] = "Nabiki";
+$spellcheck["/([Nn])ermia/"] = "$1erima";
+$spellcheck["/([Nn])ermai/"] = "$1erima";
+$spellcheck["/([Ss])nesei/"] = "$1ensei";
 
 /* HTML typos */
 $spellcheck["/,br>/"] = "\n";
