@@ -46,7 +46,7 @@ function listfics_author($searchid = null, $highlight = 0, $searchstring = null)
 				highlight($row['author_name'],$searchstring);
 				highlight($row['author_email'],$searchstring);
 			}
-			$out .= printcategory("author", "aid", $row['author_id'], $row['author_name'], $row['author_email'], $row['author_website']);
+			$out .= printcategory("author", "aid", $row['author_id'], (isset($row['author_name']) ? $row['author_name'] : $row['author_email']), $row['author_email'], $row['author_website']);
 			$fl = author_fic($row['author_id']);
 
 			/*

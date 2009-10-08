@@ -16,7 +16,7 @@
     <td>
       {foreach item=author name=authorfe from=$fic_author}{if !$smarty.foreach.authorfe.first}<br />{/if}
         <a href="{$SCRIPT_NAME}?u=author&aid={$author.author_id}">{if $author.author_name}{$author.author_name}{else}{$author.author_email}{/if}</a>
-	{if $author.author_email && $author.author_name && !$omitcontact}
+	{if $author.author_email && !$omitcontact}
 	  {if $showemail}
 	    &lt;<a href="mailto:{$author.author_email|strip_tags|strip:''}">{$author.author_email}</a>&gt;
 	  {else}
