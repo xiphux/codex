@@ -41,10 +41,12 @@
     <td><strong>Series: </strong></td>
     <td>{foreach item=series name=seriesfe from=$fic_series}{if !$smarty.foreach.seriesfe.first}, {/if}<a href="{$SCRIPT_NAME}?u=series&sid={$series.series_id}">{$series.series_title}</a>{/foreach}</td>
   </tr>
+  {if count($fic_genre) > 0}
   <tr>
     <td><strong>{if count($fic_genre) > 1}Genres{else}Genre{/if}: </strong></td>
     <td>{foreach item=genre name=genrefe from=$fic_genre}{if !$smarty.foreach.genrefe.first}, {/if}<a href="{$SCRIPT_NAME}?u=genre&gid={$genre.id}">{$genre.name}</a>{/foreach}</td>
   </tr>
+  {/if}
   {if $fic_matchup}
     <tr>
       <td><strong>{if count($fic_matchup) > 1 }Matchups{else}Matchup{/if}: </strong></td>
