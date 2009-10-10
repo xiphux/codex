@@ -8,6 +8,7 @@
  *  Copyright (C) 2005 Christopher Han <xiphux@gmail.com>
  */
 
+ include_once('findfic_keywords.php');
  include_once('findfic_title.php');
  include_once('findfic_title_fuzzy.php');
  include_once('findfic_author.php');
@@ -43,9 +44,17 @@ function findfic($src = null)
 
 			$out .= findfic_matchup($src);
 
+			if ((strlen($out) < 1)) {
+				$tpl->clear_all_assign();
+				$tpl->assign("note", "No exact matches found, attempting keyword search");
+				$outhead .= $tpl->fetch("note.tpl");
+
+				$out .= findfic_keywords($src);
+			}
+
 			if ((strlen($out) < 1) && ($codex_conf['fuzzysearchthreshold'] > 0)) {
 				$tpl->clear_all_assign();
-				$tpl->assign("note", "No exact matches found, attempting fuzzy search");
+				$tpl->assign("note", "No exact or keyword matches found, attempting fuzzy search");
 				$outhead .= $tpl->fetch("note.tpl");
 
 				$out .= findfic_title_fuzzy($src);

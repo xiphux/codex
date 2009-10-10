@@ -19,7 +19,7 @@
  include_once('series_title.php');
  include_once('chapter_count.php');
 
-function printfic($id, $author_info = TRUE, $highlight = 0, $search = null)
+function printfic($id, $author_info = TRUE, $highlight = 0, $search = null, $keywords = null)
 {
 	global $tpl,$codex_conf, $cache;
 
@@ -49,8 +49,12 @@ function printfic($id, $author_info = TRUE, $highlight = 0, $search = null)
 		/*
 		 * Highlight search string in title if specified
 		 */
-		if ($highlight == CODEX_TITLE && $search)
-			highlight($fdata["title"],$search);
+		if (($highlight & CODEX_TITLE) && $search) {
+			if (isset($keywords))
+				highlight_keywords($fdata["title"], $keywords);
+			else
+				highlight($fdata["title"],$search);
+		}
 
 		/*
 		 * Export fic data
@@ -72,10 +76,17 @@ function printfic($id, $author_info = TRUE, $highlight = 0, $search = null)
 		/*
 		 * Highlight a search string in author name if specified
 		 */
-		if ($highlight == CODEX_AUTHOR && $search) {
-			foreach ($adata as $i => $aid) {
-				highlight($adata[$i]["author_name"],$search);
-				highlight($adata[$i]["author_email"],$search);
+		if (($highlight & CODEX_AUTHOR) && $search) {
+			if (isset($keywords)) {
+				foreach ($adata as $i => $aid) {
+					highlight_keywords($adata[$i]["author_name"], $keywords);
+					highlight_keywords($adata[$i]["author_email"], $keywords);
+				}
+			} else {
+				foreach ($adata as $i => $aid) {
+					highlight($adata[$i]["author_name"],$search);
+					highlight($adata[$i]["author_email"],$search);
+				}
 			}
 		}
 
@@ -102,9 +113,14 @@ function printfic($id, $author_info = TRUE, $highlight = 0, $search = null)
 		/*
 		 * Highlight search string in series if specified
 		 */
-		if ($highlight == CODEX_SERIES && $search) {
-			foreach ($sdata as $i => $sid)
-				highlight($sdata[$i]["series_title"],$search);
+		if (($highlight & CODEX_SERIES) && $search) {
+			if (isset($keywords)) {
+				foreach ($sdata as $i => $sid)
+					highlight_keywords($sdata[$i]["series_title"], $keywords);
+			} else {
+				foreach ($sdata as $i => $sid)
+					highlight($sdata[$i]["series_title"],$search);
+			}
 		}
 
 		/*
@@ -126,8 +142,12 @@ function printfic($id, $author_info = TRUE, $highlight = 0, $search = null)
 			/*
 			 * Highlight search string in genre if specified
 			 */
-			if ($highlight == CODEX_GENRE && $search)
-				highlight($gdata[$i]["name"],$search);
+			if (($highlight & CODEX_GENRE) && $search) {
+				if (isset($keywords))
+					highlight_keywords($gdata[$i]["name"], $keywords);
+				else
+					highlight($gdata[$i]["name"],$search);
+			}
 
 			/*
 			 * If lemons are disabled, don't finish displaying
@@ -150,14 +170,22 @@ function printfic($id, $author_info = TRUE, $highlight = 0, $search = null)
 			/*
 			 * Highlight first character if specified
 			 */
-			if ($highlight == CODEX_MATCHUP_1 && $search)
-				highlight($mdata[$i]["match1"],$search);
+			if (($highlight & CODEX_MATCHUP_1) && $search) {
+				if (isset($keywords))
+					highlight_keywords($mdata[$i]["match1"], $keywords);
+				else
+					highlight($mdata[$i]["match1"],$search);
+			}
 
 			/*
 			 * Highlight second character if specified
 			 */
-			if ($highlight == CODEX_MATCHUP_2 && $search)
-				highlight($mdata[$i]["match2"],$search);
+			if (($highlight & CODEX_MATCHUP_2) && $search) {
+				if (isset($keywords))
+					highlight_keywords($mdata[$i]["match2"], $keywords);
+				else
+					highlight($mdata[$i]["match2"],$search);
+			}
 
 			/*
 			 * Get series for each character
