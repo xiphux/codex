@@ -63,6 +63,17 @@ $spellcheck["/([Gg])aurded/"] = "$1uarded";
 $spellcheck["/([Mm])artail/"] = "$1artial";
 $spellcheck["/([Aa])amazinfg/"] = "$1mazing";
 $spellcheck["/([Dd])ecion/"] = "$1ecision";
+$spellcheck["/([Ff])ahter/"] = "$1ather";
+$spellcheck["/([Gg])ranchildren/"] = "$1randchildren";
+$spellcheck["/oculd/"] = "could";
+$spellcheck["/Oculd/"] = "Could";
+$spellcheck["/([Mm])uderer/"] = "$1urderer";
+$spellcheck["/([Ii])denity/"] = "$1dentity";
+$spellcheck["/([Ee])xistance/"] = "$1xistence";
+$spellcheck["/(\W)fo(\W)/"] = "$1of$2";
+$spellcheck["/([Dd])rawstrins/"] = "$1rawstrings";
+$spellcheck["/([Aa])wasy/"] = "$1way";
+$spellcheck["/([Pp])leaseed/"] = "$1eased";
 
 /* Some series-specific stuff */
 $spellcheck["/NAbiki/"] = "Nabiki";
