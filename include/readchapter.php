@@ -63,7 +63,7 @@ function readchapter($id, $ch = 1)
 			 * Unwrap if specified
 			 */
 			if ($codex_conf['unwrap'] && isset($chapdata['wrapped']) && ($chapdata['wrapped'] === "1"))
-				$fdat = preg_replace("/([^\n])\r\n([^\r\s])/","$1 $2",$fdat);
+				$fdat = preg_replace("/([^\n]) *\r\n([^\r\s])/","$1 $2",$fdat);
 
 			/*
 			 * Pad lines if specified
