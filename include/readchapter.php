@@ -40,7 +40,7 @@ function readchapter($id, $ch = 1)
 
 			$chapdata = $cache->Get("chapdata_" . $id . "_" . $ch);
 			if (!$chapdata) {
-				$chapdata = DBGetRow("SELECT file,data,wrapped FROM " . $tables['chapters'] . " WHERE fic=" . $id . " AND num=" . $ch);
+				$chapdata = DBGetRow("SELECT file,data,wrapped,padlines FROM " . $tables['chapters'] . " WHERE fic=" . $id . " AND num=" . $ch);
 				$cache->Set("chapdata_" . $id . "_" . $ch, $chapdata);
 			}
 
@@ -58,18 +58,19 @@ function readchapter($id, $ch = 1)
 			if ($codex_conf['spellcheck'] == TRUE)
 				foreach ($spellcheck as $broke => $fixed)
 					$fdat = preg_replace($broke,$fixed,$fdat);
-		
-			/*
-			 * Unwrap if specified
-			 */
-			if ($codex_conf['unwrap'] && isset($chapdata['wrapped']) && ($chapdata['wrapped'] === "1"))
-				$fdat = preg_replace("/([^\n]) *\r\n([^\r\s])/","$1 $2",$fdat);
-
-			/*
-			 * Pad lines if specified
-			 */
-			if ($codex_conf['padlines'])
+	
+			$unwrap = ($codex_conf['unwrap'] && isset($chapdata['wrapped']) && ($chapdata['wrapped'] === "1"));
+			$padlines = ($codex_conf['padlines'] && isset($chapdata['padlines']) && ($chapdata['padlines'] === "1"));
+			var_dump($unwrap);
+			var_dump($padlines);
+			if ($unwrap && $padlines) {
 				$fdat = preg_replace("/([^\w\s,]) *\r\n([A-Z\t\"])/","$1\r\n\r\n$2",$fdat);
+				$fdat = preg_replace("/([^\n]) *\r\n([^\r\s])/","$1 $2",$fdat);
+			} else if ($unwrap) {
+				$fdat = preg_replace("/([^\n]) *\r\n([^\r\s])/","$1 $2",$fdat);
+			} else if ($padlines) {
+				$fdat = preg_replace("/([^\w\s,]) *\r\n([A-Z\t\"])/","$1\r\n\r\n$2",$fdat);
+			}
 
 			/*
 			 * Compact lines if specified
