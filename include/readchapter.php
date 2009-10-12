@@ -69,7 +69,7 @@ function readchapter($id, $ch = 1)
 			 * Pad lines if specified
 			 */
 			if ($codex_conf['padlines'])
-				$fdat = preg_replace("/([^\n])\r\n([^\r\n])/","$1\r\n\r\n$2",$fdat);
+				$fdat = preg_replace("/([^\w\s,]) *\r\n([A-Z\t\"])/","$1\r\n\r\n$2",$fdat);
 
 			/*
 			 * Compact lines if specified
