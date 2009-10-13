@@ -62,12 +62,12 @@ function readchapter($id, $ch = 1)
 			$unwrap = ($codex_conf['unwrap'] && isset($chapdata['wrapped']) && ($chapdata['wrapped'] === "1"));
 			$padlines = ($codex_conf['padlines'] && isset($chapdata['padlines']) && ($chapdata['padlines'] === "1"));
 			if ($unwrap && $padlines) {
-				$fdat = preg_replace("/([^\w\s,]) *\r\n([A-Z\t\"])/","$1\r\n\r\n$2",$fdat);
+				$fdat = preg_replace("/([^\w\s,]) *\r\n([A-Z\t\"]| {3,})/","$1\r\n\r\n$2",$fdat);
 				$fdat = preg_replace("/([^\n]) *\r\n([^\r\s])/","$1 $2",$fdat);
 			} else if ($unwrap) {
 				$fdat = preg_replace("/([^\n]) *\r\n([^\r\s])/","$1 $2",$fdat);
 			} else if ($padlines) {
-				$fdat = preg_replace("/([^\w\s,]) *\r\n([A-Z\t\"])/","$1\r\n\r\n$2",$fdat);
+				$fdat = preg_replace("/([^\w\s,]) *\r\n([A-Z\t\"]| {3,})/","$1\r\n\r\n$2",$fdat);
 			}
 
 			/*
