@@ -11,6 +11,8 @@
 function unwrap($str)
 {
 	global $codex_conf;
+	
+	$str = preg_replace("/([^\n])(\r\n\s*){2,}\r\n(\s*[^\r\n])/","$1\r\n\r\n$3",$str);
 
 	$return = "";
 	$lines = explode("\r\n", $str);
@@ -23,7 +25,7 @@ function unwrap($str)
 
 	for ($i = 0; $i < $linecount; $i++) {
 		/* space indents to tabs */
-		$lines[$i] = preg_replace("/^ {3,}([^ ].*)$/", "\t$1", $lines[$i], 1);
+		$lines[$i] = preg_replace("/^ {2,}([^ ].*)$/", "\t$1", $lines[$i], 1);
 
 		if (preg_match("/^\t/", $lines[$i]))
 			$tablinecount++;
