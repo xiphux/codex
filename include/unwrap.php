@@ -72,6 +72,7 @@ function unwrap($str)
 		 * attempting to guess line widths
 		 */
 		$return = preg_replace("/([^\r\n]{" . (int)$avglen . ",})\r\n/","$1 ",$str);
+		$return = preg_replace("/([\w,]) {2,}([\w,])/", "$1 $2", $return);
 		if ($codex_conf['debug'])
 			$method = "Line widths";
 	}
