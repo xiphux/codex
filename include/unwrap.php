@@ -37,7 +37,7 @@ function unwrap($str)
 			$noblanklinecount++;
 	}
 
-	$avglen = $charcount / $noblanklinecount;
+	$avglen = (int)($charcount / $noblanklinecount);
 
 	$method = "";
 
@@ -66,7 +66,7 @@ function unwrap($str)
 		$return = preg_replace("/([^\n]) *\r\n([^\r\s])/", "$1 $2", $str);
 		if ($codex_conf['debug'])
 			$method = "Blank lines";
-	} else {
+	} else if ($avglen > 1) {
 		/*
 		 * This string might be unwrappable by
 		 * attempting to guess line widths
