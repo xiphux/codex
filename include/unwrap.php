@@ -41,7 +41,8 @@ function unwrap($str)
 
 	$method = "";
 
-	if (($spacelinecount/$noblanklinecount) > 0.5) {
+	$spacelineratio = $spacelinecount/$noblanklinecount;
+	if (($spacelineratio > 0.5) && ($spacelineratio < 0.98)) {
 		/*
 		 * This string might be unwrappable using
 		 * spaces at the ends of lines
