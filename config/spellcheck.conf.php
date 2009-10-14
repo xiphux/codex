@@ -74,6 +74,12 @@ $spellcheck["/(\W)fo(\W)/"] = "$1of$2";
 $spellcheck["/([Dd])rawstrins/"] = "$1rawstrings";
 $spellcheck["/([Aa])wasy/"] = "$1way";
 $spellcheck["/([Pp])leaseed/"] = "$1eased";
+$spellcheck["/([Rr])eleived/"] = "$1elieved";
+$spellcheck["/(\W)([Tt])at(\W)/"] = "$1$2hat$3";
+$spellcheck["/([Rr])ealizaiton/"] = "$1ealization";
+$spellcheck["/([Tt])ehy/"] = "$1hey";
+$spellcheck["/([Rr])esolvign/"] = "$1esolving";
+$spellcheck["/([Ll])uxary/"] = "$1uxury";
 
 /* Some series-specific stuff */
 $spellcheck["/NAbiki/"] = "Nabiki";
