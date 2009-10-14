@@ -55,7 +55,7 @@ function unwrap($str)
 		 * This string might be unwrappable
 		 * using tab/space indents to find paragraphs
 		 */
-		 $return = preg_replace("/\r\n(\S)/", " $1", $str);
+		 $return = preg_replace("/ *\r\n(\S)/", " $1", $str);
 		 if ($codex_conf['debug'])
 			$method = "Indents";
 	} else if ((($linecount-$noblanklinecount)/$linecount) > 0.10) {
