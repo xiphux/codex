@@ -14,6 +14,7 @@ include_once('fic_author.php');
 include_once('fic_chapters.php');
 include_once('chapter_exists.php');
 include_once('chapter_title.php');
+include_once('unwrap.php');
 
 function readchapter($id, $ch = 1)
 {
@@ -58,18 +59,12 @@ function readchapter($id, $ch = 1)
 			if ($codex_conf['spellcheck'] == TRUE)
 				foreach ($spellcheck as $broke => $fixed)
 					$fdat = preg_replace($broke,$fixed,$fdat);
-	
-			$unwrap = ($codex_conf['unwrap'] && isset($chapdata['wrapped']) && ($chapdata['wrapped'] === "1"));
-			$padlines = ($codex_conf['padlines'] && isset($chapdata['padlines']) && ($chapdata['padlines'] === "1"));
-			if ($unwrap && $padlines) {
-				$fdat = preg_replace("/([^\w\s,]) *\r\n([A-Z\t\"]| {3,})/","$1\r\n\r\n$2",$fdat);
-				$fdat = preg_replace("/([^\n]) *\r\n([^\r\s])/","$1 $2",$fdat);
-			} else if ($unwrap) {
-				$fdat = preg_replace("/([^\n]) *\r\n([^\r\s])/","$1 $2",$fdat);
-			} else if ($padlines) {
-				$fdat = preg_replace("/([^\w\s,]) *\r\n([A-Z\t\"]| {3,})/","$1\r\n\r\n$2",$fdat);
-			}
+			
+			if ($codex_conf['unwrap'] && isset($chapdata['wrapped']) && ($chapdata['wrapped'] === "1"))
+				$fdat = unwrap($fdat);
 
+			if ($codex_conf['padlines'] && isset($chapdata['padlines']) && ($chapdata['padlines'] === "1"))
+				$fdat = preg_replace("/([^\w\s,]) *\r\n([A-Z\t\"]| {3,})/","$1\r\n\r\n$2",$fdat);
 			/*
 			 * Compact lines if specified
 			 */
