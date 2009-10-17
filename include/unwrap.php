@@ -12,10 +12,9 @@ function unwrap($str)
 {
 	global $codex_conf;
 	
-	$str = preg_replace("/([^\n])(\r\n\s*){2,}\r\n(\s*[^\r\n])/","$1\r\n\r\n$3",$str);
-
 	$return = "";
-	$lines = explode("\r\n", $str);
+	$lines = explode("\r\n", preg_replace("/([^\n])(\r\n\s*){2,}\r\n(\s*[^\r\n])/","$1\r\n\r\n$3",$str));
+
 	$linecount = count($lines);
 
 	$charcount = 0;
