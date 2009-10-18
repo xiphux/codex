@@ -51,7 +51,7 @@ function unwrap($str)
 		$return = preg_replace("/ \r\n/", " ", $str);
 		if ($codex_conf['debug'])
 			$method = "Spaces at ends of lines";
-	} else if (($tablinecount/$noblanklinecount) > 0.25) {
+	} else if (($tablinecount/$noblanklinecount) > 0.23) {
 		/*
 		 * This string might be unwrappable
 		 * using tab/space indents to find paragraphs
