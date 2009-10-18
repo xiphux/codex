@@ -173,6 +173,11 @@ echo $headerout;
 
 echo $main;
 
+if ($codex_conf['debug']) {
+	echo '<hr /><span class="italic">Database queries: ' . $querycount . '</span>';
+	echo '<div class="bottompadding"></div>';
+}
+
 $footerout = $cache->Get("output_footer");
 if (!$footerout) {
 	$tpl->clear_all_assign();
