@@ -14,6 +14,8 @@ include_once('fic_data.php');
 include_once('chapter_count.php');
 include_once('readchapter.php');
 include_once('toc.php');
+include_once('chapter_exists.php');
+include_once('increment_viewcount.php');
 
 function readfic($id, $ch = 0)
 {
@@ -21,12 +23,14 @@ function readfic($id, $ch = 0)
 
 	$outkey = "readfic_" . $id . "_" . $ch;
 
+	$chapcount = chapter_count($id);
+
 	$out = $cache->Get($outkey);
 	if (!$out) {
 		if (isset($id)) {
 			if (fic_data($id)) {
 				if ($ch == 0) {
-					if (chapter_count($id) < 2)
+					if ($chapcount < 2)
 						$out = readchapter($id, 1);
 					else
 						$out = toc($id);
@@ -38,6 +42,12 @@ function readfic($id, $ch = 0)
 			$out = "No fic specified";
 
 		$cache->Set($outkey, $out);
+	}
+	if (($id > 0) && ($chapcount > 0)) {
+		if ($chapcount < 2)
+			$ch = 1;
+		if (chapter_exists($id, $ch))
+			increment_viewcount($id, $ch);
 	}
 	return $out;
 }

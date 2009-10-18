@@ -18,6 +18,7 @@
  include_once('character_series.php');
  include_once('series_title.php');
  include_once('chapter_count.php');
+ include_once('get_viewcount.php');
 
 function printfic($id, $author_info = TRUE, $highlight = 0, $search = null, $keywords = null)
 {
@@ -104,6 +105,11 @@ function printfic($id, $author_info = TRUE, $highlight = 0, $search = null, $key
 		 * Export chapter count
 		 */
 		$tpl->assign("chaptercount", $chapcount);
+
+		if ($chapcount < 2) {
+			$tpl->assign("showviews", true);
+			$tpl->assign("views", get_viewcount($id, 1));
+		}
 
 		/*
 		 * Get series data

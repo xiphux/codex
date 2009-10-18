@@ -16,7 +16,7 @@ function fic_chapters($id)
 
 	$out = $cache->Get($outkey);
 	if (!$out) {
-		$out = DBGetArray("SELECT num,title FROM " . $tables['chapters'] . " WHERE fic = " . $id . " ORDER BY num");
+		$out = DBGetArray("SELECT num,title,views FROM " . $tables['chapters'] . " WHERE fic = " . $id . " ORDER BY num");
 		$cache->Set($outkey, $out);
 	}
 	return $out;

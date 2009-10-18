@@ -60,3 +60,11 @@
 hr {
 	margin: 0 0 0 0;
 }
+
+.chaptertable .chapnameheader {
+	text-align: left;
+}
+
+.chaptertable .chapviews {
+	text-align: center;
+}

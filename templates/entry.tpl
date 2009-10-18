@@ -37,6 +37,12 @@
     <td>{$chaptercount}</td>
   </tr>
   {/if}
+  {if $showviews}
+  <tr>
+    <td><strong>Views: </strong></td>
+    <td>{$views}</td>
+  </tr>
+  {/if}
   <tr>
     <td><strong>Series: </strong></td>
     <td>{foreach item=series name=seriesfe from=$fic_series}{if !$smarty.foreach.seriesfe.first}, {/if}<a href="{$SCRIPT_NAME}?u=series&sid={$series.series_id}">{$series.series_title}</a>{/foreach}</td>
