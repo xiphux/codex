@@ -106,7 +106,7 @@ function printfic($id, $author_info = TRUE, $highlight = 0, $search = null, $key
 		 */
 		$tpl->assign("chaptercount", $chapcount);
 
-		if ($chapcount < 2) {
+		if ($chapcount == 1) {
 			$tpl->assign("showviews", true);
 			$tpl->assign("views", get_viewcount($id, 1));
 		}
