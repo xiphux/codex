@@ -6,5 +6,5 @@
  *  Copyright (C) 2008 Christopher Han <xiphux@gmail.com>
  *}
 <p>
-  <span class="italic">{$note}</span>
+  <span class="italic label">{$note}</span>
 </p>

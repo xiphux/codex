@@ -7,7 +7,7 @@
  *}
 <table class="chaptertable">
 <thead>
-<tr><th class="chapnameheader">Chapter</th><th class="chapviewsheader">Views</th></tr>
+<tr><th class="chapnameheader label">Chapter</th><th class="chapviewsheader label">Views</th></tr>
 </thead>
 <tbody>
 {foreach from=$chapters item=chap}

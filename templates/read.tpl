@@ -27,7 +27,7 @@ function nav2()
 {/literal}
 {/if}
 {capture name=ficstr}
-{$fic.title} by {foreach item=author name=authorfe from=$author}{if !$smarty.foreach.authorfe.first}, {/if}{$author.author_name}{foreachelse}Unknown{/foreach}
+{$fic.title} <span class="label">by</span> {foreach item=author name=authorfe from=$author}{if !$smarty.foreach.authorfe.first}, {/if}{$author.author_name}{foreachelse}Unknown{/foreach}
 {/capture}
 <div class="readnav">
 {if $chapter > 1}

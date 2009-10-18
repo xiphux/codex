@@ -8,11 +8,11 @@
 <p>
 <table>
   <tr>
-    <td class="main"><strong>Title: </strong></td>
+    <td class="main"><span class="label">Title: </span></td>
     <td>{if $chaptercount > 0}<a href="{$SCRIPT_NAME}?u=read&fic={$fic.id}">{$fic.title}</a>{else}{$fic.title}{/if}</td>
   </tr>
   <tr>
-    <td><strong>{if count($fic_author) > 1}Authors{else}Author{/if}: </strong></td>
+    <td><span class="label">{if count($fic_author) > 1}Authors{else}Author{/if}: </span></td>
     <td>
       {foreach item=author name=authorfe from=$fic_author}{if !$smarty.foreach.authorfe.first}<br />{/if}
         <a href="{$SCRIPT_NAME}?u=author&aid={$author.author_id}">{if $author.author_name}{$author.author_name}{else}{$author.author_email}{/if}</a>
@@ -33,53 +33,53 @@
   <tr>
   {if $chaptercount > 1}
   <tr>
-    <td><strong>Chapters: </strong></td>
+    <td><span class="label">Chapters: </span></td>
     <td>{$chaptercount}</td>
   </tr>
   {/if}
   {if $showviews}
   <tr>
-    <td><strong>Views: </strong></td>
+    <td><span class="label">Views: </span></td>
     <td>{$views}</td>
   </tr>
   {/if}
   <tr>
-    <td><strong>Series: </strong></td>
+    <td><span class="label">Series: </span></td>
     <td>{foreach item=series name=seriesfe from=$fic_series}{if !$smarty.foreach.seriesfe.first}, {/if}<a href="{$SCRIPT_NAME}?u=series&sid={$series.series_id}">{$series.series_title}</a>{/foreach}</td>
   </tr>
   {if count($fic_genre) > 0}
   <tr>
-    <td><strong>{if count($fic_genre) > 1}Genres{else}Genre{/if}: </strong></td>
+    <td><span class="label">{if count($fic_genre) > 1}Genres{else}Genre{/if}: </span></td>
     <td>{foreach item=genre name=genrefe from=$fic_genre}{if !$smarty.foreach.genrefe.first}, {/if}<a href="{$SCRIPT_NAME}?u=genre&gid={$genre.id}">{$genre.name}</a>{/foreach}</td>
   </tr>
   {/if}
   {if $fic_matchup}
     <tr>
-      <td><strong>{if count($fic_matchup) > 1 }Matchups{else}Matchup{/if}: </strong></td>
+      <td><span class="label">{if count($fic_matchup) > 1 }Matchups{else}Matchup{/if}: </span></td>
       <td>{foreach item=matchup name=matchupfe from=$fic_matchup}{if !$smarty.foreach.matchupfe.first}, {/if}<a href="{$SCRIPT_NAME}?u=matchup&mid={$matchup.matchup_id}">{$matchup.match1} + {$matchup.match2}</a>{/foreach}</td>
       </tr>
 {/if}
 {if $fic.sequel_to_title}
   <tr>
-    <td><strong>Prequel: </strong></td>
+    <td><span class="label">Prequel: </span></td>
     <td><a href="{$SCRIPT_NAME}?u=show&fic={$fic.sequel_to}">{$fic.sequel_to_title}</a></td>
   </tr>
 {/if}
 {if $fic.sequels}
   <tr>
-    <td><strong>{if count($fic.sequels) > 1}Sequels{else}Sequel{/if}:</strong></td>
+    <td><span class="label">{if count($fic.sequels) > 1}Sequels{else}Sequel{/if}:</span></td>
     <td>{foreach item=sequel name=sequelfe from=$fic.sequels}{if !$smarty.foreach.sequelfe.first}<br />{/if}<a href="{$SCRIPT_NAME}?u=show&fic={$sequel.id}">{$sequel.title}</a>{/foreach}</td>
   </tr>
 {/if}
 {if $fic.sidestory_to_title}
   <tr>
-    <td><strong>Sidestory to: </strong></td>
+    <td><span class="label">Sidestory to: </span></td>
     <td><a href="{$SCRIPT_NAME}?u=show&fic={$fic.sidestory_to}">{$fic.sidestory_to_title}</a></td>
   </tr>
 {/if}
 {if $fic.sidestories}
   <tr>
-    <td><strong>{if count($fic.sidestories) > 1}Sidestories{else}Sidestory{/if}:</strong></td>
+    <td><span class="label">{if count($fic.sidestories) > 1}Sidestories{else}Sidestory{/if}:</span></td>
     <td>{foreach item=sidestory name=sidestoryfe from=$fic.sidestories}{if !$smarty.foreach.sidestoryfe.first}<br />{/if}<a href="{$SCRIPT_NAME}?u=show&fic={$sidestory.id}">{$sidestory.title}</a>{/foreach}</td>
   </tr>
 {/if}
