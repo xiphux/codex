@@ -80,6 +80,8 @@ $spellcheck["/([Rr])ealizaiton/"] = "$1ealization";
 $spellcheck["/([Tt])ehy/"] = "$1hey";
 $spellcheck["/([Rr])esolvign/"] = "$1esolving";
 $spellcheck["/([Ll])uxary/"] = "$1uxury";
+$spellcheck["/([Ii])ntregued/"] = "$1ntrigued";
+$spellcheck["/([Ss])heild/"] = "$1hield";
 
 /* Some series-specific stuff */
 $spellcheck["/NAbiki/"] = "Nabiki";
