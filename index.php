@@ -174,7 +174,7 @@ echo $headerout;
 echo $main;
 
 if ($codex_conf['debug']) {
-	echo '<hr /><span class="italic">Database queries: ' . $querycount . '</span>';
+	echo '<hr /><span class="italic"><span class="label">Database queries:</span> ' . $querycount . '</span>';
 	echo '<div class="bottompadding"></div>';
 }
 
