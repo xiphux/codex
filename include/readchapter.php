@@ -74,7 +74,7 @@ function readchapter($id, $ch = 1)
 			/*
 			 * Fix for display on web browsers
 			 */
-			$fdat = htmlentities($fdat,ENT_COMPAT,'UTF-8');
+			$fdat = htmlspecialchars($fdat);
 			//$fdat = nl2br($fdat);
 			$fdat = strtr($fdat, array("\n" => '<br />', "\r\n" => '<br />'));
 
