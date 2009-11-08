@@ -36,13 +36,13 @@ function findfic_matchup($src)
 			 */
 			$r = $cache->Get("match1_" . $row['id']);
 			if (!$r) {
-				$r = DBGetArray("SELECT matchup_id FROM " . $tables['matchups'] . " WHERE match_1 = " . $row['id']);
+				$r = DBGetArray("SELECT id FROM " . $tables['matchups'] . " WHERE character1 = " . $row['id']);
 				$cache->Set("match1_" . $row['id'], $r);
 			}
 
 			foreach ($r as $row2) {
-				if (!in_array($row2['matchup_id'],$ex))
-					$ex[] = $row2['matchup_id'];
+				if (!in_array($row2['id'],$ex))
+					$ex[] = $row2['id'];
 			}
 
 			/*
@@ -50,13 +50,13 @@ function findfic_matchup($src)
 			 */
 			$r = $cache->Get("match2_" . $row['id']);
 			if (!$r) {
-				$r = DBGetArray("SELECT matchup_id FROM " . $tables['matchups'] . " WHERE match_2 = {$row['id']}");
+				$r = DBGetArray("SELECT id FROM " . $tables['matchups'] . " WHERE character2 = {$row['id']}");
 				$cache->Set("match2_" . $row['id'], $r);
 			}
 
 			foreach ($r as $row2) {
-				if (!in_array($row2['matchup_id'],$ex))
-					$ex[] = $row2['matchup_id'];
+				if (!in_array($row2['id'],$ex))
+					$ex[] = $row2['id'];
 			}
 		}
 		if (count($ex) > 0) {

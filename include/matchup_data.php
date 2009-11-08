@@ -15,7 +15,7 @@ function matchup_data($id)
 
 	$tmp = $cache->Get("matchup_data_" . $id);
 	if (!$tmp) {
-		$tmp = DBGetRow("SELECT m1.matchup_id, char1.name AS match1, char1.id AS id1, char2.name AS match2, char2.id AS id2, CONCAT(char1.name,' + ',char2.name) AS matchup_name FROM " . $tables['matchups'] . " AS m1 LEFT JOIN " . $tables['characters'] . " AS char1 ON char1.id = m1.match_1 LEFT JOIN " . $tables['characters'] . " AS char2 ON char2.id = m1.match_2 WHERE m1.matchup_id = " . $id);
+		$tmp = DBGetRow("SELECT m1.id, char1.name AS match1, char1.id AS id1, char2.name AS match2, char2.id AS id2, CONCAT(char1.name,' + ',char2.name) AS matchup_name FROM " . $tables['matchups'] . " AS m1 LEFT JOIN " . $tables['characters'] . " AS char1 ON char1.id = m1.character1 LEFT JOIN " . $tables['characters'] . " AS char2 ON char2.id = m1.character2 WHERE m1.id = " . $id);
 		$cache->Set("matchup_data_" . $id, $tmp);
 	}
 	return $tmp;

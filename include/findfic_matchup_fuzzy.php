@@ -25,7 +25,7 @@ function findfic_matchup_fuzzy($src)
 		$out = "";
 		$res = $cache->Get($key);
 		if (!$res) {
-			$res = DBGetCol("SELECT matchup_id FROM " . $tables['matchups']);
+			$res = DBGetCol("SELECT id FROM " . $tables['matchups']);
 			$cache->Set($key, $res);
 		}
 		foreach ($res as $mat) {

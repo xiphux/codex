@@ -27,16 +27,16 @@ function listfics_matchup($searchid = null, $highlight = 0, $searchstring = null
 	if (!$out) {
 		$out = "";
 
-		$q = "SELECT matchup_id,match_1,match_2 FROM " . $tables['matchups'];
+		$q = "SELECT id,character1,character2 FROM " . $tables['matchups'];
 		$key = "listfics_matchup";
 		/*
 		 * User only wants one matchup
 		 */
 		if (isset($searchid)) {
-			$q .= " WHERE matchup_id = $searchid";
+			$q .= " WHERE id = $searchid";
 			$key .= "_" . $searchid;
 		} else
-			$q .= " ORDER BY matchup_id";
+			$q .= " ORDER BY id";
 		$ml = $cache->Get($key);
 		if (!$ml) {
 			$ml = DBGetArray($q);
@@ -52,7 +52,7 @@ function listfics_matchup($searchid = null, $highlight = 0, $searchstring = null
 				highlight($tmp['match1'],$searchstring);
 			if ($highlight == CODEX_MATCHUP_2 && $searchstring)
 				highlight($tmp['match2'],$searchstring);
-			$tmp = matchup_data($row['matchup_id']);
+			$tmp = matchup_data($row['id']);
 			$s1 = character_series($tmp['id1']);
 			$s2 = character_series($tmp['id2']);
 			if ($s1 != $s2) {
@@ -60,8 +60,8 @@ function listfics_matchup($searchid = null, $highlight = 0, $searchstring = null
 				$tmp['match2'] .= " (" . series_title($s2) . ")";
 			}
 			$tmp["matchup_name"] = $tmp['match1'] . " + " . $tmp['match2'];
-			$out .= printcategory("matchup", "mid", $row['matchup_id'], $tmp['matchup_name'], null, null);
-			$fl = matchup_fic($row['matchup_id']);
+			$out .= printcategory("matchup", "mid", $row['id'], $tmp['matchup_name'], null, null);
+			$fl = matchup_fic($row['id']);
 
 			/*
 			 * Enumerate fics per matchup

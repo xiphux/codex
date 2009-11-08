@@ -10,8 +10,8 @@
 
 function matchupcmp($a, $b)
 {
-	$m1 = matchup_data($a["matchup_id"]);
-	$m2 = matchup_data($b["matchup_id"]);
+	$m1 = matchup_data($a["id"]);
+	$m2 = matchup_data($b["id"]);
 	return strcmp($m1["matchup_name"],$m2["matchup_name"]);
 }
 
