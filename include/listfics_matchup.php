@@ -13,7 +13,6 @@ include_once('printfic.php');
 include_once('printcategory.php');
 include_once('matchupcmp.php');
 include_once('matchup_data.php');
-include_once('character_series.php');
 include_once('series_title.php');
 include_once('matchup_fic.php');
 
@@ -47,18 +46,9 @@ function listfics_matchup($searchid = null, $highlight = 0, $searchstring = null
 		 * Enumerate matchup list
 		 */
 		foreach ($ml as $row) {
-			if ($highlight == CODEX_MATCHUP_1 && $searchstring)
-				highlight($tmp['match1'],$searchstring);
-			if ($highlight == CODEX_MATCHUP_2 && $searchstring)
-				highlight($tmp['match2'],$searchstring);
 			$tmp = matchup_data($row['id']);
-			$s1 = character_series($tmp['id1']);
-			$s2 = character_series($tmp['id2']);
-			if ($s1 != $s2) {
-				$tmp['match1'] .= " (" . series_title($s1) . ")";
-				$tmp['match2'] .= " (" . series_title($s2) . ")";
-			}
-			$tmp["matchup_name"] = $tmp['match1'] . " + " . $tmp['match2'];
+			if ($searchstring && (($highlight & CODEX_MATCHUP_1) || ($highlight & CODEX_MATCHUP_2)))
+				highlight($tmp['matchup_name'],$searchstring,"searchtext",true);
 			$out .= printcategory("matchup", "mid", $row['id'], $tmp['matchup_name'], null, null);
 			$fl = matchup_fic($row['id']);
 

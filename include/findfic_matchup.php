@@ -11,7 +11,6 @@
 include_once('highlight.php');
 include_once('printcategory.php');
 include_once('matchup_data.php');
-include_once('character_series.php');
 include_once('series_title.php');
 
 function findfic_matchup($src)
@@ -49,15 +48,8 @@ function findfic_matchup($src)
 		}
 		foreach ($ex as $mat) {
 			$tmp = matchup_data($mat);
-			highlight($tmp['match1'], $src);
-			highlight($tmp['match2'], $src);
-			$s1 = character_series($tmp['id1']);
-			$s2 = character_series($tmp['id2']);
-			if ($s1 != $s2) {
-				$tmp['match1'] .= " (" . series_title($s1) . ")";
-				$tmp['match2'] .= " (" . series_title($s2) . ")";
-			}
-			$tmp["matchup_name"] = $tmp['match1'] . " + " . $tmp['match2'];
+			highlight($tmp['matchup_name'], $src, "searchtext", true);
+			var_dump($tmp['matchup_name']);
 			$out .= printcategory("matchup", "mid", $mat, $tmp['matchup_name'], null, null);
 		}
 		$cache->Set("output_" . $key, $out);

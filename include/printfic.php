@@ -15,7 +15,6 @@
  include_once('fic_series.php');
  include_once('fic_genre.php');
  include_once('fic_matchup.php');
- include_once('character_series.php');
  include_once('series_title.php');
  include_once('chapter_count.php');
  include_once('get_viewcount.php');
@@ -173,38 +172,11 @@ function printfic($id, $author_info = TRUE, $highlight = 0, $search = null, $key
 		$mdata = fic_matchup($id);
 		
 		foreach($mdata as $i => $mid) {
-			/*
-			 * Highlight first character if specified
-			 */
-			if (($highlight & CODEX_MATCHUP_1) && $search) {
+			if ($search && (($highlight & CODEX_MATCHUP_1) || ($highlight & CODEX_MATCHUP_2))) {
 				if (isset($keywords))
-					highlight_keywords($mdata[$i]["match1"], $keywords);
+					highlight_keywords($mdata[$i]["matchup_name"], $keywords,"searchtext",true);
 				else
-					highlight($mdata[$i]["match1"],$search);
-			}
-
-			/*
-			 * Highlight second character if specified
-			 */
-			if (($highlight & CODEX_MATCHUP_2) && $search) {
-				if (isset($keywords))
-					highlight_keywords($mdata[$i]["match2"], $keywords);
-				else
-					highlight($mdata[$i]["match2"],$search);
-			}
-
-			/*
-			 * Get series for each character
-			 */
-			$s1 = character_series($mdata[$i]["id1"]);
-			$s2 = character_series($mdata[$i]["id2"]);
-
-			/*
-			 * If it's a crossover matchup, say what series each character is from
-			 */
-			if ($s1 != $s2) {
-				$mdata[$i]["match1"] .= " (" . series_title($s1) . ")";
-				$mdata[$i]["match2"] .= " (" . series_title($s2) . ")";
+					highlight($mdata[$i]["matchup_name"],$search,"searchtext",true);
 			}
 		}
 

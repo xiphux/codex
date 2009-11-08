@@ -56,7 +56,7 @@
   {if $fic_matchup}
     <tr>
       <td><span class="label">{if count($fic_matchup) > 1 }Matchups{else}Matchup{/if}: </span></td>
-      <td>{foreach item=matchup name=matchupfe from=$fic_matchup}{if !$smarty.foreach.matchupfe.first}, {/if}<a href="{$SCRIPT_NAME}?u=matchup&mid={$matchup.id}">{$matchup.match1} + {$matchup.match2}</a>{/foreach}</td>
+      <td>{foreach item=matchup name=matchupfe from=$fic_matchup}{if !$smarty.foreach.matchupfe.first}, {/if}<a href="{$SCRIPT_NAME}?u=matchup&mid={$matchup.id}">{$matchup.matchup_name}</a>{/foreach}</td>
       </tr>
 {/if}
 {if $fic.sequel_to_title}

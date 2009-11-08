@@ -14,7 +14,7 @@ function fic_matchup($id)
 
 	$tmp = $cache->Get("fic_matchup_" . $id);
 	if (!$tmp) {
-		$tmp = DBGetArray("SELECT " . $tables['matchups'] . ".id, table1.name match1, table1.id id1, table2.name match2, table2.id id2 FROM (" . $tables['characters'] . " AS table1, " . $tables['characters'] . " AS table2) JOIN " . $tables['matchups'] . " ON (" . $tables['matchups'] . ".character1 = table1.id AND " . $tables['matchups'] . ".character2 = table2.id) JOIN " . $tables['fic_matchup'] . " ON (" . $tables['matchups'] . ".id = " . $tables['fic_matchup'] . ".matchup_id AND " . $tables['fic_matchup'] . ".fic_id = $id)");
+		$tmp = DBGetArray("SELECT m1.id, char1.name AS match1, char1.id AS id1, char2.name AS match2, char2.id AS id2, s1.title as title1, s2.title as title2, IF(s1.id=s2.id,CONCAT(char1.name,' + ',char2.name),CONCAT(char1.name,' (',s1.title,') + ',char2.name,' (',s2.title,')')) AS matchup_name FROM " . $tables['fic_matchup'] . " AS fm1 LEFT JOIN " . $tables['matchups'] . " AS m1 ON fm1.matchup_id = m1.id LEFT JOIN " . $tables['characters'] . " AS char1 ON char1.id = m1.character1 LEFT JOIN " . $tables['characters'] . " AS char2 ON char2.id = m1.character2 LEFT JOIN " . $tables['characters_series'] . " AS cs1 ON char1.id = cs1.character_id LEFT JOIN " . $tables['series'] . " AS s1 ON cs1.series_id = s1.id LEFT JOIN " . $tables['characters_series'] . " AS cs2 ON char2.id = cs2.character_id LEFT JOIN " . $tables['series'] . " AS s2 ON cs2.series_id = s2.id WHERE fm1.fic_id = " . $id);
 		$cache->Set("fic_matchup_" . $id, $tmp);
 	}
 	return $tmp;
