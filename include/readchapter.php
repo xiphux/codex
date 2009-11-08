@@ -85,6 +85,7 @@ function readchapter($id, $ch = 1)
 				$fdat = preg_replace("/(\W)_([^\t\n\r\f\a\e>]+?)_(\W)/e", "'$1<span class=\"emphasis\">'.str_replace('_',' ','$2').'</span>$3'", $fdat);
 				$fdat = preg_replace("/([^\*])\*([^\*>\n]*)\*([^\*])/","$1*<span class=\"emphasis\">$2</span>*$3", $fdat);
 				$fdat = preg_replace("/\^?\(TM\)/i", "<sup>TM</sup>", $fdat);
+				$fdat = preg_replace("/\(C\)/i", "&copy;", $fdat);
 			}
 
 			$tpl->assign("fdata", $fdat);
