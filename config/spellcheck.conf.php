@@ -82,6 +82,11 @@ $spellcheck["/([Rr])esolvign/"] = "$1esolving";
 $spellcheck["/([Ll])uxary/"] = "$1uxury";
 $spellcheck["/([Ii])ntregued/"] = "$1ntrigued";
 $spellcheck["/([Ss])heild/"] = "$1hield";
+$spellcheck["/([Ss])toppd/"] = "$1topped";
+$spellcheck["/([Ss])errogate/"] = "$1urrogate";
+$spellcheck["/([Pp])ennance/"] = "$1enance";
+$spellcheck["/([Rr])esteraunt/"] = "$1estaurant";
+$spellcheck["/([Ii])mmedeately/"] = "$1mmediately";
 
 /* Some series-specific stuff */
 $spellcheck["/NAbiki/"] = "Nabiki";
