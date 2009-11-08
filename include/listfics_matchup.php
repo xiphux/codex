@@ -35,8 +35,7 @@ function listfics_matchup($searchid = null, $highlight = 0, $searchstring = null
 		if (isset($searchid)) {
 			$q .= " WHERE id = $searchid";
 			$key .= "_" . $searchid;
-		} else
-			$q .= " ORDER BY id";
+		}
 		$ml = $cache->Get($key);
 		if (!$ml) {
 			$ml = DBGetArray($q);
