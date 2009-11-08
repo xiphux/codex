@@ -36,7 +36,7 @@ function stats()
 	$tpl->assign("authors",DBGetOne("SELECT COUNT(id) FROM " . $tables['authors']));
 	$tpl->assign("genres",DBGetOne("SELECT COUNT(id) FROM " . $tables['genres']));
 	$tpl->assign("series",DBGetOne("SELECT COUNT(series_id) FROM " . $tables['series']));
-	$tpl->assign("characters",DBGetOne("SELECT COUNT(character_id) FROM " . $tables['characters']));
+	$tpl->assign("characters",DBGetOne("SELECT COUNT(id) FROM " . $tables['characters']));
 	$tpl->assign("matchups",DBGetOne("SELECT COUNT(matchup_id) FROM " . $tables['matchups']));
 	$dbstats = DBGetArray("SHOW TABLE STATUS");
 	$total = 0;
