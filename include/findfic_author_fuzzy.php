@@ -22,12 +22,12 @@ function findfic_author_fuzzy($src)
 		$out = "";
 		$res = $cache->Get($key);
 		if (!$res) {
-			$res = DBGetArray("SELECT author_id,author_name,author_email,author_website FROM " . $tables['authors'] . " ORDER BY author_name");
+			$res = DBGetArray("SELECT id,name,email,website FROM " . $tables['authors'] . " ORDER BY name");
 			$cache->Set($key, $res);
 		}
 		foreach ($res as $row) {
-			if (fuzzysearch($row['author_name'],$src))
-				$out .= printcategory("author", "aid", $row['author_id'], $row['author_name'], $row['author_email'], $row['author_website']);
+			if (fuzzysearch($row['name'],$src))
+				$out .= printcategory("author", "aid", $row['id'], $row['name'], $row['email'], $row['website']);
 		}
 		if (strlen($out) > 0) {
 			$tpl->clear_all_assign();

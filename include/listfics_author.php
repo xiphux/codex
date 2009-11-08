@@ -22,16 +22,16 @@ function listfics_author($searchid = null, $highlight = 0, $searchstring = null)
 	$out = $cache->Get($outkey);
 	if (!$out) {
 		$out = "";
-		$q = "SELECT author_id,author_name,author_email,author_website FROM " . $tables['authors'];
+		$q = "SELECT id,name,email,website FROM " . $tables['authors'];
 		$key = "listfics_author";
 		/*
 		 * User only wants one author
 		 */
 		if (isset($searchid)) {
-			$q .= " WHERE author_id = $searchid AND ((" . $tables['authors'] . ".author_name IS NOT NULL) OR (" . $tables['authors'] . ".author_email IS NOT NULL))";
+			$q .= " WHERE id = $searchid AND ((" . $tables['authors'] . ".name IS NOT NULL) OR (" . $tables['authors'] . ".email IS NOT NULL))";
 			$key .= "_" . $searchid;
 		} else
-			$q .= " WHERE (" . $tables['authors'] . ".author_name IS NOT NULL) OR (" . $tables['authors'] . ".author_email IS NOT NULL) ORDER BY author_name";
+			$q .= " WHERE (" . $tables['authors'] . ".name IS NOT NULL) OR (" . $tables['authors'] . ".email IS NOT NULL) ORDER BY name";
 		$al = $cache->Get($key);
 		if (!$al) {
 			$al = DBGetArray($q);
@@ -43,11 +43,11 @@ function listfics_author($searchid = null, $highlight = 0, $searchstring = null)
 		 */
 		foreach ($al as $row) {
 			if ($highlight == CODEX_AUTHOR && $searchstring) {
-				highlight($row['author_name'],$searchstring);
-				highlight($row['author_email'],$searchstring);
+				highlight($row['name'],$searchstring);
+				highlight($row['email'],$searchstring);
 			}
-			$out .= printcategory("author", "aid", $row['author_id'], (isset($row['author_name']) ? $row['author_name'] : $row['author_email']), $row['author_email'], $row['author_website']);
-			$fl = author_fic($row['author_id']);
+			$out .= printcategory("author", "aid", $row['id'], (isset($row['name']) ? $row['name'] : $row['email']), $row['email'], $row['website']);
+			$fl = author_fic($row['id']);
 
 			/*
 			 * Enumerate fics per author

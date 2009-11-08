@@ -22,7 +22,7 @@ function findfic_author($src)
 		$out = "";
 		$res = $cache->Get($key);
 		if (!$res) {
-			$res = DBGetArray("SELECT author_id,author_name,author_email,author_website FROM " . $tables['authors'] . " WHERE (UPPER(author_name) LIKE '%" . strtoupper($src) . "%') OR (UPPER(author_email) LIKE '%" . strtoupper($src) . "%') ORDER BY author_name");
+			$res = DBGetArray("SELECT id,name,email,website FROM " . $tables['authors'] . " WHERE (UPPER(name) LIKE '%" . strtoupper($src) . "%') OR (UPPER(email) LIKE '%" . strtoupper($src) . "%') ORDER BY name");
 			$cache->Set($key, $res);
 		}
 		if ($res) {
@@ -31,9 +31,9 @@ function findfic_author($src)
 			$out .= $tpl->fetch("note.tpl");
 		}
 		foreach ($res as $row) {
-			highlight($row['author_name'],$src);
-			highlight($row['author_email'],$src);
-			$out .= printcategory("author", "aid", $row['author_id'], (isset($row['author_name']) ? $row['author_name'] : $row['author_email']), (isset($row['author_name']) ? $row['author_email'] : null), $row['author_website']);
+			highlight($row['name'],$src);
+			highlight($row['email'],$src);
+			$out .= printcategory("author", "aid", $row['id'], (isset($row['name']) ? $row['name'] : $row['email']), (isset($row['name']) ? $row['email'] : null), $row['website']);
 		}
 		$cache->Set("output_" . $key, $out);
 	}

@@ -15,16 +15,16 @@
     <td><span class="label">{if count($fic_author) > 1}Authors{else}Author{/if}: </span></td>
     <td>
       {foreach item=author name=authorfe from=$fic_author}{if !$smarty.foreach.authorfe.first}<br />{/if}
-        <a href="{$SCRIPT_NAME}?u=author&aid={$author.author_id}">{if $author.author_name}{$author.author_name}{else}{$author.author_email}{/if}</a>
-	{if $author.author_email && !$omitcontact}
+        <a href="{$SCRIPT_NAME}?u=author&aid={$author.id}">{if $author.name}{$author.name}{else}{$author.email}{/if}</a>
+	{if $author.email && !$omitcontact}
 	  {if $showemail}
-	    &lt;<a href="mailto:{$author.author_email|strip_tags|strip:''}">{$author.author_email}</a>&gt;
+	    &lt;<a href="mailto:{$author.email|strip_tags|strip:''}">{$author.email}</a>&gt;
 	  {else}
-	    [<a href="mailto:{$author.author_email|strip_tags|strip:''}">email</a>]
+	    [<a href="mailto:{$author.email|strip_tags|strip:''}">email</a>]
 	  {/if}
 	{/if}
-	{if $author.author_website && !$omitcontact}
-	  [<a href="{$author.author_website|strip_tags|strip:''}">{if $showwebsite}{$author.author_website}{else}web{/if}</a>]
+	{if $author.website && !$omitcontact}
+	  [<a href="{$author.website|strip_tags|strip:''}">{if $showwebsite}{$author.website}{else}web{/if}</a>]
 	{/if}
       {foreachelse}
         Unknown

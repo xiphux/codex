@@ -16,8 +16,8 @@ function keyword_to_subquery($keyword, $casesensitive = false)
 		return;
 	
 	$titlefield = 'fictable.title';
-	$authornamefield = 'authortable.author_name';
-	$authoremailfield = 'authortable.author_email';
+	$authornamefield = 'authortable.name';
+	$authoremailfield = 'authortable.email';
 	$genrefield = 'genretable.name';
 	$seriesfield = 'seriestable.series_title';
 	$char1field = 'char1table.character_name';
@@ -37,7 +37,7 @@ function keyword_to_subquery($keyword, $casesensitive = false)
 
 	$titlequery = "SELECT id FROM " . $tables['fics'] . " AS fictable WHERE " . $titlefield . " LIKE '%" . $keyword . "%'";
 
-	$authorquery = "SELECT fic_id AS id FROM " . $tables['fic_author'] . " AS ficauthortable LEFT JOIN " . $tables['authors'] . " AS authortable ON ficauthortable.author_id = authortable.author_id WHERE " . $authornamefield . " LIKE '%" . $keyword . "%' OR " . $authoremailfield . " LIKE '%" . $keyword . "%'";
+	$authorquery = "SELECT fic_id AS id FROM " . $tables['fic_author'] . " AS ficauthortable LEFT JOIN " . $tables['authors'] . " AS authortable ON ficauthortable.author_id = authortable.id WHERE " . $authornamefield . " LIKE '%" . $keyword . "%' OR " . $authoremailfield . " LIKE '%" . $keyword . "%'";
 
 	$genrequery = "SELECT fic_id AS id FROM " . $tables['fic_genre'] . " AS ficgenretable LEFT JOIN " . $tables['genres'] . " AS genretable ON ficgenretable.genre_id = genretable.id WHERE " . $genrefield . " LIKE '%" . $keyword . "%'";
 

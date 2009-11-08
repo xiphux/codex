@@ -80,13 +80,13 @@ function printfic($id, $author_info = TRUE, $highlight = 0, $search = null, $key
 		if (($highlight & CODEX_AUTHOR) && $search) {
 			if (isset($keywords)) {
 				foreach ($adata as $i => $aid) {
-					highlight_keywords($adata[$i]["author_name"], $keywords);
-					highlight_keywords($adata[$i]["author_email"], $keywords);
+					highlight_keywords($adata[$i]["name"], $keywords);
+					highlight_keywords($adata[$i]["email"], $keywords);
 				}
 			} else {
 				foreach ($adata as $i => $aid) {
-					highlight($adata[$i]["author_name"],$search);
-					highlight($adata[$i]["author_email"],$search);
+					highlight($adata[$i]["name"],$search);
+					highlight($adata[$i]["email"],$search);
 				}
 			}
 		}
