@@ -26,7 +26,7 @@ function listfics_genre($searchid = null, $highlight = 0, $searchstring = null)
 	if (!$out) {
 		$out = "";
 
-		$q = "SELECT * FROM " . $tables['genres'];
+		$q = "SELECT id,name FROM " . $tables['genres'];
 		$key = "listfics_genre";
 		/*
 		 * User only wants one genre

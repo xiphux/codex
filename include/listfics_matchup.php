@@ -27,7 +27,7 @@ function listfics_matchup($searchid = null, $highlight = 0, $searchstring = null
 	if (!$out) {
 		$out = "";
 
-		$q = "SELECT * FROM " . $tables['matchups'];
+		$q = "SELECT matchup_id,match_1,match_2 FROM " . $tables['matchups'];
 		$key = "listfics_matchup";
 		/*
 		 * User only wants one matchup

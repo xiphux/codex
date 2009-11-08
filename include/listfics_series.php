@@ -23,7 +23,7 @@ function listfics_series($searchid = null, $highlight = 0, $searchstring = null)
 	if (!$out) {
 		$out = "";
 
-		$q = "SELECT * FROM " . $tables['series'];
+		$q = "SELECT series_id,series_title FROM " . $tables['series'];
 		$key = "listfics_series";
 		/*
 		 * User only wants one series

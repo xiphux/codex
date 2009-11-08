@@ -22,7 +22,7 @@ function listfics_author($searchid = null, $highlight = 0, $searchstring = null)
 	$out = $cache->Get($outkey);
 	if (!$out) {
 		$out = "";
-		$q = "SELECT * FROM " . $tables['authors'];
+		$q = "SELECT author_id,author_name,author_email,author_website FROM " . $tables['authors'];
 		$key = "listfics_author";
 		/*
 		 * User only wants one author
