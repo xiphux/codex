@@ -19,7 +19,7 @@ function keyword_to_subquery($keyword, $casesensitive = false)
 	$authornamefield = 'authortable.name';
 	$authoremailfield = 'authortable.email';
 	$genrefield = 'genretable.name';
-	$seriesfield = 'seriestable.series_title';
+	$seriesfield = 'seriestable.title';
 	$char1field = 'char1table.name';
 	$char2field = 'char2table.name';
 	if (!$casesensitive) {
@@ -41,7 +41,7 @@ function keyword_to_subquery($keyword, $casesensitive = false)
 
 	$genrequery = "SELECT fic_id AS id FROM " . $tables['fic_genre'] . " AS ficgenretable LEFT JOIN " . $tables['genres'] . " AS genretable ON ficgenretable.genre_id = genretable.id WHERE " . $genrefield . " LIKE '%" . $keyword . "%'";
 
-	$seriesquery = "SELECT fic_id AS id FROM " . $tables['fic_series'] . " AS ficseriestable LEFT JOIN " . $tables['series'] . " AS seriestable ON ficseriestable.series_id = seriestable.series_id WHERE " . $seriesfield . " LIKE '%" . $keyword . "%'";
+	$seriesquery = "SELECT fic_id AS id FROM " . $tables['fic_series'] . " AS ficseriestable LEFT JOIN " . $tables['series'] . " AS seriestable ON ficseriestable.series_id = seriestable.id WHERE " . $seriesfield . " LIKE '%" . $keyword . "%'";
 
 	$matchupquery = "SELECT fic_id AS id FROM " . $tables['fic_matchup'] . " AS ficmatchuptable LEFT JOIN " . $tables['matchups'] . " AS matchuptable ON ficmatchuptable.matchup_id = matchuptable.matchup_id LEFT JOIN " . $tables['characters'] . " AS char1table ON matchuptable.match_1 = char1table.id LEFT JOIN " . $tables['characters'] . " AS char2table ON matchuptable.match_2 = char2table.id WHERE " . $char1field . " LIKE '%" . $keyword . "%' OR " . $char2field . " LIKE '%" . $keyword . "%'";
 

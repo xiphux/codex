@@ -22,7 +22,7 @@ function findfic_series($src)
 		$out = "";
 		$res = $cache->Get($key);
 		if (!$res) {
-			$res = DBGetArray("SELECT series_id,series_title FROM " . $tables['series'] . " WHERE UPPER(series_title) LIKE '%" . strtoupper($src) . "%' ORDER BY series_title");
+			$res = DBGetArray("SELECT id,title FROM " . $tables['series'] . " WHERE UPPER(title) LIKE '%" . strtoupper($src) . "%' ORDER BY title");
 			$cache->Set($key, $res);
 		}
 		if ($res) {
@@ -31,8 +31,8 @@ function findfic_series($src)
 			$out .= $tpl->fetch("note.tpl");
 		}
 		foreach ($res as $row) {
-			highlight($row['series_title'],$src);
-			$out .= printcategory("series", "sid", $row['series_id'], $row['series_title'], null, null);
+			highlight($row['title'],$src);
+			$out .= printcategory("series", "sid", $row['id'], $row['title'], null, null);
 		}
 		$cache->Set("output_" . $key, $out);
 	}

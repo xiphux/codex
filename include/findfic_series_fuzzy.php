@@ -22,12 +22,12 @@ function findfic_series_fuzzy($src)
 		$out = "";
 		$res = $cache->Get($key);
 		if (!$res) {
-			$res = DBGetArray("SELECT series_id,series_title FROM " . $tables['series'] . " ORDER BY series_title");
+			$res = DBGetArray("SELECT id,title FROM " . $tables['series'] . " ORDER BY title");
 			$cache->Set($key, $res);
 		}
 		foreach ($res as $row) {
-			if (fuzzysearch($row['series_title'],$src))
-				$out .= printcategory("series", "sid", $row['series_id'], $row['series_title'], null, null);
+			if (fuzzysearch($row['title'],$src))
+				$out .= printcategory("series", "sid", $row['id'], $row['title'], null, null);
 		}
 		if (strlen($out) > 0) {
 			$tpl->clear_all_assign();

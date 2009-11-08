@@ -122,10 +122,10 @@ function printfic($id, $author_info = TRUE, $highlight = 0, $search = null, $key
 		if (($highlight & CODEX_SERIES) && $search) {
 			if (isset($keywords)) {
 				foreach ($sdata as $i => $sid)
-					highlight_keywords($sdata[$i]["series_title"], $keywords);
+					highlight_keywords($sdata[$i]["title"], $keywords);
 			} else {
 				foreach ($sdata as $i => $sid)
-					highlight($sdata[$i]["series_title"],$search);
+					highlight($sdata[$i]["title"],$search);
 			}
 		}
 

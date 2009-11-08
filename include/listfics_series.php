@@ -23,16 +23,16 @@ function listfics_series($searchid = null, $highlight = 0, $searchstring = null)
 	if (!$out) {
 		$out = "";
 
-		$q = "SELECT series_id,series_title FROM " . $tables['series'];
+		$q = "SELECT id,title FROM " . $tables['series'];
 		$key = "listfics_series";
 		/*
 		 * User only wants one series
 		 */
 		if (isset($searchid)) {
-			$q .= " WHERE series_id = $searchid";
+			$q .= " WHERE id = $searchid";
 			$key .= "_" . $searchid;
 		} else
-			$q .= " ORDER BY series_title";
+			$q .= " ORDER BY title";
 		$sl = $cache->Get($key);
 		if (!$sl) {
 			$sl = DBGetArray($q);
@@ -44,9 +44,9 @@ function listfics_series($searchid = null, $highlight = 0, $searchstring = null)
 		 */
 		foreach ($sl as $row) {
 			if ($highlight == CODEX_SERIES && $searchstring)
-				highlight($row['series_title'],$searchstring);
-			$out .= printcategory("series", "sid", $row['series_id'], $row['series_title'], null, null);
-			$fl = series_fic($row['series_id']);
+				highlight($row['title'],$searchstring);
+			$out .= printcategory("series", "sid", $row['id'], $row['title'], null, null);
+			$fl = series_fic($row['id']);
 
 			/*
 			 * Enumerate fics per series

@@ -14,7 +14,7 @@ function series_title($id)
 
 	$tmp = $cache->Get("series_title_" . $id);
 	if (!$tmp) {
-		$tmp = DBGetOne("SELECT series_title FROM " . $tables['series'] . " WHERE series_id = $id");
+		$tmp = DBGetOne("SELECT title FROM " . $tables['series'] . " WHERE id = $id");
 		$cache->Set("series_title_" . $id, $tmp);
 	}
 	return $tmp;

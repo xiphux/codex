@@ -45,7 +45,7 @@
   {/if}
   <tr>
     <td><span class="label">Series: </span></td>
-    <td>{foreach item=series name=seriesfe from=$fic_series}{if !$smarty.foreach.seriesfe.first}, {/if}<a href="{$SCRIPT_NAME}?u=series&sid={$series.series_id}">{$series.series_title}</a>{/foreach}</td>
+    <td>{foreach item=series name=seriesfe from=$fic_series}{if !$smarty.foreach.seriesfe.first}, {/if}<a href="{$SCRIPT_NAME}?u=series&sid={$series.id}">{$series.title}</a>{/foreach}</td>
   </tr>
   {if count($fic_genre) > 0}
   <tr>
