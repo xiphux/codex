@@ -22,20 +22,20 @@ function unwrap($str)
 	$spacelinecount = 0;
 	$noblanklinecount = 0;
 
-	for ($i = 0; $i < $linecount; $i++) {
+	for ($i = 0; $i < $linecount; ++$i) {
 		/* space indents to tabs */
 		$lines[$i] = preg_replace("/^ {2,}([^ ].*)$/", "\t$1", $lines[$i], 1);
 
 		if (preg_match("/^\t/", $lines[$i]))
-			$tablinecount++;
+			++$tablinecount;
 
 		if (preg_match("/ $/", $lines[$i]))
-			$spacelinecount++;
+			++$spacelinecount;
 
 		$charcount += strlen($lines[$i]);
 
 		if (strlen(trim($lines[$i])) > 0)
-			$noblanklinecount++;
+			++$noblanklinecount;
 	}
 
 	$avglen = (int)($charcount / $noblanklinecount);
