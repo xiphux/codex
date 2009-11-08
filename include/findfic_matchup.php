@@ -31,27 +31,10 @@ function findfic_matchup($src)
 
 		$ex = array();
 		foreach ($res as $row) {
-			/*
-			 * Get matchups for character 1
-			 */
-			$r = $cache->Get("match1_" . $row['id']);
+			$r = $cache->Get("match_" . $row['id']);
 			if (!$r) {
-				$r = DBGetArray("SELECT id FROM " . $tables['matchups'] . " WHERE character1 = " . $row['id']);
-				$cache->Set("match1_" . $row['id'], $r);
-			}
-
-			foreach ($r as $row2) {
-				if (!in_array($row2['id'],$ex))
-					$ex[] = $row2['id'];
-			}
-
-			/*
-			 * Get matchups for character 2
-			 */
-			$r = $cache->Get("match2_" . $row['id']);
-			if (!$r) {
-				$r = DBGetArray("SELECT id FROM " . $tables['matchups'] . " WHERE character2 = {$row['id']}");
-				$cache->Set("match2_" . $row['id'], $r);
+				$r = DBGetArray("SELECT id FROM " . $tables['matchups'] . " WHERE character1 = " . $row['id'] . " OR character2 = " . $row['id']);
+				$cache->Set("match_" . $row['id'], $r);
 			}
 
 			foreach ($r as $row2) {
