@@ -7,6 +7,8 @@
  *  Copyright (C) 2005 Christopher Han <xiphux@gmail.com>
  */
 
+ $starttime = microtime(true);
+
  session_start();
 
  ob_start();
@@ -175,6 +177,7 @@ echo $main;
 
 if ($codex_conf['debug']) {
 	echo '<hr /><span class="italic"><span class="label">Database queries:</span> ' . $querycount . '</span>';
+	echo '<br /><span class="italic"><span class="label">Execution time:</span> ' . (microtime(true)-$starttime) . '</span>';
 	echo '<div class="bottompadding"></div>';
 }
 
