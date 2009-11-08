@@ -135,7 +135,7 @@ $codex_conf['adodb_prefix'] = "adodb/";
   * unless something is very wrong, and do not allow other users
   * to access the site with debugging on.
   */
- $codex_conf['debug'] = true;
+ $codex_conf['debug'] = false;
 
  /*
   * session_key
