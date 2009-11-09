@@ -10,7 +10,7 @@
  *  Copyright (C) 2005 Christopher Han <xiphux@gmail.com>
  */
 
-include_once('fic_data.php');
+include_once('fic_exists.php');
 include_once('chapter_count.php');
 include_once('readchapter.php');
 include_once('toc.php');
@@ -28,7 +28,7 @@ function readfic($id, $ch = 0)
 	$out = $cache->Get($outkey);
 	if (!$out) {
 		if (isset($id)) {
-			if (fic_data($id)) {
+			if (fic_exists($id)) {
 				if ($ch == 0) {
 					if ($chapcount < 2)
 						$out = readchapter($id, 1);
