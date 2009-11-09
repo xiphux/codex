@@ -15,7 +15,7 @@ function chapter_exists($fic, $ch)
 	$tmp = $cache->Get("chapter_exists_" . $fic . "_" . $ch);
 	if (!$tmp) {
 		$tmp = false;
-		$chap = DBGetRow("SELECT id,title FROM " . $tables['chapters'] . " WHERE fic=" . $fic . " AND num=" . $ch);
+		$chap = DBGetRow("SELECT id FROM " . $tables['chapters'] . " WHERE fic=" . $fic . " AND num=" . $ch);
 		if ($chap)
 			$tmp = true;
 		if (isset($tmp))

@@ -43,7 +43,7 @@ function readfic($id, $ch = 0)
 
 		$cache->Set($outkey, $out);
 	}
-	if (($id > 0) && ($chapcount > 0)) {
+	if (($id > 0) && ($chapcount > 0) && ($ch > 0)) {
 		if ($chapcount < 2)
 			$ch = 1;
 		if (chapter_exists($id, $ch))
