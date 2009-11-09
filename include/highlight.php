@@ -23,7 +23,6 @@ function highlight(&$string, $substr, $type = "searchtext", $skipparens = false)
 					highlight($tmp, $substr, $type);
 				$str .= $tmp;
 			}
-			var_dump($str);
 		}
 		$string = $str;
 	} else {

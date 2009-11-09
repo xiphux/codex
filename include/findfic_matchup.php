@@ -49,7 +49,6 @@ function findfic_matchup($src)
 		foreach ($ex as $mat) {
 			$tmp = matchup_data($mat);
 			highlight($tmp['matchup_name'], $src, "searchtext", true);
-			var_dump($tmp['matchup_name']);
 			$out .= printcategory("matchup", "mid", $mat, $tmp['matchup_name'], null, null);
 		}
 		$cache->Set("output_" . $key, $out);
