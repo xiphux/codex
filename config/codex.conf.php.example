@@ -42,7 +42,7 @@ $codex_conf['adodb_prefix'] = "adodb/";
  $codex_conf['db_type'] = "mysqli";
  $codex_conf['db_host'] = "localhost";
  $codex_conf['db_user'] = "codex";
- $codex_conf['db_pass'] = "hzt2xJFcsfwLw56H";
+ $codex_conf['db_pass'] = "password";
  $codex_conf['database'] = "codex";
 
  /*
@@ -101,7 +101,7 @@ $codex_conf['adodb_prefix'] = "adodb/";
   * expand to the name (codex) and version. '$codex_version' will
   * expand to the version only
   */
- $codex_conf['title'] = "centraldogma :: $codex_appstring";
+ $codex_conf['title'] = "$codex_appstring";
 
  /*
   * If enabled, a 'stats' link will appear on the main page with
@@ -141,7 +141,7 @@ $codex_conf['adodb_prefix'] = "adodb/";
   * session_key
   * The key inside the session variable to use for session data
   */
- $codex_conf['session_key'] = "codex";
+ $codex_conf['session_key'] = $_SERVER["SERVER_NAME"] . "codex";
 
 /*
  * theme
