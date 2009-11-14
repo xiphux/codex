@@ -87,6 +87,7 @@ $spellcheck["/([Ss])errogate/"] = "$1urrogate";
 $spellcheck["/([Pp])ennance/"] = "$1enance";
 $spellcheck["/([Rr])esteraunt/"] = "$1estaurant";
 $spellcheck["/([Ii])mmedeately/"] = "$1mmediately";
+$spellcheck["/([Rr])ememebered/"] = "$1emembered";
 
 /* Some series-specific stuff */
 $spellcheck["/NAbiki/"] = "Nabiki";
