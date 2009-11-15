@@ -107,7 +107,7 @@ if (isset($_GET['u'])) {
 				include_once('include/author_name.php');
 				$ttl .= " :: " . author_name($_GET['aid']);
 			}
-			echo listfics_author((isset($_GET['aid']) ? $_GET['aid'] : null));
+			echo listfics_author((isset($_GET['aid']) ? $_GET['aid'] : null), (isset($_GET['pg']) ? $_GET['pg'] : 1));
 			break;
 		case "matchup":
 			include_once('include/listfics_matchup.php');
