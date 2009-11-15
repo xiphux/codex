@@ -24,67 +24,62 @@ function listfics_author($searchid = null, $page = 1, $highlight = 0, $searchstr
 		$out = "";
 
 		$key = "listfics_author";
-		$q = "SELECT a1.id,a1.name,a1.email,a1.website,COUNT(f1.id) AS count FROM " . $tables['authors'] . " AS a1 JOIN " . $tables['fic_author'] . " AS fa ON a1.id = fa.author_id LEFT JOIN " . $tables['fics'] . " AS f1 ON fa.fic_id = f1.id WHERE ((a1.name IS NOT NULL) OR (a1.email IS NOT NULL))";
+		$q = "SELECT a1.id,a1.name,a1.email,a1.website,f1.id AS fid FROM " . $tables['authors'] . " AS a1 RIGHT JOIN " . $tables['fic_author'] . " AS fa ON fa.author_id = a1.id RIGHT JOIN " . $tables['fics'] . " AS f1 ON fa.fic_id = f1.id";
 		/*
 		 * User only wants one author
 		 */
 		if (isset($searchid)) {
-			$q .= " AND a1.id = $searchid";
+			$q .= " WHERE a1.id = $searchid ORDER BY f1.title";
 			$key .= "_" . $searchid;
 		} else {
-			$q .= " GROUP BY a1.id ORDER BY a1.name";
+			$q .= " ORDER BY a1.name, a1.email, f1.title";
 		}
 		$al = $cache->Get($key);
 		if (!$al) {
-			$al = DBGetArray($q);
+			$al = DBSelectLimit($q, $codex_conf['itemsperpage'], (($page - 1) * $codex_conf['itemsperpage']));
 			$cache->Set($key, $al);
 		}
 
-		/*
-		 * Enumerate author list
-		 */
-		$displayed = 0;
-		$start = ($page - 1) * $codex_conf['itemsperpage'] + 1;
-		$end = $page * $codex_conf['itemsperpage'];
-		$shownext = false;
-		foreach ($al as $row) {
-			if (($displayed + $row['count']) < $start) {
-				$displayed += $row['count'];
-			} else if ($displayed >= $end) {
-				$shownext = true;
-				break;
-			} else {
-
-				if ($highlight == CODEX_AUTHOR && $searchstring) {
-					highlight($row['name'],$searchstring);
-					highlight($row['email'],$searchstring);
-				}
-				$out .= printcategory("author", "aid", $row['id'], (isset($row['name']) ? $row['name'] : $row['email']), $row['email'], $row['website']);
-				
-				$offset = $start - $displayed - 1;
-				if ($offset < 0)
-					$offset = 0;
-				$count = $end - $displayed - $offset;
-				$fl = author_fic($row['id'], $count, $offset);
-				while (!$fl->EOF) {
-					$out .= printfic($fl->fields['id'],FALSE,$highlight,$searchstring);
-					$fl->MoveNext();
-					++$displayed;
-				}
-				$displayed += $offset;
-
-				if (($count + $offset) < $row['count']) {
-					$shownext = true;
-					break;
-				}
-			}
+		$count = $cache->Get($key . "_count");
+		if (!$count) {
+			$q = "SELECT COUNT(f1.id) FROM " . $tables['authors'] . " AS a1 RIGHT JOIN " . $tables['fic_author'] . " AS fa ON fa.author_id = a1.id RIGHT JOIN " . $tables['fics'] . " AS f1 ON fa.fic_id = f1.id";
+			if (isset($searchid))
+				$q .= " WHERE a1.id = $searchid";
+			$count = DBGetOne($q);
+			$cache->Set($key . "_count", $count);
 		}
 
-		if ($shownext || ($page > 1)) {
-			if ($shownext)
-				$tpl->assign("pagernext", ($page+1));
-			if ($page > 1)
-				$tpl->assign("pagerprev", ($page-1));
+		$previd = -1;
+
+		while (!$al->EOF) {
+			if ($al->fields['id'] != $previd) {
+				$name = $al->fields['name'];
+				$email = $al->fields['email'];
+				if (!(isset($name) || isset($email)))
+					$out .= "<p><strong>Unknown</strong></p>";
+				else {
+					if ($highlight == CODEX_AUTHOR && $searchstring) {
+						highlight($name,$searchstring);
+						highlight($email,$searchstring);
+					}
+					$out .= printcategory("author", "aid", $al->fields['id'], (isset($name) ? $name : $email), $email, $al->fields['website']);
+				}
+				$previd = $al->fields['id'];
+			}
+			$out .= printfic($al->fields['fid'], false, $highlight, $searchstring);
+			$al->MoveNext();
+		}
+		
+		$showpager = false;
+		if ($page > 1) {
+			$showpager = true;
+			$tpl->assign("pagerprev", ($page-1));
+		}
+		if ($count > ($page * $codex_conf['itemsperpage'])) {
+			$showpager = true;
+			$tpl->assign("pagernext", ($page+1));
+		}
+		if ($showpager) {
 			$tpl->assign("pagerdest", "author");
 			if (isset($searchid))
 				$tpl->assign("pagerauthorid", $searchid);
