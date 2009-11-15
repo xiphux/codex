@@ -117,7 +117,7 @@ if (isset($_GET['u'])) {
 				if ($match)
 					$ttl .= " :: " . $match["matchup_name"];
 			}
-			echo listfics_matchup((isset($_GET['mid']) ? $_GET['mid'] : null));
+			echo listfics_matchup((isset($_GET['mid']) ? $_GET['mid'] : null), (isset($_GET['pg']) ? $_GET['pg'] : 1));
 			break;
 		case "series":
 			include_once('include/listfics_series.php');
