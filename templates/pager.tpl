@@ -9,12 +9,12 @@
   <div class="pager">
     {if $pagerprev}
       <div class="pagerleft">
-      <a href="{$SCRIPT_NAME}?u={$pagerdest}&pg={$pagerprev}{if $pagerauthorid}&aid={$pagerauthorid}{/if}{if $pagerseriesid}&sid={$pagerseriesid}{/if}">&lt; prev</a>
+      <a href="{$SCRIPT_NAME}?u={$pagerdest}&pg={$pagerprev}{if $pagerauthorid}&aid={$pagerauthorid}{/if}{if $pagerseriesid}&sid={$pagerseriesid}{/if}{if $pagergenreid}&gid={$pagergenreid}{/if}">&lt; prev</a>
       </div>
     {/if}
     {if $pagernext}
       <div class="pagerright">
-      <a href="{$SCRIPT_NAME}?u={$pagerdest}&pg={$pagernext}{if $pagerauthorid}&aid={$pagerauthorid}{/if}{if $pagerseriesid}&sid={$pagerseriesid}{/if}">next &gt;</a>
+      <a href="{$SCRIPT_NAME}?u={$pagerdest}&pg={$pagernext}{if $pagerauthorid}&aid={$pagerauthorid}{/if}{if $pagerseriesid}&sid={$pagerseriesid}{/if}{if $pagergenreid}&gid={$pagergenreid}{/if}">next &gt;</a>
       </div>
     {/if}
   </div>

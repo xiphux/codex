@@ -133,7 +133,7 @@ if (isset($_GET['u'])) {
 				include_once('include/genre_name.php');
 				$ttl .= " :: " . genre_name($_GET['gid']);
 			}
-			echo listfics_genre((isset($_GET['gid']) ? $_GET['gid'] : null));
+			echo listfics_genre((isset($_GET['gid']) ? $_GET['gid'] : null), (isset($_GET['pg']) ? $_GET['pg'] : 1));
 			break;
 		case "changetheme":
 			include_once('include/root.php');
