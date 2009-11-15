@@ -11,6 +11,7 @@ include_once('defs.php');
 include_once('highlight.php');
 include_once('printfic.php');
 include_once('printcategory.php');
+include_once('printcategoryunknown.php');
 
 function listfics_author($searchid = null, $page = 1, $highlight = 0, $searchstring = null)
 {
@@ -55,7 +56,7 @@ function listfics_author($searchid = null, $page = 1, $highlight = 0, $searchstr
 				$name = $al->fields['name'];
 				$email = $al->fields['email'];
 				if (!(isset($name) || isset($email)))
-					$out .= "<p><strong>Unknown</strong></p>";
+					$out .= printcategoryunknown();
 				else {
 					if ($highlight == CODEX_AUTHOR && $searchstring) {
 						highlight($name,$searchstring);

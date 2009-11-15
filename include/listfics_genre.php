@@ -12,6 +12,7 @@ include_once('defs.php');
 include_once('highlight.php');
 include_once('printfic.php');
 include_once('printcategory.php');
+include_once('printcategoryunknown.php');
 
 function listfics_genre($searchid = null, $page = 1, $highlight = 0, $searchstring = null)
 {
@@ -67,7 +68,7 @@ function listfics_genre($searchid = null, $page = 1, $highlight = 0, $searchstri
 			if ($gl->fields['id'] != $previd) {
 				$name = $gl->fields['name'];
 				if (!isset($name)) {
-					$out .= "<p><strong>Unknown</strong></p>";
+					$out .= printcategoryunknown();
 				} else {
 					if ($highlight == CODEX_GENRE && $searchstring)
 						highlight($name,$searchstring);

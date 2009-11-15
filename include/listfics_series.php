@@ -11,6 +11,7 @@ include_once('defs.php');
 include_once('highlight.php');
 include_once('printfic.php');
 include_once('printcategory.php');
+include_once('printcategoryunknown.php');
 
 function listfics_series($searchid = null, $page = 1, $highlight = 0, $searchstring = null)
 {
@@ -53,7 +54,7 @@ function listfics_series($searchid = null, $page = 1, $highlight = 0, $searchstr
 			if ($sl->fields['id'] != $previd) {
 				$title = $sl->fields['title'];
 				if (!isset($title)) {
-					$out .= "<p><strong>Unknown</strong></p>";
+					$out .= printcategoryunknown();
 				} else {
 					if ($highlight == CODEX_SERIES && $searchstring)
 						highlight($title,$searchstring);

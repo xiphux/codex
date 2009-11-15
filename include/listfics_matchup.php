@@ -11,6 +11,7 @@ include_once('defs.php');
 include_once('highlight.php');
 include_once('printfic.php');
 include_once('printcategory.php');
+include_once('printcategoryunknown.php');
 
 function listfics_matchup($searchid = null, $page = 1, $highlight = 0, $searchstring = null)
 {
@@ -55,7 +56,7 @@ function listfics_matchup($searchid = null, $page = 1, $highlight = 0, $searchst
 			if ($ml->fields['id'] != $previd) {
 				$matchup = $ml->fields['matchup_name'];
 				if (!isset($matchup)) {
-					$out .= "<p><strong>Unknown</strong></p>";
+					$out .= printcategoryunknown();
 				} else {
 					if ($searchstring && (($highlight & CODEX_MATCHUP_1) || ($highlight & CODEX_MATCHUP_2)))
 						highlight($matchup,$searchstring,"searchtext",true);

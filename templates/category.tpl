@@ -7,7 +7,12 @@
  *}
 <p>
  <strong>
-  <a href="{$SCRIPT_FILE}?u={$catsort}&{$catidtype}={$catid}">{$catname}</a></strong>
+  {if $unknown}
+  Unknown
+  {else}
+  <a href="{$SCRIPT_FILE}?u={$catsort}&{$catidtype}={$catid}">{$catname}</a>
+  {/if}
+  </strong>
   {if $email}
     [<a href="mailto:{$email|strip_tags|strip:''}">{$email}</a>]
   {/if}

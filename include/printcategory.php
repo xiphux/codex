@@ -1,9 +1,9 @@
 <?php
 /*
- *  printfic.php
+ *  printcategory.php
  *  Codex: A PHP/MySQL fanfiction database
  *  Component: printfic
- *  Print out a fic's information given a fic id
+ *  Print out category header for a fic listing
  *
  *  Copyright (C) 2005 Christopher Han <xiphux@gmail.com>
  */
