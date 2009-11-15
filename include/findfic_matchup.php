@@ -11,7 +11,6 @@
 include_once('highlight.php');
 include_once('printcategory.php');
 include_once('matchup_data.php');
-include_once('series_title.php');
 
 function findfic_matchup($src)
 {

@@ -15,7 +15,6 @@
  include_once('fic_series.php');
  include_once('fic_genre.php');
  include_once('fic_matchup.php');
- include_once('series_title.php');
  include_once('chapter_count.php');
  include_once('get_viewcount.php');
 

@@ -10,7 +10,6 @@
 
 include_once('printcategory.php');
 include_once('matchup_data.php');
-include_once('series_title.php');
 include_once('fuzzysearch.php');
 
 function findfic_matchup_fuzzy($src)

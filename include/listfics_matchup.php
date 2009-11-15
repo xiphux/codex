@@ -13,7 +13,6 @@ include_once('printfic.php');
 include_once('printcategory.php');
 include_once('matchupcmp.php');
 include_once('matchup_data.php');
-include_once('series_title.php');
 include_once('matchup_fic.php');
 
 function listfics_matchup($searchid = null, $highlight = 0, $searchstring = null)
