@@ -125,4 +125,15 @@ function DBErrorMsg()
 	return $db->ErrorMsg();
 }
 
+function DBSelectLimit($sql, $nrows=-1, $offset=-1, $inputarr=false)
+{
+	global $db,$querycount,$codex_conf;
+	++$querycount;
+	if ($codex_conf['adodbcache'])
+		$ret = $db->SelectLimit($sql, $nrows, $offset, $inputarr, $codex_conf['secs2cache']);
+	else
+		$ret = $db->SelectLimit($sql, $nrows, $offset, $inputarr);
+	return $ret;
+}
+
 ?>

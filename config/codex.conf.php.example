@@ -264,4 +264,11 @@ $codex_conf['unwrap'] = TRUE;
   */
  $codex_conf['compactlines'] = TRUE;
 
+ /*
+  * Items per page
+  *
+  * Number of fics to display on a page
+  */
+ $codex_conf['itemsperpage'] = 30;
+
 ?>

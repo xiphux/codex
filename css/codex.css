@@ -52,3 +52,19 @@
 	bottom: 0;
 }
 
+.pager {
+	width: 100%;
+}
+
+.pagerleft {
+	display: inline;
+	text-align: left;
+	left: 0;
+}
+
+.pagerright {
+	float: right;
+	display: inline;
+	text-align: right;
+	right: 0;
+}

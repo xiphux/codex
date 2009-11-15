@@ -99,7 +99,7 @@ if (isset($_GET['u'])) {
 			break;
 		case "title":
 			include_once('include/listfics_title.php');
-			echo listfics_title();
+			echo listfics_title((isset($_GET['pg']) ? $_GET['pg'] : 1));
 			break;
 		case "author":
 			include_once('include/listfics_author.php');
