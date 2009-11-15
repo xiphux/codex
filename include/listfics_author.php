@@ -17,7 +17,7 @@ function listfics_author($searchid = null, $page = 1, $highlight = 0, $searchstr
 {
 	global $tables, $tpl, $cache, $codex_conf;
 
-	$outkey = "output_listfics_author_" . $searchid . "_" . $highlight . "_" . md5($searchstring);
+	$outkey = "output_listfics_author_" . $searchid . "_" . $highlight . "_" . md5($searchstring) . "_" . $page;
 
 	$out = $cache->Get($outkey);
 	if (!$out) {
