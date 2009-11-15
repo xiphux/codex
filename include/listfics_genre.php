@@ -80,6 +80,7 @@ function listfics_genre($searchid = null, $page = 1, $highlight = 0, $searchstri
 			$out .= printfic($gl->fields['fid'],TRUE,$highlight,$searchstring);
 			$gl->MoveNext();
 		}
+		$gl->Close();
 
 		$showpager = false;
 		if ($page > 1) {

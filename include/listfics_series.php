@@ -65,6 +65,7 @@ function listfics_series($searchid = null, $page = 1, $highlight = 0, $searchstr
 			$out .= printfic($sl->fields['fid'],TRUE,$highlight,$searchstring);
 			$sl->MoveNext();
 		}
+		$sl->Close();
 
 		$showpager = false;
 		if ($page > 1) {

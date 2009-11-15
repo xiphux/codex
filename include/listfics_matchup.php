@@ -67,6 +67,7 @@ function listfics_matchup($searchid = null, $page = 1, $highlight = 0, $searchst
 			$out .= printfic($ml->fields['fid'],TRUE,$highlight,$searchstring);
 			$ml->MoveNext();
 		}
+		$ml->Close();
 
 		$showpager = false;
 		if ($page > 1) {

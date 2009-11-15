@@ -69,6 +69,7 @@ function listfics_author($searchid = null, $page = 1, $highlight = 0, $searchstr
 			$out .= printfic($al->fields['fid'], false, $highlight, $searchstring);
 			$al->MoveNext();
 		}
+		$al->Close();
 		
 		$showpager = false;
 		if ($page > 1) {
