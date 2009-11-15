@@ -89,6 +89,7 @@ $spellcheck["/([Rr])esteraunt/"] = "$1estaurant";
 $spellcheck["/([Ii])mmedeately/"] = "$1mmediately";
 $spellcheck["/([Rr])ememebered/"] = "$1emembered";
 $spellcheck["/([Ee])nemey/"] = "$1nemy";
+$spellcheck["/([Cc])rsytal/"] = "$1rystal";
 
 /* Some series-specific stuff */
 $spellcheck["/NAbiki/"] = "Nabiki";
