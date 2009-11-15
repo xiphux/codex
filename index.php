@@ -125,7 +125,7 @@ if (isset($_GET['u'])) {
 				include_once('include/series_title.php');
 				$ttl .= " :: " . series_title($_GET['sid']);
 			}
-			echo listfics_series((isset($_GET['sid']) ? $_GET['sid'] : null));
+			echo listfics_series((isset($_GET['sid']) ? $_GET['sid'] : null), (isset($_GET['pg']) ? $_GET['pg'] : 1));
 			break;
 		case "genre":
 			include_once('include/listfics_genre.php');
