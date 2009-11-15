@@ -8,7 +8,6 @@
  *  Copyright (C) 2005 Christopher Han <xiphux@gmail.com>
  */
 include_once('defs.php');
-include_once('highlight.php');
 include_once('printfic.php');
 
 function listfics_title($page = 1, $highlight = 0, $searchstring = null)

@@ -11,7 +11,6 @@ include_once('defs.php');
 include_once('highlight.php');
 include_once('printfic.php');
 include_once('printcategory.php');
-include_once('author_fic.php');
 
 function listfics_author($searchid = null, $page = 1, $highlight = 0, $searchstring = null)
 {
