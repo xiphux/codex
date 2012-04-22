@@ -76,6 +76,10 @@ hr {
 	text-align: center;
 }
 
+.chaptertable .chapwordcount {
+	text-align: center;
+}
+
 .label {
 	color: DarkGray;
 }

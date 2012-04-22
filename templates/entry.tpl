@@ -44,6 +44,10 @@
   </tr>
   {/if}
   <tr>
+    <td><span class="label">Words:</span></td>
+    <td>{$wordcount}</td>
+  </tr>
+  <tr>
     <td><span class="label">Series: </span></td>
     <td>{foreach item=series name=seriesfe from=$fic_series}{if !$smarty.foreach.seriesfe.first}, {/if}<a href="{$SCRIPT_NAME}?u=series&sid={$series.id}">{$series.title}</a>{/foreach}</td>
   </tr>

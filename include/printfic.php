@@ -15,8 +15,7 @@
  include_once('fic_series.php');
  include_once('fic_genre.php');
  include_once('fic_matchup.php');
- include_once('chapter_count.php');
- include_once('get_viewcount.php');
+ include_once('fic_chapters.php');
 
 function printfic($id, $author_info = TRUE, $highlight = 0, $search = null, $keywords = null)
 {
@@ -95,9 +94,14 @@ function printfic($id, $author_info = TRUE, $highlight = 0, $search = null, $key
 		$tpl->assign("fic_author",$adata);
 
 		/*
+		 * Get chapters
+		 */
+		$chapters = fic_chapters($id);
+
+		/*
 		 * Get count of chapters in fic
 		 */
-		$chapcount = chapter_count($id);
+		$chapcount = count($chapters);
 
 		/*
 		 * Export chapter count
@@ -106,8 +110,17 @@ function printfic($id, $author_info = TRUE, $highlight = 0, $search = null, $key
 
 		if ($chapcount == 1) {
 			$tpl->assign("showviews", true);
-			$tpl->assign("views", get_viewcount($id, 1));
+			$tpl->assign("views", $chapters[0]['views']);
 		}
+
+		/*
+		 * Get word count of fic
+		 */
+		$wordcount = null;
+		for ($i = 0; $i < $chapcount; $i++) {
+			$wordcount += $chapters[$i]['wordcount'];
+		}
+		$tpl->assign('wordcount', $wordcount);
 
 		/*
 		 * Get series data
