@@ -28,6 +28,12 @@ if ($codex_conf['persist'])
 	$db->PConnect($codex_conf['db_host'],$codex_conf['db_user'],$codex_conf['db_pass'],$codex_conf['database']);
 else
 	$db->Connect($codex_conf['db_host'],$codex_conf['db_user'],$codex_conf['db_pass'],$codex_conf['database']);
+$db->Execute('SET character_set_database=UTF8');
+$db->Execute('SET character_set_client=UTF8');
+$db->Execute('SET character_set_connection=UTF8');
+$db->Execute('SET character_set_results=UTF8');
+$db->Execute('SET character_set_server=UTF8');
+$db->Execute('SET names UTF8');
 $db->SetFetchMode(ADODB_FETCH_ASSOC);
 
 if ($codex_conf['debug'])
