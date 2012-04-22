@@ -29,12 +29,11 @@ function readfic($id, $ch = 0)
 	if (!$out) {
 		if (isset($id)) {
 			if (fic_exists($id)) {
-				if ($ch == 0) {
-					if ($chapcount < 2)
-						$out = readchapter($id, 1);
-					else
-						$out = toc($id);
-				} else
+				if (($ch == 0) && ($chapcount == 1))
+					$ch = 1;
+				if ($ch == 0)
+					$out = toc($id);
+				else
 					$out = readchapter($id, $ch);
 			} else
 				$out = "Invalid fic";
@@ -44,7 +43,7 @@ function readfic($id, $ch = 0)
 		$cache->Set($outkey, $out);
 	}
 	if (($id > 0) && ($chapcount > 0) && ($ch > 0)) {
-		if ($chapcount < 2)
+		if (($chapcount == 1) && ($ch != 1))
 			$ch = 1;
 		if (chapter_exists($id, $ch))
 			increment_viewcount($id, $ch);
