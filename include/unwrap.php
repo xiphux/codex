@@ -13,7 +13,6 @@ function unwrap($str)
 	global $codex_conf;
 	
 	$return = "";
-	$str = preg_replace("/\r\n/", "\n", $str);
 	$lines = explode("\n", preg_replace("/([^\n])(\n\s*){2,}\n(\s*[^\n])/","$1\n\n$3",$str));
 
 	$linecount = count($lines);

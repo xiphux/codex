@@ -68,6 +68,11 @@ table {
 	padding: 4px 2px 4px 2px;
 }
 
+.breakline {
+	margin: 24px 0px 24px 0px;
+	border-top: 2px solid #cfcfcf;
+}
+
 .emphasis {
 	font-style: italic;
 }
