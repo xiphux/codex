@@ -148,7 +148,7 @@ $codex_conf['adodb_prefix'] = "adodb/";
  * This is the default theme to use
  * Specified as the name of a css file in css/themes,
  */
-$codex_conf['theme'] = "dark.css";
+$codex_conf['theme'] = "newspaper.css";
 
 /*
  * unwrap
