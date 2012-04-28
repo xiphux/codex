@@ -52,7 +52,6 @@ function nav2()
 </span>
 {/if}
 </div>
-<hr />
 {/if}
 
 <div class="readtext">
@@ -63,7 +62,6 @@ function nav2()
 
 {if ($chapter > 1) || ($chapter < $chapcount)}
 <div class="bottomreadnav">
-<hr />
 {if $chapter > 1}
 <span class="bottomreadnavleft">
 <a href="{$SCRIPT_NAME}?u=read&fic={$fic.id}&ch={$chapter-1}">&lt; prev</a>

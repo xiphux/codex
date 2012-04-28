@@ -1,0 +1,93 @@
+body {
+ 	color: #090000;
+	background-color: #fcfdf9;
+	position: relative;
+	font-family: Georgia,"Times New Roman",serif;
+	font-size: 19px;
+	overflow: auto;
+}
+
+a:link {
+	color: #8a0000;
+	text-decoration: none;
+}
+
+a:active {
+	color: #8a0000;
+	text-decoration: none;
+}
+
+a:visited {
+	color: #8a0000;
+	text-decoration: none;
+}
+
+.italic {
+	font-style: italic;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.underline {
+	text-decoration: underline;
+}
+
+.lemontext {
+	color: red;
+}
+
+.searchtext {
+	color: yellow;
+	font-weight: bold;
+}
+
+table {
+	border: none;
+	border-spacing: 5px;
+}
+
+.main {
+	width: 100px;
+}
+
+.readtext {
+	padding: 0px 96px 0px 96px;
+}
+
+.readnav {
+	background-color: #f6f6f2;
+	border-bottom: 2px solid #d9d9d5;
+	padding: 4px 2px 4px 2px;
+}
+
+.bottomreadnav {
+	background-color: #f6f6f2;
+	border-top: 2px solid #d9d9d5;
+	padding: 4px 2px 4px 2px;
+}
+
+.emphasis {
+	font-style: italic;
+}
+
+hr {
+	margin: 0 0 0 0;
+}
+
+.chaptertable .chapnameheader {
+	text-align: left;
+}
+
+.chaptertable .chapviews {
+	text-align: center;
+}
+
+.chaptertable .chapwordcount {
+	text-align: center;
+}
+
+.label {
+	color: #5d5d52;
+}
