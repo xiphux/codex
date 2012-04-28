@@ -13,7 +13,8 @@ function unwrap($str)
 	global $codex_conf;
 	
 	$return = "";
-	$lines = explode("\r\n", preg_replace("/([^\n])(\r\n\s*){2,}\r\n(\s*[^\r\n])/","$1\r\n\r\n$3",$str));
+	$str = preg_replace("/\r\n/", "\n", $str);
+	$lines = explode("\n", preg_replace("/([^\n])(\n\s*){2,}\n(\s*[^\n])/","$1\n\n$3",$str));
 
 	$linecount = count($lines);
 
@@ -43,12 +44,12 @@ function unwrap($str)
 	$method = "";
 
 	$spacelineratio = $spacelinecount/$noblanklinecount;
-	if (($spacelineratio > 0.5) && ($spacelineratio < 0.98)) {
+	if (($spacelineratio > 0.6) && ($spacelineratio < 0.98)) {
 		/*
 		 * This string might be unwrappable using
 		 * spaces at the ends of lines
 		 */
-		$return = preg_replace("/ \r\n/", " ", $str);
+		$return = preg_replace("/ \n/", " ", $str);
 		if ($codex_conf['debug'])
 			$method = "Spaces at ends of lines";
 	} else if (($tablinecount/$noblanklinecount) > 0.20) {
@@ -56,7 +57,7 @@ function unwrap($str)
 		 * This string might be unwrappable
 		 * using tab/space indents to find paragraphs
 		 */
-		 $return = preg_replace("/ *\r\n(\S)/", " $1", $str);
+		 $return = preg_replace("/ *\n(\S)/", " $1", $str);
 		 if ($codex_conf['debug'])
 			$method = "Indents";
 	} else if ((($linecount-$noblanklinecount)/$linecount) > 0.10) {
@@ -64,7 +65,7 @@ function unwrap($str)
 		 * This string might be unwrappable
 		 * using blank lines to find paragraphs
 		 */
-		$return = preg_replace("/([^\n]) *\r\n([^\r\s])/", "$1 $2", $str);
+		$return = preg_replace("/([^\n]) *\n([^\r\s])/", "$1 $2", $str);
 		if ($codex_conf['debug'])
 			$method = "Blank lines";
 	} else if ($avglen > 1) {
@@ -72,7 +73,7 @@ function unwrap($str)
 		 * This string might be unwrappable by
 		 * attempting to guess line widths
 		 */
-		$return = preg_replace("/([^\r\n]{" . (int)$avglen . ",})\r\n/","$1 ",$str);
+		$return = preg_replace("/([^\n]{" . (int)$avglen . ",})\n/","$1 ",$str);
 		$return = preg_replace("/([\w,]) {2,}([\w,])/", "$1 $2", $return);
 		if ($codex_conf['debug'])
 			$method = "Line widths";
