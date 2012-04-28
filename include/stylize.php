@@ -18,7 +18,7 @@ function stylize($str)
 	/*
 	 * Add emphasis for asterisks
 	 */
-	$str = preg_replace("/([^\*])\*([^\*>\n]*)\*([^\*])/","$1*<span class=\"emphasis\">$2</span>*$3", $str);
+	$str = preg_replace("/([^\*])(\*{1,2})([^\*>\n]*)(\*{1,2})([^\*])/","$1$2<span class=\"emphasis\">$3</span>$4$5", $str);
 
 	/*
 	 * Superscript trademark symbol
