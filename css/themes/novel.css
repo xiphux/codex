@@ -3,16 +3,16 @@ body {
 	background-color: #f1ebcf;
 	position: relative;
 	font-family: Cambria, 'Hoefler Text', Georgia,"Times New Roman",serif;
-	font-size: 19px;
+	font-size: 1.2em;
 	overflow: auto;
 }
 
 select {
-	font-size: 19px;
+	font-size: 1.2em;
 }
 
 input {
-	font-size: 16px;
+	font-size: 0.9em;
 }
 
 a:link {
@@ -62,6 +62,7 @@ table {
 
 .readtext {
 	padding: 0px 96px 0px 96px;
+	line-height: 1.7em;
 }
 
 .readnav {
