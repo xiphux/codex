@@ -7,6 +7,14 @@ body {
 	overflow: auto;
 }
 
+select {
+	font-size: 19px;
+}
+
+input {
+	font-size: 16px;
+}
+
 a:link {
 	color: #28b3ed;
 	text-decoration: none;
