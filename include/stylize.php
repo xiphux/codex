@@ -11,6 +11,11 @@
 function stylize($str)
 {
 	/*
+	 * Stylize breaking lines
+	 */
+	$str = preg_replace("/\s*\n([\s\n])*\*{2,}([\s\n])*\n/","<div class=\"breakline\"></div>", $str);
+
+	/*
 	 * Add emphasis for underscores
 	 */
 	$str = preg_replace("/(\W)_([^\t\n\r\f\a\e>]+?)_(\W)/e", "'$1<span class=\"emphasis\">'.str_replace('_',' ','$2').'</span>$3'", $str);
@@ -29,11 +34,6 @@ function stylize($str)
 	 * Use real copyright symbol
 	 */
 	$str = preg_replace("/\(C\)/i", "&copy;", $str);
-
-	/*
-	 * Stylize breaking lines
-	 */
-	$str = preg_replace("/\s*\n([\s\n])*\*{2,}([\s\n])*\n/","<div class=\"breakline\"></div>", $str);
 
 	return $str;
 }
