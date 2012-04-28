@@ -90,6 +90,7 @@ $spellcheck["/([Ii])mmedeately/"] = "$1mmediately";
 $spellcheck["/([Rr])ememebered/"] = "$1emembered";
 $spellcheck["/([Ee])nemey/"] = "$1nemy";
 $spellcheck["/([Cc])rsytal/"] = "$1rystal";
+$spellcheck["/([Uu])derstand/"] = "$1nderstand";
 
 /* Some series-specific stuff */
 $spellcheck["/NAbiki/"] = "Nabiki";
