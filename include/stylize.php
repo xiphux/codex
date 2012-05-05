@@ -13,7 +13,7 @@ function stylize($str)
 	/*
 	 * Stylize breaking lines
 	 */
-	$str = preg_replace("/\s*\n([\s\n])*(\* ?){2,}([\s\n])*\n/","<div class=\"breakline\"></div>", $str);
+	$str = preg_replace("/\s*\n([\s\n])*(([\*\-=\~_<>]|&gt;|&lt;) ?){2,}([\s\n])*\n/","<div class=\"breakline\"></div>", $str);
 
 	/*
 	 * Add emphasis for underscores
